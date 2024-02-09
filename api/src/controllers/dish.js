@@ -1,11 +1,27 @@
 const dishRouter = require("express").Router();
+const sinToken = require("express").Router();
 const Dish = require("../models/Dish");
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+const config = require("../utils/config");
 
-//Ruta GET para traer todos los platos
-dishRouter.get("/", async (_request, response) => {
+//Ruta GET para traer todos los platos sin token
+sinToken.get("/", async (_request, response) => {
   const dish = await Dish.find({}).populate("user", { name: 1 });
   response.json(dish);
+});
+
+//Ruta GET para traer todos los platos con token
+dishRouter.get("/", async (request, response) => {
+  try {
+    const codeToken = jwt.verify(request.token, config.SECRET);
+    console.log('token', codeToken);
+
+    const dish = await Dish.find({}).populate("user", { name: 1 });
+    response.json(dish);
+  } catch (error) {
+     response.status(401).json({ error: 'token missing or invalid' });
+  }
 });
 
 //Ruta POST para crear platos
@@ -20,7 +36,8 @@ dishRouter.post("/", async (request, response, next) => {
     !body.price ||
     !body.image ||
     body.celiac == undefined ||
-    body.vegetarian == undefined
+    body.vegetarian == undefined ||
+    user == undefined
   ) {
     return response.status(400).json({ error: "Missing data, error creating" });
   }
@@ -38,7 +55,7 @@ dishRouter.post("/", async (request, response, next) => {
 
   try {
     const saveDish = await dish.save();
-    user.dish = user.dish.concat(saveDish._id);
+    user.dishes = user.dishes.concat(saveDish._id);
     await user.save();
     response.json(saveDish);
   } catch (error) {
@@ -52,4 +69,4 @@ dishRouter.post("/", async (request, response, next) => {
   dishRouter.delete(() => {});
 });
 
-module.exports = dishRouter;
+module.exports = {dishRouter, sinToken};

@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     require: true,
   },
 
-  dish: [{
+  dishes: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Dish"
   }]
