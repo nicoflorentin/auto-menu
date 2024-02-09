@@ -8,6 +8,20 @@ const requestLogger = (request, response, next) => {
   next();
 };
 
+// Para los token 
+const tokenExtractor = (request, response, next) => {
+  const authorization = request.get("authorization");
+
+  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
+    request.token = authorization.substring(7);
+  } else {
+    request.token = null;
+  }
+  console.log("Token in tokenExtractor:", request.token);
+  next();
+};
+
+//Para las rutas
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: "unknown route" });
 };
@@ -20,6 +34,9 @@ const errorHandler = (error, request, response, next) => {
   if (error.name === "CastError") {
     return response.status(400).json({ error: error.message });
   }
+  if (error.name == "secretOrPrivateKey")
+    return response.status(400).json({ error: error.message });
+
   next(error);
 };
 
@@ -27,4 +44,5 @@ module.exports = {
   requestLogger,
   errorHandler,
   unknownEndpoint,
+  tokenExtractor,
 };

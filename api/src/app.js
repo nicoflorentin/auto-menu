@@ -6,8 +6,9 @@ const mongoose = require("mongoose");
 const config = require("./utils/config");
 const logger = require("./utils/logger");
 
-const dishRouter = require("./controllers/dish");
+const {dishRouter,sinToken} = require("./controllers/dish");
 const userRouter = require("./controllers/user")
+const loginRouter = require("./controllers/login")
 
 mongoose
   .connect(config.MONGO_URI)
@@ -21,10 +22,12 @@ mongoose
 app.use(express.json());
 app.use(cors())
 app.use(middleware.requestLogger);
+app.use(middleware.tokenExtractor)
 
-
+app.use("/api/dish/sinjwt", sinToken);
 app.use("/api/dish", dishRouter);
 app.use("/api/user", userRouter);
+app.use("/api/login", loginRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
