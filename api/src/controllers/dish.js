@@ -6,21 +6,22 @@ const jwt = require("jsonwebtoken");
 const config = require("../utils/config");
 
 //Ruta GET para traer todos los platos sin token
-sinToken.get("/", async (_request, response) => {
+sinToken.get("/", async (request, response, next) => {
   const dish = await Dish.find({}).populate("user", { name: 1 });
-  response.json(dish);
+  request.data = dish
+  next()
 });
 
 //Ruta GET para traer todos los platos con token
-dishRouter.get("/", async (request, response) => {
+dishRouter.get("/", async (request, response, next) => {
   try {
     const codeToken = jwt.verify(request.token, config.SECRET);
     console.log('token', codeToken);
 
     const dish = await Dish.find({}).populate("user", { name: 1 });
-    response.json(dish);
+    next()
   } catch (error) {
-     response.status(401).json({ error: 'token missing or invalid' });
+    next(new Error('Error de validacion de token'))
   }
 });
 
@@ -63,10 +64,10 @@ dishRouter.post("/", async (request, response, next) => {
   }
 
   //Ruta Patch
-  dishRouter.patch(() => {});
+  dishRouter.patch(() => { });
 
   //Ruta DELETE
-  dishRouter.delete(() => {});
+  dishRouter.delete(() => { });
 });
 
-module.exports = {dishRouter, sinToken};
+module.exports = { dishRouter, sinToken };

@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const config = require("./utils/config");
 const logger = require("./utils/logger");
 
-const {dishRouter,sinToken} = require("./controllers/dish");
+const { dishRouter, sinToken } = require("./controllers/dish");
 const userRouter = require("./controllers/user")
 const loginRouter = require("./controllers/login")
 
@@ -29,7 +29,9 @@ app.use("/api/dish", dishRouter);
 app.use("/api/user", userRouter);
 app.use("/api/login", loginRouter);
 
-app.use(middleware.unknownEndpoint);
+// app.use(middleware.unknownEndpoint);
+
 app.use(middleware.errorHandler);
+app.use(middleware.responseHandler);
 
 module.exports = app;

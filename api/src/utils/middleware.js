@@ -27,22 +27,31 @@ const unknownEndpoint = (request, response) => {
 };
 
 const errorHandler = (error, request, response, next) => {
-  logger.error(error.message);
+  logger.error(error.name);
   if (error.name === "ValidatorError") {
     return response.status(400).json({ error: error.message });
   }
   if (error.name === "CastError") {
     return response.status(400).json({ error: error.message });
   }
-  if (error.name == "secretOrPrivateKey")
-    return response.status(400).json({ error: error.message });
+  if (error.name == "secretOrPrivateKey") { 
+    return response.status(400).json({ error: error.message }); 
+  }
+  console.log('error')
+  response.status(400).send({error: error.message})
 
-  next(error);
+  next();
 };
+
+const responseHandler = (request, response, next) => {
+  response.status(200).json({error: false, data: request.data})
+  next()
+}
 
 module.exports = {
   requestLogger,
   errorHandler,
+  responseHandler,
   unknownEndpoint,
   tokenExtractor,
 };
