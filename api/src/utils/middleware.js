@@ -22,8 +22,10 @@ const tokenExtractor = (request, response, next) => {
 };
 
 //Para las rutas
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: "unknown route" });
+const unknownEndpoint = (request, response, next) => {
+  // Comprueba si la ruta no coincide con ninguna ruta definida
+  !request.route ?
+    next(new Error('Ruta incorrecta')) : next()
 };
 
 const errorHandler = (error, request, response, next) => {
@@ -34,17 +36,16 @@ const errorHandler = (error, request, response, next) => {
   if (error.name === "CastError") {
     return response.status(400).json({ error: error.message });
   }
-  if (error.name == "secretOrPrivateKey") { 
-    return response.status(400).json({ error: error.message }); 
+  if (error.name == "secretOrPrivateKey") {
+    return response.status(400).json({ error: error.message });
   }
-  console.log('error')
-  response.status(400).send({error: error.message})
+  response.status(400).send({ error: error.message })
 
   next();
 };
 
 const responseHandler = (request, response, next) => {
-  response.status(200).json({error: false, data: request.data})
+  response.status(200).json({ error: false, data: request.data })
   next()
 }
 
