@@ -1,7 +1,5 @@
 import React, { useEffect } from "react"
 import { fetchDishes } from "../../../redux/slices/dishesSlice"
-import { increment } from "../../../redux/slices/counterSlice"
-
 import { useDispatch, useSelector } from "react-redux"
 
 const Main = () => {
