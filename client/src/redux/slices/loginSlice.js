@@ -1,17 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+
+const delay = () => {
+  return new Promise(resolve => setTimeout(resolve, 2000));
+};
 
 // Define una función asincrónica para obtener los datos de la API
-export const fetchLogin = createAsyncThunk('login/fetchLogin', async () => {
-  const response = await fetch('http://localhost:3001/api/dish/sinjwt');
-  // const data = await response.json();
-  return { user: '', token: '123' };
+export const fetchLogin = createAsyncThunk('login/fetchLogin', async (loginData) => {
+  const response = await axios.post('http://localhost:3001/api/login', loginData)
+  await delay()
+  return response.data
 });
+
 
 export const loginSlice = createSlice({
   name: 'login',
   initialState: {
-    user: '',
-    token: '',
+    data: { user: '', token: '' },
+    loading: false,
+    error: null
   },
   extraReducers: (builder) => {
     builder

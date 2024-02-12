@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { fetchLogin } from "../../redux/slices/loginSlice"
+import React, { useState } from "react"
+import withAuth from "./withAuth"
+import { Input } from "@nextui-org/input"
+import { Button } from "@nextui-org/button"
+import Spinner from "../../components/Spinner"
 
-const Login = () => {
-
+const Login = ({ loggedUserData, login, loading }) => {
 	const [input, setInput] = useState({
-		user: "",
+		username: "",
 		password: "",
 	})
-	const decodedToken = useSelector(state => state.login)
 
-	const dispatch = useDispatch()
-
-	useEffect(() => {
-		dispatch(fetchLogin())
-	}, [dispatch])
-
-	const handleSubmitEvent = e => {
+	const handleSubmit = async e => {
 		e.preventDefault()
-		if (input.username !== "" && input.password !== "") {
-			//dispatch action from hooks
-		}
-		alert("please provide a valid input")
+		login(input)
 	}
+
+	console.log("user", loggedUserData)
 
 	const handleInput = e => {
 		const { name, value } = e.target
@@ -32,44 +25,45 @@ const Login = () => {
 		}))
 	}
 
-	console.log(decodedToken)
+	console.log("loading", loading)
 
 	return (
-		<div>
-			<form onSubmit={handleSubmitEvent}>
-				<div className="form_control">
-					<label htmlFor="user-email">Email:</label>
-					<input
+		<section className="flex justify-center items-center h-screen">
+			<div
+				className=" border border-slate-200 w-[300px] rounded-2xl py-5 px-10"
+			>
+				<form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+					<h2 className="font-semibold">Sign in</h2>
+					<Input
+						className=""
+						name="username"
 						type="email"
-						id="user-email"
-						name="email"
-						placeholder="example@yahoo.com"
-						aria-describedby="user-email"
-						aria-invalid="false"
-						onChange={handleInput}
+						label="Email"
+						// placeholder="Username"
+						value={input.user}
+						onChange={e => handleInput(e)}
 					/>
-					<div id="user-email" className="sr-only">
-						Please enter a valid username. It must contain at least 6 characters.
-					</div>
-				</div>
-				<div className="form_control">
-					<label htmlFor="password">Password:</label>
-					<input
-						type="password"
-						id="password"
+					<Input
 						name="password"
-						aria-describedby="user-password"
-						aria-invalid="false"
-						onChange={handleInput}
+						type="password"
+						label="Password"
+						// placeholder="Password"
+						value={input.password}
+						onChange={e => handleInput(e)}
 					/>
-					<div id="user-password" className="sr-only">
-						your password should be more than 6 character
-					</div>
-				</div>
-				<button className="bg-blue-500 text-slate-200 px-3 py-1 rounded-md my-5">Submit</button>
-			</form>
-		</div>
+					{!loading ? (
+						<Button className="w-full" color="primary" type="submit" variant="solid">
+							Sign in
+						</Button>
+					) : (
+						<Button variant="solid" color="primary" spinner={<Spinner />} isLoading>
+							Loading
+						</Button>
+					)}
+				</form>
+			</div>
+		</section>
 	)
 }
 
-export default Login
+export default withAuth(Login)
