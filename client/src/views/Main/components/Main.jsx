@@ -1,20 +1,17 @@
 import React, { useEffect } from "react"
 import { fetchDishes } from "../../../redux/slices/dishesSlice"
-import { increment } from "../../../redux/slices/counterSlice"
-
 import { useDispatch, useSelector } from "react-redux"
 
 const Main = () => {
 	const dispatch = useDispatch()
-	const { loading, error, data } = useSelector(state => state.dishes) // Usa el slice para los platos
+	const { loading, error, data: response } = useSelector(state => state.dishes) // Usa el slice para los platos
 
-	console.log(data)
 
 	useEffect(() => {
 		dispatch(fetchDishes())
 	}, [dispatch])
 
-	const renderDishes = data && data.map(dish => <div>{dish.title}</div>)
+	const renderDishes = !response.error && response.data?.map(dish => <div>{dish.title}</div>)
 
 	return <div>
 		<h1>Dishes</h1>
