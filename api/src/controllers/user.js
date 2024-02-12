@@ -9,14 +9,14 @@ userRouter.get("/", async (_request, response) => {
 });
 
 userRouter.post("/", async (request, response, next) => {
-  const body = request.body;
+  const { password, username, name } = request.body;
 
   const saltRounds = 10;
-  const passwordHash = await bcrypt.hash(body.password, saltRounds);
+  const passwordHash = await bcrypt.hash(password, saltRounds);
 
   const user = new User({
-    username: body.username,
-    name: body.name,
+    username,
+    name,
     passwordHash,
   });
 

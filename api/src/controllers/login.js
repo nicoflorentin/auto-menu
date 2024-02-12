@@ -4,16 +4,17 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const config = require("../utils/config");
 
-loginRouter.post("/", async (request, response, next) => {
-  const body = request.body;
 
-  const user = await User.findOne({ username: body.username });
-  const password =
+loginRouter.post("/", async (request, response, next) => {
+  const { username, password } = request.body;
+
+  const user = await User.findOne({ username: username });
+  const isPassword =
     user === null
       ? false
-      : await bcrypt.compare(body.password, user.passwordHash);
+      : await bcrypt.compare(password, user.passwordHash);
 
-  if (!(user && password)) {
+  if (!(user && isPassword)) {
     return response.status(401).json({
       error: "Incorrect user or password",
     });
