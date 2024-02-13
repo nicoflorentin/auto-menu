@@ -5,7 +5,7 @@ import "./index.css"
 
 import { Provider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
-import { NextUIProvider } from "@nextui-org/system"
+import { NextUIProvider } from "@nextui-org/react"
 import store from "./redux/store/store.js"
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -16,9 +16,16 @@ export const fetchLogin = createAsyncThunk('login/fetchLogin', async (loginData)
 export const loginSlice = createSlice({
   name: 'login',
   initialState: {
-    data: { user: '', token: '' },
+    data: { username: '', name: '', token: '' },
     loading: false,
     error: null
+  },
+  reducers: {
+    logOut(state) {
+      state.data.username = ''
+      state.data.name = ''
+      state.data.token = ''
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -35,7 +42,7 @@ export const loginSlice = createSlice({
         state.error = action.error.message;
       });
   },
-  reducers: {},
 })
 
+export const { logOut } = loginSlice.actions
 export default loginSlice.reducer
