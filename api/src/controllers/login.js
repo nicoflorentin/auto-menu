@@ -5,19 +5,13 @@ const bcrypt = require("bcrypt");
 const config = require("../utils/config");
 
 
-loginRouter.post("/", async (request, response, next) => {
+loginRouter.post("/", async (request, _response, next) => {
   const { username, password } = request.body;
 
   const user = await User.findOne({ username: username });
-  const isPassword =
-    user === null
-      ? false
-      : await bcrypt.compare(password, user.passwordHash);
 
-  if (!(user && isPassword)) {
-    return response.status(401).json({
-      error: "Incorrect user or password",
-    });
+  if (!user || !(await bcrypt.compare(password, user.passwordHash))) {
+    return next(new Error("Incorrect user or password"));
   }
 
   const userForToken = {
@@ -27,9 +21,9 @@ loginRouter.post("/", async (request, response, next) => {
 
   try {
     const token = jwt.sign(userForToken, config.SECRET, {});
-    response
-      .status(200)
-      .send({ token, username: user.username, name: user.name });
+    request.statusCode = 200;
+    request.data = { token, username: user.username, name: user.name };
+    next()
   } catch (error) {
     next(error);
   }

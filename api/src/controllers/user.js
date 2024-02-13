@@ -22,9 +22,11 @@ userRouter.post("/", async (request, response, next) => {
 
   try {
     const savedUser = await user.save();
-    response.json(savedUser);
+    request.data = savedUser; 
+    request.statusCode = 201; 
+    next();
   } catch (error) {
-    next(error);
+    next(new Error('The user already exists or data is missing'))
   }
 });
 
