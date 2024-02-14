@@ -34,7 +34,7 @@ const Main = () => {
 
 	return (
 		<div className="">
-			<ul className="flex flex-wrap gap-5 justify-center">{loading ? <p>loading</p> : renderDishes}</ul>
+			<ul className="flex flex-wrap gap-5">{loading ? <p>loading</p> : renderDishes}</ul>
 		</div>
 	)
 }
