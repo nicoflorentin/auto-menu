@@ -4,17 +4,18 @@ import withAuth from "../../views/Login/withAuth"
 import userIcon from '../../assets/user-icon.png'
 
 const NavBar = ({ logOut, loggedUserData }) => {
-	console.log(loggedUserData)
 
 	const { username, name } = loggedUserData
 
 	return (
-		<div className="flex py-2 px-5 bg-slate-200 w-full">
+		<div className="flex justify-end items-center gap-10 py-2 px-5 bg-slate-200 w-full">
+			<div className="mr-auto">PAGE LOGO</div>
 			<User
+			className=''
 				name={name}
 				description={username}
 			/>
-			<Button size="sm" className="ml-auto" onClick={() => logOut()}>
+			<Button size="sm" className="" onClick={() => logOut()}>
 				LogOut
 			</Button>
 		</div>

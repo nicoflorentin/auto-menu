@@ -1,9 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-
-const delay = () => {
-  return new Promise(resolve => setTimeout(resolve, 2000));
-};
+import { delay } from '../../utilities/delay';
 
 // Define una función asincrónica para obtener los datos de la API
 export const fetchLogin = createAsyncThunk('login/fetchLogin', async (loginData) => {
@@ -12,14 +9,15 @@ export const fetchLogin = createAsyncThunk('login/fetchLogin', async (loginData)
   return response.data
 });
 
+const initialState = {
+  data: { username: '', name: '', token: '' },
+  loading: false,
+  error: null
+}
 
 export const loginSlice = createSlice({
   name: 'login',
-  initialState: {
-    data: { username: '', name: '', token: '' },
-    loading: false,
-    error: null
-  },
+  initialState,
   reducers: {
     logOut(state) {
       state.data.username = ''
@@ -35,11 +33,11 @@ export const loginSlice = createSlice({
       })
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.data = action.payload.data;
       })
       .addCase(fetchLogin.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error;
       });
   },
 })

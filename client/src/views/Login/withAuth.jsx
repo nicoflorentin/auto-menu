@@ -12,6 +12,7 @@ const withAuth = (OriginalComponent) => {
 
     // Optimized conditional redirection upon successful login
     useEffect(() => {
+      console.log(loggedUserData)
       if (loggedUserData?.token) {
         navigate('/dashboard');
       } else {
@@ -23,7 +24,7 @@ const withAuth = (OriginalComponent) => {
       try {
         await dispatch(fetchLogin(loginData));
       } catch (error) {
-        console.error('Login error:', error);
+        console.log('Login error:', error);
         // Optionally display user-friendly error messages based on error
       }
     };

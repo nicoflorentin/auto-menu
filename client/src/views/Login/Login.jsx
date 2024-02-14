@@ -14,8 +14,6 @@ const Login = ({ loggedUserData, login, loading }) => {
 		login(input)
 	}
 
-	console.log("user", loggedUserData)
-
 	const handleInput = e => {
 		const { name, value } = e.target
 		setInput(prev => ({
@@ -23,8 +21,6 @@ const Login = ({ loggedUserData, login, loading }) => {
 			[name]: value,
 		}))
 	}
-
-	console.log("loading", loading)
 
 	return (
 		<section className="flex justify-center items-center h-screen">
