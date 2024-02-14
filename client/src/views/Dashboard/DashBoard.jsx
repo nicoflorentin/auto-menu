@@ -1,13 +1,17 @@
-import React from "react"
+import React, { useEffect } from "react"
 import AsideBar from "./AsideBar/AsideBar"
 import DishesList from "../Main/components/DishesList/DishesList"
-import { useLocation } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 const DashBoard = () => {
-	const { pathname } = useLocation()
+	const navigate = useNavigate()
+	const { data: loggedUserData } = useSelector(state => state.login)
 
+	useEffect(() => {
+		!loggedUserData.token && navigate("/login")
+	}, [loggedUserData?.token])
 
-	console.log(pathname)
 	return (
 		<div id="section-container" className="p-10">
 			<div id="dashboard-container" className="flex flex-row border rounded-2xl">
@@ -15,7 +19,7 @@ const DashBoard = () => {
 					<AsideBar />
 				</aside>
 				<div className="p-5 w-full">
-					<DishesList pathname={pathname} />
+					<DishesList />
 				</div>
 			</div>
 		</div>

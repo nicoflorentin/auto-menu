@@ -1,9 +1,12 @@
 import React, { useState } from "react"
 import withAuth from "./withAuth"
-import { Input, Button } from "@nextui-org/react"
+import { Input, Button, Card, CardBody, Tabs, Tab } from "@nextui-org/react"
 import Spinner from "../../components/Spinner"
+import { Link } from "react-router-dom"
 
-const Login = ({ loggedUserData, login, loading }) => {
+const Login = ({ login, signUp, loading }) => {
+	console.log('render Login component')
+	const [selected, setSelected] = useState("login")
 	const [input, setInput] = useState({
 		username: "",
 		password: "",
@@ -11,7 +14,7 @@ const Login = ({ loggedUserData, login, loading }) => {
 
 	const handleSubmit = async e => {
 		e.preventDefault()
-		login(input)
+		selected === "login" ? login(input) : signUp(input).then(() => setSelected("login"))
 	}
 
 	const handleInput = e => {
@@ -24,39 +27,82 @@ const Login = ({ loggedUserData, login, loading }) => {
 
 	return (
 		<section className="flex justify-center items-center h-screen">
-			<div
-				className=" border border-slate-200 w-[300px] rounded-2xl py-10 px-10"
-			>
-				<form className="flex flex-col gap-3" onSubmit={handleSubmit}>
-					<h2 className="font-semibold">Sign in</h2>
-					<Input
-						className=""
-						name="username"
-						type="email"
-						label="Email"
-						// placeholder="Username"
-						value={input.user}
-						onChange={e => handleInput(e)}
-					/>
-					<Input
-						name="password"
-						type="password"
-						label="Password"
-						// placeholder="Password"
-						value={input.password}
-						onChange={e => handleInput(e)}
-					/>
-					{!loading ? (
-						<Button className="w-full" color="primary" type="submit" variant="solid">
-							Sign in
-						</Button>
-					) : (
-						<Button variant="solid" color="primary" spinner={<Spinner />} isLoading>
-							Loading
-						</Button>
-					)}
-				</form>
-			</div>
+			<Card className="max-w-full w-[340px] h-[400px]">
+				<CardBody className="overflow-hidden">
+					<Tabs fullWidth size="md" aria-label="Tabs form" selectedKey={selected} onSelectionChange={setSelected}>
+						<Tab key="login" title="Login">
+							<form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+								<Input
+									isRequired
+									name="username"
+									label="Email"
+									placeholder="Enter your email"
+									type="email"
+									onChange={e => handleInput(e)}
+								/>
+								<Input
+									isRequired
+									name="password"
+									label="Password"
+									placeholder="Enter your password"
+									type="password"
+									onChange={e => handleInput(e)}
+								/>
+								<p className="text-center text-small">
+									Need to create an account?{" "}
+									<Link size="sm" onClick={() => setSelected("sign-up")}>
+										Sign up
+									</Link>
+								</p>
+								<div className="flex gap-2 justify-end">
+									<Button fullWidth color="primary" type="submit">
+										Login
+									</Button>
+								</div>
+							</form>
+						</Tab>
+						<Tab key="sign-up" title="Sign up">
+							<form className="flex flex-col gap-4 h-[300px]" onSubmit={handleSubmit}>
+								<Input
+									isRequired
+									name="name"
+									label="Name"
+									placeholder="Enter your name"
+									type="text"
+									onChange={e => handleInput(e)}
+								/>
+								<Input
+									isRequired
+									name="username"
+									label="Email"
+									placeholder="Enter your email"
+									type="email"
+									onChange={e => handleInput(e)}
+								/>
+								<Input
+									isRequired
+									name="password"
+									label="Password"
+									placeholder="Enter your password"
+									type="password"
+									onChange={e => handleInput(e)}
+								/>
+								<p className="text-center text-small">
+									Already have an account?{" "}
+									<Link size="sm" onClick={() => setSelected("login")}>
+										Login
+									</Link>
+								</p>
+								<div className="flex gap-2 justify-end">
+									<Button fullWidth color="primary" type="submit">
+										Sign up
+									</Button>
+								</div>
+							</form>
+						</Tab>
+					</Tabs>
+				</CardBody>
+			</Card>
 		</section>
 	)
 }

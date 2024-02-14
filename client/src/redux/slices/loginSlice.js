@@ -9,6 +9,13 @@ export const fetchLogin = createAsyncThunk('login/fetchLogin', async (loginData)
   return response.data
 });
 
+export const fetchSignUp = createAsyncThunk('login/fetchSignUp', async (SignUpData) => {
+  const response = await axios.post('http://localhost:3001/api/user', SignUpData)
+  await delay()
+  return response.data
+});
+
+
 const initialState = {
   data: { username: '', name: '', token: '' },
   loading: false,

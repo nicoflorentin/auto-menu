@@ -20,15 +20,16 @@ const DishItem = ({ dish }) => {
 	)
 }
 
-const Main = ({loggedUserData}) => {
+const Main = () => {
 	const dispatch = useDispatch()
-	const { loading, error, data: response } = useSelector(state => state.dishes) // Usa el slice para los platos
+	const { data: loggedUserData } = useSelector(state => state.login)
+	const { loading, dishes } = useSelector(state => state.dishes) // Usa el slice para los platos
 
 	useEffect(() => {
 		dispatch(fetchDishes(loggedUserData.token))
 	}, [dispatch])
 
-	const renderDishes = !response.error && response.data?.map(dish => <DishItem dish={dish} />)
+	const renderDishes = dishes?.map(dish => <DishItem dish={dish} key={dish.id} />)
 
 	return (
 		<div className="">
@@ -37,4 +38,4 @@ const Main = ({loggedUserData}) => {
 	)
 }
 
-export default withAuth(Main)
+export default Main

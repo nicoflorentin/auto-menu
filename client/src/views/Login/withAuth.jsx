@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { fetchLogin, logOut } from "../../redux/slices/loginSlice"
+import { fetchLogin, fetchSignUp, logOut } from "../../redux/slices/loginSlice"
 import { useNavigate } from "react-router"
 import { useEffect } from "react";
 
@@ -12,7 +12,6 @@ const withAuth = (OriginalComponent) => {
 
     // Optimized conditional redirection upon successful login
     useEffect(() => {
-      console.log(loggedUserData)
       if (loggedUserData?.token) {
         navigate('/dashboard');
       } else {
@@ -23,6 +22,15 @@ const withAuth = (OriginalComponent) => {
     const handleLogin = async (loginData) => {
       try {
         await dispatch(fetchLogin(loginData));
+      } catch (error) {
+        console.log('Login error:', error);
+        // Optionally display user-friendly error messages based on error
+      }
+    };
+    
+    const handleSignUp = async (SignUpData) => {
+      try {
+        await dispatch(fetchSignUp(SignUpData));
       } catch (error) {
         console.log('Login error:', error);
         // Optionally display user-friendly error messages based on error
@@ -39,6 +47,7 @@ const withAuth = (OriginalComponent) => {
         {...props}
         loggedUserData={loggedUserData}
         login={handleLogin}
+        signUp={handleSignUp}
         logOut={handleLogOut}
         error={error}
         loading={loading}
