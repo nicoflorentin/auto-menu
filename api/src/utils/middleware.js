@@ -8,7 +8,7 @@ const requestLogger = (request, response, next) => {
   next();
 };
 
-// Para los token 
+// Middleware para extraer el token
 const tokenExtractor = (request, response, next) => {
   const authorization = request.get("authorization");
 
@@ -21,33 +21,42 @@ const tokenExtractor = (request, response, next) => {
   next();
 };
 
-//Para las rutas
+// Middleware para manejar rutas desconocidas
 const unknownEndpoint = (request, response, next) => {
-  // Comprueba si la ruta no coincide con ninguna ruta definida
-  !request.route ?
-    next(new Error('Ruta incorrecta')) : next()
+  !request.route ? next(new Error("unknown route")) : next();
 };
 
+// Middleware para manejar errores
 const errorHandler = (error, request, response, next) => {
-  logger.error(error.name);
-  if (error.name === "ValidatorError") {
-    return response.status(400).json({ error: error.message });
-  }
-  if (error.name === "CastError") {
-    return response.status(400).json({ error: error.message });
-  }
-  if (error.name == "secretOrPrivateKey") {
-    return response.status(400).json({ error: error.message });
-  }
-  response.status(400).send({ error: error.message })
+  logger.error(error);
 
-  next();
+  if (
+    error.name === "ValidatorError" ||
+    error.name === "CastError" ||
+    error.name === "secretOrPrivateKey" ||
+    error.name === "ReferenceError" ||
+    error.message === "The user already exists or data is missing" ||
+    error.message === "Missing data, error creating" ||
+    error.message === "Incorrect user or password"
+  ) {
+    statusCode = 400;
+  } else if (error.message === "jwt must be provided") {
+    statusCode = 401;
+  }
+
+  response.status(statusCode).json({ error: true, message: error.message });
 };
 
+// Middleware para manejar respuestas exitosas
 const responseHandler = (request, response, next) => {
-  response.status(200).json({ error: false, data: request.data })
-  next()
-}
+  if (request.statusCode) {
+    response
+      .status(request.statusCode)
+      .json({ error: false, data: request.data });
+  } else {
+    next();
+  }
+};
 
 module.exports = {
   requestLogger,

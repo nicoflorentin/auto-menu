@@ -4,16 +4,19 @@ const dishSchema = new mongoose.Schema({
   title: {
     type: String,
     require: true,
-    minlegth : 5
+    minlength: 3
+    
   },
   description: {
     type: String,
     require: true,
+    minlength: 5
   },
 
   category: {
     type: String,
     require: true,
+    minlength: 3
   },
   price: {
     type: Number,

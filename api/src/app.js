@@ -30,7 +30,6 @@ app.use("/api/user", userRouter);
 app.use("/api/login", loginRouter);
 
 app.use(middleware.unknownEndpoint);
-
 app.use(middleware.responseHandler);
 app.use(middleware.errorHandler);
 
