@@ -19,7 +19,10 @@ dishRouter.get("/", async (request, _response, next) => {
     const codeToken = jwt.verify(request.token, config.SECRET);
     console.log("token", codeToken);
 
-    const dish = await Dish.find({}).populate("user", { name: 1 });
+    const userId = codeToken.id
+    console.log("hola", userId.id);
+
+    const dish = await Dish.find({ user: userId }).populate("user", { name: 1 });
     request.data = dish;
     request.statusCode = 200;
     next();
