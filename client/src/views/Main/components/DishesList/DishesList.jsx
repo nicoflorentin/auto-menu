@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
-import { fetchDishes } from "../../../../redux/slices/dishesSlice"
+import { fetchDishes, clearDishes } from "../../../../redux/slices/dishesSlice"
 import { useDispatch, useSelector } from "react-redux"
-import withAuth from "../../../Login/withAuth"
 
 const DishItem = ({ dish }) => {
 	const { category, celiac, description, id, image, price, title, vegetarian } = dish
@@ -27,6 +26,8 @@ const Main = () => {
 
 	useEffect(() => {
 		dispatch(fetchDishes(loggedUserData.token))
+
+		return () => dispatch(clearDishes())
 	}, [dispatch])
 
 	const renderDishes = dishes?.map(dish => <DishItem dish={dish} key={dish.id} />)

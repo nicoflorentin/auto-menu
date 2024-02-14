@@ -5,8 +5,8 @@ import Spinner from "../../components/Spinner"
 import { Link } from "react-router-dom"
 
 const Login = ({ login, signUp, loading }) => {
-	console.log('render Login component')
 	const [selected, setSelected] = useState("login")
+
 	const [input, setInput] = useState({
 		username: "",
 		password: "",
@@ -27,6 +27,9 @@ const Login = ({ login, signUp, loading }) => {
 
 	return (
 		<section className="flex justify-center items-center h-screen">
+			{/* <LoginFields></LoginFields>
+		<RegisterFields></RegisterFields> */}
+
 			<Card className="max-w-full w-[340px] h-[400px]">
 				<CardBody className="overflow-hidden">
 					<Tabs fullWidth size="md" aria-label="Tabs form" selectedKey={selected} onSelectionChange={setSelected}>
@@ -50,14 +53,20 @@ const Login = ({ login, signUp, loading }) => {
 								/>
 								<p className="text-center text-small">
 									Need to create an account?{" "}
-									<Link size="sm" onClick={() => setSelected("sign-up")}>
+									<Link size="sm" onPress={() => setSelected("sign-up")}>
 										Sign up
 									</Link>
 								</p>
 								<div className="flex gap-2 justify-end">
-									<Button fullWidth color="primary" type="submit">
-										Login
-									</Button>
+									{!loading ? (
+										<Button className="w-full" color="primary" type="submit" variant="solid">
+											Sign in
+										</Button>
+									) : (
+										<Button className="w-full" variant="solid" color="primary" spinner={<Spinner />} isLoading>
+											Loading
+										</Button>
+									)}
 								</div>
 							</form>
 						</Tab>
@@ -89,14 +98,20 @@ const Login = ({ login, signUp, loading }) => {
 								/>
 								<p className="text-center text-small">
 									Already have an account?{" "}
-									<Link size="sm" onClick={() => setSelected("login")}>
+									<Link size="sm" onPress={() => setSelected("login")}>
 										Login
 									</Link>
 								</p>
 								<div className="flex gap-2 justify-end">
-									<Button fullWidth color="primary" type="submit">
-										Sign up
-									</Button>
+									{!loading ? (
+										<Button className="w-full" color="primary" type="submit" variant="solid">
+											Sign up
+										</Button>
+									) : (
+										<Button className="w-full" variant="solid" color="primary" spinner={<Spinner />} isLoading>
+											Loading
+										</Button>
+									)}
 								</div>
 							</form>
 						</Tab>

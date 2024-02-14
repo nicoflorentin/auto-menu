@@ -45,6 +45,14 @@ export const loginSlice = createSlice({
       .addCase(fetchLogin.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error;
+      })
+      .addCase(fetchSignUp.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload.data;
+      })
+      .addCase(fetchSignUp.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
       });
   },
 })

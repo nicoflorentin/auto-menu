@@ -25,7 +25,11 @@ export const dishesSlice = createSlice({
     error: null,
     dishes: []
   },
-  reducers: {},
+  reducers: {
+    clearDishes(state) {
+      state.dishes = []
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchDishes.pending, (state) => {
@@ -43,4 +47,5 @@ export const dishesSlice = createSlice({
   },
 });
 
+export const { clearDishes } = dishesSlice.actions
 export default dishesSlice.reducer;
