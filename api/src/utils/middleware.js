@@ -36,11 +36,13 @@ const errorHandler = (error, request, response, next) => {
     error.name === "secretOrPrivateKey" ||
     error.name === "ReferenceError" ||
     error.message === "The user already exists or data is missing" ||
-    error.message === "Missing data, error creating" ||
-    error.message === "Incorrect user or password"
+    error.message === "Missing data, error creating"
   ) {
     statusCode = 400;
-  } else if (error.message === "jwt must be provided") {
+  } else if (
+    error.message === "jwt must be provided" ||
+    error.message === "Incorrect user or password"
+  ) {
     statusCode = 401;
   }
 
