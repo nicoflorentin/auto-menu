@@ -1,10 +1,18 @@
 // En tu archivo slice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { delay } from '../../utilities/delay';
 
 // Define una función asincrónica para obtener los datos de la API
-export const fetchDishes = createAsyncThunk('dishes/fetchDishes', async () => {
-  const response = await fetch('http://localhost:3001/api/dish/sinjwt');
+export const fetchDishes = createAsyncThunk('dishes/fetchDishes', async (token) => {
+  const axiosConfig = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await fetch('http://localhost:3001/api/dish', axiosConfig);
   const data = await response.json();
+  await delay()
   return data;
 
 });
@@ -15,9 +23,13 @@ export const dishesSlice = createSlice({
   initialState: {
     loading: false,
     error: null,
-    data: []
+    dishes: []
   },
-  reducers: {},
+  reducers: {
+    clearDishes(state) {
+      state.dishes = []
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchDishes.pending, (state) => {
@@ -26,7 +38,7 @@ export const dishesSlice = createSlice({
       })
       .addCase(fetchDishes.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.dishes = action.payload.data;
       })
       .addCase(fetchDishes.rejected, (state, action) => {
         state.loading = false;
@@ -35,4 +47,5 @@ export const dishesSlice = createSlice({
   },
 });
 
+export const { clearDishes } = dishesSlice.actions
 export default dishesSlice.reducer;

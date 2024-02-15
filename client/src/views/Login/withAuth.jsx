@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { fetchLogin } from "../../redux/slices/loginSlice"
+import { fetchLogin, fetchSignUp, logOut } from "../../redux/slices/loginSlice"
 import { useNavigate } from "react-router"
 import { useEffect } from "react";
 
@@ -14,6 +14,8 @@ const withAuth = (OriginalComponent) => {
     useEffect(() => {
       if (loggedUserData?.token) {
         navigate('/dashboard');
+      } else {
+        navigate('/login')
       }
     }, [loggedUserData?.token, navigate]); // Optimized dependency array
 
@@ -21,16 +23,32 @@ const withAuth = (OriginalComponent) => {
       try {
         await dispatch(fetchLogin(loginData));
       } catch (error) {
-        console.error('Login error:', error);
+        console.log('Login error:', error);
         // Optionally display user-friendly error messages based on error
       }
     };
+    
+    const handleSignUp = async (SignUpData) => {
+      try {
+        await dispatch(fetchSignUp(SignUpData));
+      } catch (error) {
+        console.log('Login error:', error);
+        // Optionally display user-friendly error messages based on error
+      }
+    };
+
+    const handleLogOut = () => {
+      dispatch(logOut())
+      navigate('/login')
+    }
 
     return (
       <OriginalComponent
         {...props}
         loggedUserData={loggedUserData}
         login={handleLogin}
+        signUp={handleSignUp}
+        logOut={handleLogOut}
         error={error}
         loading={loading}
       />

@@ -11,7 +11,7 @@ loginRouter.post("/", async (request, _response, next) => {
   const user = await User.findOne({ username: username });
 
   if (!user || !(await bcrypt.compare(password, user.passwordHash))) {
-    return next(new Error("Incorrect user or password"));
+    next(new Error("Incorrect user or password"));
   }
 
   const userForToken = {
