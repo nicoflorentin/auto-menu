@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import AsideBar from "./AsideBar/AsideBar"
-import DishesList from "../Main/components/DishesList/DishesList"
-import { useNavigate } from "react-router-dom"
+import DishesList from '../../components/DishesList/DishesList.jsx'
+import { Outlet, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 const DashBoard = () => {
@@ -19,7 +19,7 @@ const DashBoard = () => {
 					<AsideBar />
 				</aside>
 				<div className="p-5 w-full">
-					<DishesList />
+					<Outlet />
 				</div>
 			</div>
 		</div>

@@ -12,16 +12,14 @@ const withAuth = (OriginalComponent) => {
 
     // Optimized conditional redirection upon successful login
     useEffect(() => {
-      if (loggedUserData?.token) {
-        navigate('/dashboard');
-      } else {
+      if (!loggedUserData?.token) {
         navigate('/login')
       }
     }, [loggedUserData?.token, navigate]); // Optimized dependency array
 
     const handleLogin = async (loginData) => {
       try {
-        await dispatch(fetchLogin(loginData));
+        await dispatch(fetchLogin(loginData)).then(()=> navigate('/dashboard'))
       } catch (error) {
         console.log('Login error:', error);
         // Optionally display user-friendly error messages based on error

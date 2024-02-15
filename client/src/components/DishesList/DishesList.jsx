@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { fetchDishes, clearDishes } from "../../../../redux/slices/dishesSlice"
+import { fetchDishes, clearDishes } from "../../redux/slices/dishesSlice"
 import { useDispatch, useSelector } from "react-redux"
 
 const DishItem = ({ dish }) => {

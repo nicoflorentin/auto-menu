@@ -53,7 +53,7 @@ const Login = ({ login, signUp, loading }) => {
 								/>
 								<p className="text-center text-small">
 									Need to create an account?{" "}
-									<Link size="sm" onPress={() => setSelected("sign-up")}>
+									<Link size="sm" onClick={() => setSelected("sign-up")}>
 										Sign up
 									</Link>
 								</p>
@@ -98,7 +98,7 @@ const Login = ({ login, signUp, loading }) => {
 								/>
 								<p className="text-center text-small">
 									Already have an account?{" "}
-									<Link size="sm" onPress={() => setSelected("login")}>
+									<Link size="sm" onClick={() => setSelected("login")}>
 										Login
 									</Link>
 								</p>
