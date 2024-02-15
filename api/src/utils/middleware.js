@@ -30,23 +30,28 @@ const unknownEndpoint = (request, response, next) => {
 const errorHandler = (error, request, response, next) => {
   logger.error(error);
 
+  let statusCode = 500
+
   if (
     error.name === "ValidatorError" ||
     error.name === "CastError" ||
     error.name === "secretOrPrivateKey" ||
     error.name === "ReferenceError" ||
     error.message === "The user already exists or data is missing" ||
-    error.message === "Missing data, error creating"
+    error.message === "Missing data, error creating" ||
+    error.message === "Dish not found" ||
+    error.message === "User does not have permission to edit this dish"
   ) {
     statusCode = 400;
   } else if (
     error.message === "jwt must be provided" ||
-    error.message === "Incorrect user or password"
+    error.message === "Incorrect user or password" ||
+    error.message === "Dish not found or user does not have permission to edit it"
   ) {
     statusCode = 401;
   }
 
-  response.status(statusCode).json({ error: true, message: error.message });
+    response.status(statusCode).json({ error: true, message: error.message });
 };
 
 // Middleware para manejar respuestas exitosas
