@@ -4,19 +4,18 @@ const dishSchema = new mongoose.Schema({
   title: {
     type: String,
     require: true,
-    minlength: 3
-    
+    minlength: 3,
   },
   description: {
     type: String,
     require: true,
-    minlength: 5
+    minlength: 5,
   },
 
   category: {
     type: String,
     require: true,
-    minlength: 3
+    minlength: 3,
   },
   price: {
     type: Number,
@@ -29,26 +28,32 @@ const dishSchema = new mongoose.Schema({
 
   celiac: {
     type: Boolean,
+    default: false,
     require: true,
   },
   vegetarian: {
     type: Boolean,
-     require: true,
+    default: false,
+    require: true,
   },
 
-  user:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref:"User"
-  }
+  archived: {
+    type: Boolean,
+    default: false,
+  },
 
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 dishSchema.set("toJSON", {
-    transform: (document, returnedObject) => {
-      returnedObject.id = returnedObject._id.toString();
-      delete returnedObject._id;
-      delete returnedObject.__v;
-    },
-  });
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
+});
 
-module.exports = mongoose.model("Dish", dishSchema)
+module.exports = mongoose.model("Dish", dishSchema);
