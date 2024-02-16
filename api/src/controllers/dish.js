@@ -13,16 +13,19 @@ sinToken.get("/", async (request, response, next) => {
   next();
 });
 
+
+
 //Ruta GET para traer todos los platos con token
 dishRouter.get("/", async (request, _response, next) => {
   try {
     const codeToken = jwt.verify(request.token, config.SECRET);
     console.log("token", codeToken);
 
-    const userId = codeToken.id
-    console.log("hola", userId.id);
+    const userId = codeToken.id;
 
-    const dish = await Dish.find({ user: userId }).populate("user", { name: 1 });
+    const dish = await Dish.find({ user: userId }).populate("user", {
+      name: 1,
+    });
     request.data = dish;
     request.statusCode = 200;
     next();
@@ -31,36 +34,50 @@ dishRouter.get("/", async (request, _response, next) => {
   }
 });
 
+
+
 //Ruta POST para crear platos
-dishRouter.post("/", async (request, response, next) => {
+dishRouter.post("/", async (request, _response, next) => {
   try {
     const codeToken = jwt.verify(request.token, config.SECRET);
     console.log("token", codeToken);
 
-    const body = request.body;
-    const user = await User.findById(body.userId);
+    const userId = codeToken.id;
+
+    const {
+      title,
+      description,
+      category,
+      price,
+      image,
+      celiac,
+      vegetarian,
+      archived,
+    } = request.body;
+    const user = await User.findById(userId);
 
     if (
-      !body.title ||
-      !body.description ||
-      !body.category ||
-      !body.price ||
-      !body.image ||
-      body.celiac == undefined ||
-      body.vegetarian == undefined ||
-      user == undefined
+      !title ||
+      !description ||
+      !category ||
+      !price ||
+      !image ||
+      celiac === undefined ||
+      vegetarian === undefined ||
+      archived === undefined
     ) {
       next(new Error("Missing data, error creating"));
     }
 
     const dish = new Dish({
-      title: body.title,
-      description: body.description,
-      category: body.category,
-      price: body.price,
-      image: body.image,
-      celiac: body.celiac,
-      vegetarian: body.vegetarian,
+      title,
+      description,
+      category,
+      price,
+      image,
+      celiac,
+      vegetarian,
+      archived,
       user: user._id,
     });
 
@@ -69,16 +86,66 @@ dishRouter.post("/", async (request, response, next) => {
     await user.save();
     request.data = saveDish;
     request.statusCode = 201;
-    next()
+    next();
   } catch (error) {
     next(error);
   }
-
-  //Ruta Patch
-  dishRouter.patch(() => {});
-
-  //Ruta DELETE
-  dishRouter.delete(() => {});
 });
+
+
+
+//Ruta PUT para modificar platos
+dishRouter.put("/:id", async (request, _response, next) => {
+  try {
+    const codeToken = jwt.verify(request.token, config.SECRET);
+    const userId = codeToken.id;
+    
+    const dishId = request.params.id;
+    const {
+      title,
+      description,
+      category,
+      price,
+      image,
+      celiac,
+      vegetarian,
+      archived,
+    } = request.body;
+
+    const dishDb = await Dish.findOne({ _id: dishId });
+
+    if (!dishDb) {
+      next(new Error("Dish not found"));
+    }
+
+    if (dishDb.user.toString() !== userId) {
+      next(new Error("User does not have permission to edit this dish"));
+    }
+
+    const dish = {
+      title,
+      description,
+      category,
+      price,
+      image,
+      celiac,
+      vegetarian,
+      archived,
+    };
+    const updateDish = await Dish.findByIdAndUpdate(dishDb, dish, {
+      new: true,
+    });
+    request.data = updateDish;
+    request.statusCode = 201;
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
+//Ruta DELETE
+dishRouter.delete(() => {});
 
 module.exports = { dishRouter, sinToken };
