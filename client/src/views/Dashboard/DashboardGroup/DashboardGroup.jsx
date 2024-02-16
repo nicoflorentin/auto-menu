@@ -17,7 +17,7 @@ const DashBoard = ({ icon, childrens, sectionName }) => {
 			<div className={`flex flex-row
 											${isOpen ? null : 'hidden'}
 											w-full`}>
-				<div className="border border-red-500 ml-2 mr-1 my-1"></div>
+				<div className="ml-2 my-10"></div>
 				<div className=''>
 				{childrens?.map(config => (
 					<DashboardLink icon={config.icon} sectionPath={config.sectionPath} sectionName={config.sectionName} />

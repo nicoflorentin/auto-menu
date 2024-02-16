@@ -67,17 +67,17 @@ const AsideBar = () => {
 			<h2 className="text-xl font-bold">Menu</h2>
 			<div>
 				{linksConfig.map(element => {
-					if (!element.isGroup) {
+					if (element.isGroup) {
+						return (
+							<DashBoardGroup icon={element.icon} childrens={element.childrens} sectionName={element.sectionName} />
+						)
+					} else {
 						return (
 							<DashboardLink
 								icon={element.icon}
 								sectionPath={element.sectionPath}
 								sectionName={element.sectionName}
 							/>
-						)
-					} else {
-						return (
-							<DashBoardGroup icon={element.icon} childrens={element.childrens} sectionName={element.sectionName} />
 						)
 					}
 				})}
