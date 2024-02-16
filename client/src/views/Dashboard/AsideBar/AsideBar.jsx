@@ -1,44 +1,64 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import DashboardLink from "../DashBoardLink/DashboardLink"
+import DashBoardGroup from "../DashboardGroup/DashboardGroup"
 
 const AsideBar = () => {
 	const linksConfig = [
 		{
 			sectionPath: "dishes",
 			sectionName: "Dishes",
-			isGroup: false,
 			icon: "asd",
+			isGroup: false,
 		},
 		{
 			sectionPath: "add",
 			sectionName: "Add",
-			isGroup: false,
 			icon: "add",
+			isGroup: false,
 		},
 		{
 			sectionPath: "delete",
 			sectionName: "Delete",
-			isGroup: false,
 			icon: "delete",
+			isGroup: false,
 		},
 		{
 			sectionPath: "edit",
 			sectionName: "Edit",
-			isGroup: false,
 			icon: "edit",
+			isGroup: false,
 		},
 		{
 			sectionPath: "archived",
 			sectionName: "Archived",
-			isGroup: false,
 			icon: "archived",
+			isGroup: false,
 		},
 		{
 			sectionPath: "statistics",
 			sectionName: "Statistics",
-			isGroup: false,
 			icon: "statistics",
+			isGroup: true,
+			childrens: [
+				{
+					sectionPath: "visits",
+					sectionName: "Visits",
+					icon: "Visits",
+					isGroup: false,
+				},
+				{
+					sectionPath: "comments",
+					sectionName: "Comments",
+					icon: "Comments",
+					isGroup: false,
+				},
+				{
+					sectionPath: "ratings",
+					sectionName: "Rating",
+					icon: "Rating",
+					isGroup: false,
+				},
+			],
 		},
 	]
 
@@ -46,13 +66,19 @@ const AsideBar = () => {
 		<>
 			<h2 className="text-xl font-bold">Menu</h2>
 			<div>
-				{linksConfig.map(config => {
-					if (!config.isGroup) {
+				{linksConfig.map(element => {
+					if (!element.isGroup) {
 						return (
-							<DashboardLink icon={config.icon} sectionPath={config.sectionPath} sectionName={config.sectionName} />
+							<DashboardLink
+								icon={element.icon}
+								sectionPath={element.sectionPath}
+								sectionName={element.sectionName}
+							/>
 						)
 					} else {
-						return null
+						return (
+							<DashBoardGroup icon={element.icon} childrens={element.childrens} sectionName={element.sectionName} />
+						)
 					}
 				})}
 			</div>

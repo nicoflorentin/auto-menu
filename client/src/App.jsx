@@ -20,6 +20,9 @@ function App() {
 					<Route path="delete" element={<div>delete</div>} />
 					<Route path="archived" element={<div>archived</div>} />
 					<Route path="statistics" element={<div>statistics</div>} />
+					<Route path="visits" element={<div>visits</div>} />
+					<Route path="comments" element={<div>comments</div>} />
+					<Route path="ratings" element={<div>ratings</div>} />
 				</Route>
 				<Route path="login" element={<Login />} />
 			</Routes>

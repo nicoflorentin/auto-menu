@@ -19,7 +19,7 @@ const withAuth = (OriginalComponent) => {
 
     const handleLogin = async (loginData) => {
       try {
-        await dispatch(fetchLogin(loginData)).then(()=> navigate('/dashboard'))
+        await dispatch(fetchLogin(loginData))
       } catch (error) {
         console.log('Login error:', error);
         // Optionally display user-friendly error messages based on error
