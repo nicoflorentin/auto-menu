@@ -3,38 +3,39 @@ const mongoose = require("mongoose");
 const dishSchema = new mongoose.Schema({
   title: {
     type: String,
-    require: true,
+    required: true,
     minlength: 3,
   },
   description: {
     type: String,
-    require: true,
+    required: true,
     minlength: 5,
   },
 
   category: {
     type: String,
-    require: true,
+    required: true,
     minlength: 3,
   },
   price: {
     type: Number,
-    require: true,
+    required: true,
   },
 
   image: {
     type: String,
+    required: true,
   },
 
   celiac: {
     type: Boolean,
     default: false,
-    require: true,
+    required: true,
   },
   vegetarian: {
     type: Boolean,
     default: false,
-    require: true,
+    required: true,
   },
 
   archived: {
