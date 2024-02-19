@@ -5,6 +5,7 @@ import DishesList from './components/DishesList/DishesList'
 
 import { Route, Routes, useLocation } from "react-router-dom"
 import DashBoard from "./views/Dashboard/DashBoard"
+import FormAdd from "./views/Dashboard/FormAdd/FormAdd"
 
 function App() {
 	const { pathname } = useLocation()
@@ -15,7 +16,7 @@ function App() {
 				<Route path="dashboard" element={<DashBoard />}>
 					<Route path="" element={<div className="text-center font-semibold text-3xl">WELCOME</div>} />
 					<Route path="dishes" element={<DishesList />} />
-					<Route path="add" element={<div>add</div>} />
+					<Route path="add" element={<FormAdd />} />
 					<Route path="edit" element={<div>edit</div>} />
 					<Route path="delete" element={<div>delete</div>} />
 					<Route path="archived" element={<div>archived</div>} />
