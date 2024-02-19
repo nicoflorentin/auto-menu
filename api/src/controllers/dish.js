@@ -6,14 +6,12 @@ const jwt = require("jsonwebtoken");
 const config = require("../utils/config");
 
 //Ruta GET para traer todos los platos sin token
-sinToken.get("/", async (request, response, next) => {
+sinToken.get("/", async (request, _response, next) => {
   const dish = await Dish.find({}).populate("user", { name: 1 });
   request.data = dish;
   request.statusCode = 200;
   next();
 });
-
-
 
 //Ruta GET para traer todos los platos con token
 dishRouter.get("/", async (request, _response, next) => {
@@ -34,7 +32,15 @@ dishRouter.get("/", async (request, _response, next) => {
   }
 });
 
-
+//Ruta GET para traer todos los platos por categorias
+dishRouter.get("/categories", async (_request, response, next) => {
+  try {
+    const categories = await Dish.distinct("category");
+    response.json(categories);
+  } catch (error) {
+    next(error);
+  }
+});
 
 //Ruta POST para crear platos
 dishRouter.post("/", async (request, _response, next) => {
@@ -55,19 +61,6 @@ dishRouter.post("/", async (request, _response, next) => {
       archived,
     } = request.body;
     const user = await User.findById(userId);
-
-    if (
-      !title ||
-      !description ||
-      !category ||
-      !price ||
-      !image ||
-      celiac === undefined ||
-      vegetarian === undefined ||
-      archived === undefined
-    ) {
-      next(new Error("Missing data, error creating"));
-    }
 
     const dish = new Dish({
       title,
@@ -92,14 +85,12 @@ dishRouter.post("/", async (request, _response, next) => {
   }
 });
 
-
-
 //Ruta PUT para modificar platos
 dishRouter.put("/:id", async (request, _response, next) => {
   try {
     const codeToken = jwt.verify(request.token, config.SECRET);
     const userId = codeToken.id;
-    
+
     const dishId = request.params.id;
     const {
       title,
@@ -143,9 +134,29 @@ dishRouter.put("/:id", async (request, _response, next) => {
   }
 });
 
+//Ruta DELETE para eliminar platos
+dishRouter.delete("/:id", async (request, _reponse, next) => {
+  try {
+    const id = request.params.id;
+    const codeToken = jwt.verify(request.token, config.SECRET);
+    const userId = codeToken.id;
 
+    const deleteDish = await Dish.findById(id);
+    if (!deleteDish) {
+      next(new Error("Dish not found"));
+    }
 
-//Ruta DELETE
-dishRouter.delete(() => {});
+    if (deleteDish.user.toString() !== userId) {
+      next(new Error("User does not have permission to delete this dish"));
+    }
+
+    const deletedDish = await Dish.findByIdAndDelete(id);
+    request.data = deletedDish;
+    request.statusCode = 204;
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = { dishRouter, sinToken };
