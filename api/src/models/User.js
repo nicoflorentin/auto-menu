@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
     minlength: 3,
-    require: true,
+    required: true,
   },
 
   name: String,
@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
   passwordHash: {
     type: String,
     minlength: 3,
-    require: true,
+    required: true,
   },
 
   dishes: [{
