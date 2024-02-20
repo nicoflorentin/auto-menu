@@ -1,33 +1,63 @@
 import React from "react"
 import { useFormik } from "formik"
+import { Button, Input, Select, SelectItem } from "@nextui-org/react"
+import Checkbox from "../../../components/Checkbox/Checkbox"
 
-const initialValues = { email: "" }
+const initialValues = { title: "", category: "", description: "", glutenFree: false, vegetarian: false }
+const options = [
+	{ label: "Platos principal", value: "plato-principal" },
+	{ label: "Postre", value: "postre" },
+	{ label: "Bebida", value: "bebida" },
+]
 
 const FormAdd = () => {
-	const { formik, values, handleChange, handleSubmit } = useFormik({
+	const { values, handleChange, handleSubmit } = useFormik({
 		initialValues,
 		onSubmit: values => {
 			alert(JSON.stringify(values, null, 2))
 		},
 	})
 
+	console.log(values)
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form className="flex flex-col" onSubmit={handleSubmit}>
 			<label htmlFor="title">Name</label>
-			<input id="title" name="title" type="text" onChange={handleChange} value={values.email} />
-			<label htmlFor="email">Email Address</label>
-			<input id="email" name="email" type="email" onChange={handleChange} value={values.email} />
-			<label htmlFor="email">Email Address</label>
-			<input id="email" name="email" type="email" onChange={handleChange} value={values.email} />
-
-			<button type="submit">Submit</button>
+			<Input id="title" name="title" type="text" onChange={handleChange} value={values.title} />
+			<label htmlFor="description">Description</label>
+			<Input id="description" name="description" type="text" onChange={handleChange} value={values.description} />
+			<label htmlFor="category">Category</label>
+			<Select
+				name="category"
+				label="Category"
+				placeholder="Select a category"
+				selectionMode="single"
+				className="max-w-xs"
+				onChange={handleChange}
+			>
+				{options.map(option => (
+					<SelectItem key={option.value} value={option.value}>
+						{option.label}
+					</SelectItem>
+				))}
+			</Select>
+			<label htmlFor="gluten">Gluten</label>
+			<Checkbox
+				onChange={(e) => handleChange({ target: { name: "glutenFree", value: e.target.checked } })}
+				name="gluten"
+        label='Gluten Free'
+			/>
+			<Checkbox
+				onChange={(e) => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
+				name="vegetarian"
+        label='Vegetarian'
+			/>
+			<Button type="submit">Submit</Button>
 		</form>
 	)
 }
 
 export default FormAdd
-
 
 // {
 // 	"title":"Fideos con Manteca y Limón",

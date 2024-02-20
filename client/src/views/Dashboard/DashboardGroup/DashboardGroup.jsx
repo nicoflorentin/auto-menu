@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import DashboardLink from "../DashBoardLink/DashboardLink"
-// import menuIcon from '../../../../assets/icons/arrow-down.svg'
 
 const DashBoard = ({ icon, childrens, sectionName }) => {
 

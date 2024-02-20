@@ -19,15 +19,15 @@ const DashBoard = () => {
 			isGroup: false,
 		},
 		{
-			sectionPath: "delete",
-			sectionName: "Delete",
-			icon: "delete",
-			isGroup: false,
-		},
-		{
 			sectionPath: "edit",
 			sectionName: "Edit",
 			icon: "edit",
+			isGroup: false,
+		},
+		{
+			sectionPath: "delete",
+			sectionName: "Delete",
+			icon: "delete",
 			isGroup: false,
 		},
 		{
@@ -68,7 +68,7 @@ const DashBoard = () => {
 	const pathParts = pathname.split("/")
 	const searchWord = pathParts[pathParts.length - 1]
 
-	const getSectionName = (linksConfig) => {
+	const getSectionName = linksConfig => {
 		for (const config of linksConfig) {
 			if (config.sectionPath === searchWord) {
 				return config.sectionName
