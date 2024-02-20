@@ -8,8 +8,9 @@ export const fetchDishes = createAsyncThunk('dishes/fetchDishes', async (token) 
 });
 
 export const createDish = createAsyncThunk('dishes/createDish', async (body, token) => {
-  return await dishServices.getDishes(body, token)
+  return await dishServices.createDish(body, token)
 });
+
 // Define un slice para manejar el estado relacionado con los datos de la API
 export const dishesSlice = createSlice({
   name: 'dishes',

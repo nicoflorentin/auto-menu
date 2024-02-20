@@ -12,7 +12,7 @@ const options = [
 	{ label: "Bebida", value: "bebida" },
 ]
 
-const FormAdd = () => {
+const FormEdit = () => {
 	const dispatch = useDispatch()
 	const { values, handleChange, handleSubmit } = useFormik({
 		initialValues,
@@ -62,7 +62,7 @@ const FormAdd = () => {
 	)
 }
 
-export default FormAdd
+export default FormEdit
 
 // {
 // 	"title":"Fideos con Manteca y Limón",

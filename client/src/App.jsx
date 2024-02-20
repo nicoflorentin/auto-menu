@@ -1,7 +1,7 @@
 import "./App.css"
 import Login from "./views/Login/Login"
 import NavBar from "./components/NavBar/NavBar"
-import DishesList from './components/DishesList/DishesList'
+import DishesList from "./components/DishesList/DishesList"
 
 import { Route, Routes, useLocation } from "react-router-dom"
 import DashBoard from "./views/Dashboard/DashBoard"
@@ -17,8 +17,9 @@ function App() {
 					<Route path="" element={<div className="text-center font-semibold text-3xl">WELCOME</div>} />
 					<Route path="dishes" element={<DishesList />} />
 					<Route path="add" element={<FormAdd />} />
-					<Route path="edit" element={<div>edit</div>} />
-					<Route path="delete" element={<div>delete</div>} />
+					<Route path="edit" element={<DishesList />} />
+					<Route path="edit/:id" element={<FormAdd />} />
+					<Route path="delete" element={<DishesList />} />
 					<Route path="archived" element={<div>archived</div>} />
 					<Route path="statistics" element={<div>statistics</div>} />
 					<Route path="visits" element={<div>visits</div>} />
