@@ -2,9 +2,11 @@ import { Button, User } from "@nextui-org/react"
 import React from "react"
 import withAuth from "../../views/Login/withAuth"
 import userIcon from '../../assets/user-icon.png'
+import { useSelector } from "react-redux"
 
-const NavBar = ({ logOut, loggedUserData }) => {
+const NavBar = ({ logOut }) => {
 
+	const {data:loggedUserData} = useSelector(state => state.login)
 	const { username, name } = loggedUserData
 
 	return (

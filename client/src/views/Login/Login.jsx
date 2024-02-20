@@ -2,10 +2,11 @@ import React, { useState } from "react"
 import withAuth from "./withAuth"
 import { Input, Button, Card, CardBody, Tabs, Tab } from "@nextui-org/react"
 import Spinner from "../../components/Spinner"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const Login = ({ login, signUp, loading }) => {
 	const [selected, setSelected] = useState("login")
+	const navigate = useNavigate()
 
 	const [input, setInput] = useState({
 		username: "",
@@ -14,7 +15,7 @@ const Login = ({ login, signUp, loading }) => {
 
 	const handleSubmit = async e => {
 		e.preventDefault()
-		selected === "login" ? login(input) : signUp(input).then(() => setSelected("login"))
+		selected === "login" ? login(input).then(() => navigate('/dashboard')) : signUp(input).then(() => setSelected("login"))
 	}
 
 	const handleInput = e => {
@@ -53,7 +54,7 @@ const Login = ({ login, signUp, loading }) => {
 								/>
 								<p className="text-center text-small">
 									Need to create an account?{" "}
-									<Link size="sm" onPress={() => setSelected("sign-up")}>
+									<Link size="sm" onClick={() => setSelected("sign-up")}>
 										Sign up
 									</Link>
 								</p>
@@ -98,7 +99,7 @@ const Login = ({ login, signUp, loading }) => {
 								/>
 								<p className="text-center text-small">
 									Already have an account?{" "}
-									<Link size="sm" onPress={() => setSelected("login")}>
+									<Link size="sm" onClick={() => setSelected("login")}>
 										Login
 									</Link>
 								</p>
