@@ -10,7 +10,7 @@ const DishItem = ({ dish, action, iconSize }) => {
 		<div className="flex flex-col border border-slate-200 w-96 p-2">
 			<div className="flex">
 				<span className="font-semibold">{title}</span>
-				<span onClick={action && (() => action.action(id))} className="ml-auto">
+				<span onClick={action && (() => action.action(id))} className="ml-auto cursor-pointer hover:scale-125">
 					{action && action.icon}
 				</span>
 			</div>
