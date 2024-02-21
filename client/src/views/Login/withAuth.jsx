@@ -12,7 +12,7 @@ const withAuth = (OriginalComponent) => {
 
     // Optimized conditional redirection upon successful login
     useEffect(() => {
-      if (!loggedUserData?.token) {
+      if (!loggedUserData?.token) {        
         navigate('/login')
       }
     }, [loggedUserData?.token, navigate]); // Optimized dependency array

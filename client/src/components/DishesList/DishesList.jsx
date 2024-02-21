@@ -1,27 +1,9 @@
 import React, { useEffect } from "react"
-import { fetchDishes, clearDishes } from "../../redux/slices/dishesSlice"
+import { fetchDishes, clearDishes, deleteDish } from "../../redux/slices/dishesSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useMatch, useNavigate } from "react-router-dom"
 import { DeleteIcon, EditIcon } from "../../assets/icons"
-
-const DishItem = ({ dish, action, iconSize }) => {
-	const { category, celiac, description, id, image, price, title, vegetarian } = dish
-	return (
-		<div className="flex flex-col border border-slate-200 w-96 p-2">
-			<div className="flex">
-				<span className="font-semibold">{title}</span>
-				<span onClick={action && (() => action.action(id))} className="ml-auto cursor-pointer hover:scale-125">
-					{action && action.icon}
-				</span>
-			</div>
-			<span className="text-xs">{category}</span>
-			<p>{description}</p>
-			<span className="uppercase text-xs mt-auto text-end font-semibold">{vegetarian ? "Veggie" : ""}</span>
-			<span>{celiac ? "Gluten Free" : ""}</span>
-			<p className="text-end text-xl mt-auto">{price}</p>
-		</div>
-	)
-}
+import DishItem from "../DishItem/DishItem"
 
 const DishesList = () => {
 	const actions = [
@@ -34,8 +16,8 @@ const DishesList = () => {
 			icon: <EditIcon size={20} />,
 		},
 		{
-			action: () => {
-				alert("DELETE")
+			action: (id, token) => {
+				dispatch(deleteDish({id, token}))
 			},
 			label: "Delete",
 			route: "delete",
@@ -48,7 +30,7 @@ const DishesList = () => {
 	const { actionRoute } = match.params
 	const dispatch = useDispatch()
 	const { data: loggedUserData } = useSelector(state => state.login)
-	const { loading, dishes } = useSelector(state => state.dishes) // Usa el slice para los platos
+	const { loading, dishes } = useSelector(state => state.dishes)
 
 	useEffect(() => {
 		dispatch(fetchDishes(loggedUserData.token))
@@ -56,9 +38,11 @@ const DishesList = () => {
 		return () => dispatch(clearDishes())
 	}, [dispatch])
 
-	const renderDishes = dishes?.map(dish => (
-		<DishItem action={actions.find(action => action.route === actionRoute)} dish={dish} key={dish.id} iconSize="20" />
-	))
+	const renderDishes = dishes?.map(dish => {
+		return (
+			<DishItem action={actions.find(action => action.route === actionRoute)} dish={dish} key={dish.id} iconSize="20" />
+		)
+	})
 
 	return (
 		<div className="">

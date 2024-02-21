@@ -15,7 +15,7 @@ const Login = ({ login, signUp, loading }) => {
 
 	const handleSubmit = async e => {
 		e.preventDefault()
-		selected === "login" ? login(input).then(() => navigate('/dashboard')) : signUp(input).then(() => setSelected("login"))
+		selected === "login" ? login(input).then(() => navigate("/dashboard")) : signUp(input).then(() => setSelected("login"))
 	}
 
 	const handleInput = e => {
@@ -28,9 +28,6 @@ const Login = ({ login, signUp, loading }) => {
 
 	return (
 		<section className="flex justify-center items-center h-screen">
-			{/* <LoginFields></LoginFields>
-		<RegisterFields></RegisterFields> */}
-
 			<Card className="max-w-full w-[340px] h-[400px]">
 				<CardBody className="overflow-hidden">
 					<Tabs fullWidth size="md" aria-label="Tabs form" selectedKey={selected} onSelectionChange={setSelected}>
