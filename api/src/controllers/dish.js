@@ -4,6 +4,7 @@ const Dish = require("../models/Dish");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const config = require("../utils/config");
+const _ = require('lodash');
 
 //Ruta GET para traer todos los platos sin token
 sinToken.get("/", async (request, _response, next) => {
@@ -36,7 +37,13 @@ dishRouter.get("/", async (request, _response, next) => {
 dishRouter.get("/categories", async (_request, response, next) => {
   try {
     const categories = await Dish.distinct("category");
-    response.json(categories);
+
+    const camelCaseCategories = categories.map((category) => {
+      const camelCaseValue = _.camelCase(category);
+      return { value: camelCaseValue, label: category };
+    });
+
+    response.json(camelCaseCategories);
   } catch (error) {
     next(error);
   }
