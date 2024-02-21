@@ -46,7 +46,8 @@ const errorHandler = (error, request, response, next) => {
   } else if (
     error.message === "jwt must be provided" ||
     error.message === "Incorrect user or password" ||
-    error.message === "Dish not found or user does not have permission to edit it"
+    error.message === "Dish not found or user does not have permission to edit it"||
+    error.message === "User does not have permission to access this dish"
   ) {
     statusCode = 401;
   }
