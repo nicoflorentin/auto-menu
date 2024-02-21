@@ -42,6 +42,30 @@ dishRouter.get("/categories", async (_request, response, next) => {
   }
 });
 
+//Ruta GET para traer todos los platos por ID
+dishRouter.get("/:id", async (request, _response, next) => {
+  try {
+    const id = request.params.id;
+    const codeToken = jwt.verify(request.token, config.SECRET);
+    const userId = codeToken.id;
+
+    const findDishId = await Dish.findById(id);
+    if (!findDishId) {
+      next(new Error("Dish not found"));
+    }
+
+    if (findDishId.user.toString() !== userId) {
+      next(new Error("User does not have permission to access this dish"));
+    }
+
+    request.data = findDishId;
+    request.statusCode = 200;
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 //Ruta POST para crear platos
 dishRouter.post("/", async (request, _response, next) => {
   try {
