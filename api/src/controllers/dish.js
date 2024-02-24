@@ -33,22 +33,6 @@ dishRouter.get("/", async (request, _response, next) => {
   }
 });
 
-//Ruta GET para traer todos los platos por categorias
-dishRouter.get("/categories", async (_request, response, next) => {
-  try {
-    const categories = await Dish.distinct("category");
-
-    const camelCaseCategories = categories.map((category) => {
-      const camelCaseValue = _.camelCase(category);
-      return { value: camelCaseValue, label: category };
-    });
-
-    response.json(camelCaseCategories);
-  } catch (error) {
-    next(error);
-  }
-});
-
 //Ruta GET para traer todos los platos por ID
 dishRouter.get("/:id", async (request, _response, next) => {
   try {

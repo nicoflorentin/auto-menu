@@ -9,6 +9,7 @@ const logger = require("./utils/logger");
 const { dishRouter, sinToken } = require("./controllers/dish");
 const userRouter = require("./controllers/user")
 const loginRouter = require("./controllers/login")
+const categoriesRouter = require('./controllers/categories')
 
 mongoose
   .connect(config.MONGO_URI)
@@ -26,6 +27,7 @@ app.use(middleware.tokenExtractor)
 
 app.use("/api/dish/sinjwt", sinToken);
 app.use("/api/dish", dishRouter);
+app.use("/api/categories", categoriesRouter);
 app.use("/api/user", userRouter);
 app.use("/api/login", loginRouter);
 
