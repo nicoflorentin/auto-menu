@@ -22,7 +22,7 @@ const DeleteIcon = ({ color, size }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			class="icon icon-tabler icon-tabler-trash-x-filled"
+			className="icon icon-tabler icon-tabler-trash-x-filled"
 			width={size || "30"}
 			height={size || "30"}
 			viewBox="0 0 24 24"
@@ -51,7 +51,7 @@ const EditIcon = ({ size, color }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			class="icon icon-tabler icon-tabler-settings"
+			className="icon icon-tabler icon-tabler-settings"
 			width={size || "30"}
 			height={size || "30"}
 			viewBox="0 0 24 24"

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import AsideBar from "./AsideBar/AsideBar"
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
 import withAuth from "../Login/withAuth.jsx"
@@ -65,8 +65,8 @@ const DashBoard = () => {
 	]
 
 	const { pathname } = useLocation()
-	const pathParts = pathname.split("/")
-	const searchWord = pathParts[pathParts.length - 1]
+	const pathSplitParts = pathname.split("/")
+	const searchWord = pathSplitParts[2]
 
 	const getSectionName = linksConfig => {
 		for (const config of linksConfig) {
@@ -82,17 +82,7 @@ const DashBoard = () => {
 		}
 		return null
 	}
-	// const getSectionName = linksConfig => {
-	// 	// Buscar en linksConfig el elemento cuyo sectionPath coincida con el path
-	// 	const foundConfig = linksConfig.find(config => {
-	// 		if (!config.isGroup) {
-	// 			return config.sectionPath === searchWord
-	// 		} else {
-	// 			return getSectionName(config.childrens)
-	// 		}
-	// 	})
-	// 	return !foundConfig ? '' : foundConfig
-	// }
+
 	return (
 		<div id="section-container" className="p-10">
 			<div id="dashboard-container" className="flex flex-row border rounded-2xl">
