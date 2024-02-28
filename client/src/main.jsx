@@ -9,7 +9,7 @@ import { NextUIProvider } from "@nextui-org/react"
 import store from "./redux/store/store.js"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-	<React.StrictMode>
+	// <React.StrictMode>
 		<Provider store={store}>
 			<BrowserRouter>
 				<NextUIProvider>
@@ -17,5 +17,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 				</NextUIProvider>
 			</BrowserRouter>
 		</Provider>
-	</React.StrictMode>
+	// </React.StrictMode>
 )
