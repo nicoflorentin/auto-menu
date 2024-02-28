@@ -7,12 +7,12 @@ const config = require("../utils/config");
 const _ = require('lodash');
 
 //Ruta GET para traer todos los platos sin token
-sinToken.get("/", async (request, _response, next) => {
-  const dish = await Dish.find({}).populate("user", { name: 1 });
-  request.data = dish;
-  request.statusCode = 200;
-  next();
-});
+// sinToken.get("/", async (request, response, next) => {
+//   const dish = await Dish.find({}).populate("user", { name: 1 });
+//   request.data = dish;
+//   request.statusCode = 200;
+//   next();
+// });
 
 //Ruta GET para traer todos los platos con token
 dishRouter.get("/", async (request, _response, next) => {

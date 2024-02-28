@@ -1,33 +1,43 @@
 import axios from 'axios'
-import { delay } from '../utilities/delay';
 import { LOCAL_URL } from './const'
+// import { delay } from '../utilities/delay';
 
-const getDishes = async (token) => {
+const getDishes = async (token, filters) => {
 	const axiosConfig = {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
+		params: filters
 	};
 	try {
 		const response = await axios.get(`${LOCAL_URL}/dish`, axiosConfig);
-		const data = await response.data
-		await delay()
+		const { data } = response;
+		// if (filters.archived) {
+		// 	data.data = data.data.filter(element => !!element.archived)
+		// 	return data
+		// }
+		// await delay();
+		// data.data = data.data.filter(element => element.archived === false)
 		return data;
 	} catch (error) {
 		throw new Error(error.message)
 	}
 }
-const editDish = async (body, token) => {
+
+const editDish = async (id, body, token) => {
 	const axiosConfig = {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
 	};
+
+	console.log('input al servicio ', id, body, token)
 	try {
-		const response = await axios.put(`${LOCAL_URL}/dish`, { body }, axiosConfig)
+		const response = await axios.put(`${LOCAL_URL}/dish/${id}`, body, axiosConfig)
+		console.log('response del servicio', response.data)
 		return response.data
 	} catch (error) {
-		throw new Error(error.message)
+		throw new Error('Edit dish error')
 	}
 }
 
@@ -36,10 +46,12 @@ const createDish = async (body, token) => {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
+		body: body
 	};
-	await delay()
+	// await delay()
 	try {
-		const response = await axios.post(`${LOCAL_URL}/dish`, body, axiosConfig)
+		console.log('cuerpo en el servicio:', body)
+		const response = await axios.post(`${LOCAL_URL}/dish`, axiosConfig)
 		return response.data
 	} catch (error) {
 		throw new Error('Create dish error')
@@ -68,33 +80,9 @@ const getCategories = async (token) => {
 	};
 
 	try {
-		await delay()
-		// return await axios.get(`${LOCAL_URL}/dish/categories`, axiosConfig)
-		return {
-			data: [
-				{
-					value: "acompañamientos",
-					label: "Acompañamientos"
-				},
-				{
-					value: "bebidas",
-					label: "Bebidas"
-				},
-				{
-					value: "entradas",
-					label: "Entradas"
-				},
-				{
-					value: "platosPrincipales",
-					label: "Platos principales"
-				},
-				{
-					value: "postres",
-					label: "Postres"
-				},
-			]
-		}
-
+		// await delay()
+		const response = await axios.get(`${LOCAL_URL}/categories`)
+		return response.data
 	} catch (error) {
 		console.log(error)
 	}
@@ -115,4 +103,23 @@ const getOneDish = async (id, token) => {
 	}
 }
 
-export default { getDishes, createDish, editDish, deleteDish, getCategories, getOneDish }
+const archiveDish = async (dish, token) => {
+	const axiosConfig = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+
+	const toEditData = {
+		...dish,
+		archived: !dish.archived
+	}
+
+	try {
+		const response = await axios.get(`${LOCAL_URL}/dish/${dish.id}`, toEditData, axiosConfig)
+		return response.data
+	} catch (error) {
+		throw new Error(error.message)
+	}
+}
+export default { getDishes, createDish, editDish, deleteDish, getCategories, getOneDish, archiveDish }

@@ -19,7 +19,7 @@ const DashBoard = ({ icon, childrens, sectionName }) => {
 				<div className="ml-2 my-10"></div>
 				<div className=''>
 				{childrens?.map(config => (
-					<DashboardLink icon={config.icon} sectionPath={config.sectionPath} sectionName={config.sectionName} />
+					<DashboardLink key={config.sectionName} icon={config.icon} sectionPath={config.sectionPath} sectionName={config.sectionName} />
 				))}
 				</div>
 			</div>

@@ -4,7 +4,8 @@ import dishServices from '../../services/dishServices'
 
 // Define una función asincrónica para obtener los datos de la API
 export const fetchDishes = createAsyncThunk('dishes/fetchDishes', async (payload) => {
-  return await dishServices.getDishes(payload)
+  const {token, filters} = payload
+  return await dishServices.getDishes(token, filters)
 });
 
 export const deleteDish = createAsyncThunk('dishes/deleteDish', async (payload) => {
@@ -19,9 +20,14 @@ export const createDish = createAsyncThunk('dishes/createDish', async (payload) 
 });
 
 export const editDish = createAsyncThunk('dishes/editDish', async (payload) => {
-  const { id, body, token } = payload
-  return await dishServices.editDish(id, body, token)
+  const { id, values, token } = payload
+  return await dishServices.editDish(id, values, token)
 });
+export const archiveDish = createAsyncThunk('dishes/archiveDish', async (payload) => {
+  const { id, values, token } = payload
+  return await dishServices.archiveDish(id, values, token)
+});
+
 
 // Define un slice para manejar el estado relacionado con los datos de la API
 export const dishesSlice = createSlice({
@@ -44,7 +50,7 @@ export const dishesSlice = createSlice({
       })
       .addCase(fetchDishes.fulfilled, (state, action) => {
         state.loading = false;
-        state.dishes = action.payload.data;
+        state.dishes = action.payload.data
       })
       .addCase(fetchDishes.rejected, (state, action) => {
         state.loading = false;
@@ -67,7 +73,8 @@ export const dishesSlice = createSlice({
       })
       .addCase(editDish.fulfilled, (state, action) => {
         state.loading = false;
-        state.dishes.push(action.payload);
+        state.dishes = state.dishes.filter(element => element.id !== action.payload.data.id)
+        state.dishes.push(action.payload.data);
       })
       .addCase(editDish.rejected, (state, action) => {
         state.loading = false;
