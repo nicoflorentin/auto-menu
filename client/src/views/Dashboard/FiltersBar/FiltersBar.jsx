@@ -4,10 +4,11 @@ import FilterElement from "../../../components/FilterElement/FilterElement"
 import dishServices from "../../../services/dishServices"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchDishes } from "../../../redux/slices/dishesSlice"
+import Checkbox from "../../../components/Checkbox/Checkbox"
 
 const FiltersBar = () => {
 	const dispatch = useDispatch()
-	const {token} = useSelector(state => state.login.data)
+	const { token } = useSelector(state => state.login.data)
 	const [categories, setCategories] = useState([])
 	const [orderFilters] = useState([
 		{ label: "High first", value: "descendant" },
@@ -28,12 +29,24 @@ const FiltersBar = () => {
 	})
 
 	useEffect(() => {
-		dispatch(fetchDishes(token, values)).then(() => console.log('fetch dishes with filters', values))
+		dispatch(fetchDishes(token, values)).then(() => console.log("fetch dishes with filters", values))
 	}, [values])
 
 	return (
 		<form>
 			<div className="flex justify-end gap-5 mb-1 px-3">
+				<Checkbox
+					onChange={e => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
+					name="vegetarian"
+					label="Vegetarian"
+					isSelected={values.vegetarian}
+				/>
+				<Checkbox
+					onChange={e => handleChange({ target: { name: "celiac", value: e.target.checked } })}
+					name="celiac"
+					label="Gluten Free"
+					isSelected={values.celiac}
+				/>
 				<FilterElement
 					label="Category"
 					name="category"
