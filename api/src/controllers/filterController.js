@@ -1,4 +1,4 @@
-const filterRouter = require("express").Router();
+/* const filterRouter = require("express").Router();
 const Dish = require("../models/Dish");
 
 filterRouter.get("/", async (request, _response, next) => {
@@ -22,3 +22,4 @@ filterRouter.get("/", async (request, _response, next) => {
 });
 
 module.exports = filterRouter;
+ */

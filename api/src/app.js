@@ -11,7 +11,7 @@ const sinTokenRouter = require("./controllers/sinTokenControllers")
 const userRouter = require("./controllers/user")
 const loginRouter = require("./controllers/loginController")
 const categoriesRouter = require('./controllers/categoriesController')
-const filterRouter = require ("./controllers/filterController");
+//const filterRouter = require ("./controllers/filterController");
 
 mongoose
   .connect(config.MONGO_URI)
@@ -30,7 +30,7 @@ app.use(middleware.tokenExtractor)
 app.use("/api/sinjwt", sinTokenRouter);
 app.use("/api/dish", dishRouter);
 app.use("/api/categories", categoriesRouter);
-app.use("/api/filter", filterRouter)
+//app.use("/api/filter", filterRouter)
 app.use("/api/user", userRouter);
 app.use("/api/login", loginRouter);
 
