@@ -3,6 +3,7 @@ import AsideBar from "./AsideBar/AsideBar"
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
 import withAuth from "../Login/withAuth.jsx"
 import Section from "./Section/Section.jsx"
+import FiltersBar from "./FiltersBar/FiltersBar.jsx"
 
 const DashBoard = () => {
 	const linksConfig = [
@@ -84,13 +85,14 @@ const DashBoard = () => {
 	}
 
 	return (
-		<div id="section-container" className="p-10">
+		<div id="section-container" className="p-1">
 			<div id="dashboard-container" className="flex flex-row border rounded-2xl">
 				<aside className="p-5 border-r w-72">
 					<AsideBar linksConfig={linksConfig} />
 				</aside>
 				<div className="p-5 w-full">
 					<Section sectionName={getSectionName(linksConfig)}>
+						
 						<Outlet />
 					</Section>
 				</div>

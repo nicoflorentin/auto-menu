@@ -26,6 +26,8 @@ const Login = ({ login, signUp, loading }) => {
 		}))
 	}
 
+	console.log(input)
+
 	return (
 		<section className="flex justify-center items-center h-screen">
 			<Card className="max-w-full w-[340px] h-[400px]">

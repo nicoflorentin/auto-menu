@@ -1,16 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { delay } from '../../utilities/delay';
+import { LOCAL_URL } from '../../services/const'
 
 // Define una función asincrónica para obtener los datos de la API
 export const fetchLogin = createAsyncThunk('login/fetchLogin', async (loginData) => {
-  const response = await axios.post('http://localhost:3001/api/login', loginData)
+  console.log(loginData)
+  const response = await axios.post(`${LOCAL_URL}/login`, loginData)
   await delay()
   return response.data
 });
 
 export const fetchSignUp = createAsyncThunk('login/fetchSignUp', async (SignUpData) => {
-  const response = await axios.post('http://localhost:3001/api/user', SignUpData)
+  const response = await axios.post(`${LOCAL_URL}/user`, SignUpData)
   await delay()
   return response.data
 });
@@ -30,6 +32,10 @@ export const loginSlice = createSlice({
       state.data.username = ''
       state.data.name = ''
       state.data.token = ''
+      localStorage.removeItem('user');
+    },
+    storeUserGlobal(state, action) {
+      state.data = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -41,6 +47,7 @@ export const loginSlice = createSlice({
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload.data;
+        localStorage.setItem('user', JSON.stringify(action.payload.data));
       })
       .addCase(fetchLogin.rejected, (state, action) => {
         state.loading = false;
@@ -57,5 +64,5 @@ export const loginSlice = createSlice({
   },
 })
 
-export const { logOut } = loginSlice.actions
+export const { logOut, storeUserGlobal } = loginSlice.actions
 export default loginSlice.reducer

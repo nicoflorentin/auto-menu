@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { createDish, editDish } from "../../../redux/slices/dishesSlice"
 import dishServices from "../../../services/dishServices"
 import { useParams } from "react-router"
-import { toCamelCase } from "../../../utilities/toCamelCase"
 import Spinner from "../../../components/Spinner"
+import { formatCategory } from "../../../utilities/formatCategory"
 
 const initialValues = { title: "", category: "", description: "", image: "", celiac: false, vegetarian: false }
 const initialCategories = [
@@ -32,19 +32,22 @@ const Form = () => {
 
 	useEffect(() => {
 		//si hay un id en params, trae los datos del dish y rellena el formulario
-		id && dishServices.getOneDish(id, token).then(res => setValues(res.data))
+		id &&
+			dishServices.getOneDish(id, token).then(res => {
+				setValues(res.data)
+				console.log("autofill response", res.data)
+			})
 		return () => setValues(initialValues)
 	}, [id])
 
 	useEffect(() => {
 		dishServices.getCategories(token).then(res => {
-			const categories = res.data
-			setCategories(categories)
+			console.log(res)
+			setCategories(res.data)
 		})
 	}, [])
 
-	console.log("categories", categories)
-	console.log("values", values)
+	console.log("cateogories", categories)
 
 	return (
 		<form className="flex flex-col" onSubmit={handleSubmit}>
@@ -58,6 +61,7 @@ const Form = () => {
 				label="Category"
 				placeholder="Select a category"
 				selectionMode="single"
+				selectedKeys={values.category ? [values.category] : null}
 				className=""
 				onChange={handleChange}
 			>
@@ -87,7 +91,7 @@ const Form = () => {
 			{/* <Button type="submit">Submit</Button> */}
 			{!loading ? (
 				<Button color="primary" type="submit" variant="solid">
-					Create
+					{id ? "Edit" : "Create"}
 				</Button>
 			) : (
 				<Button variant="solid" color="primary" spinner={<Spinner />} isLoading>
