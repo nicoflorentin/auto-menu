@@ -1,18 +1,8 @@
 const dishRouter = require("express").Router();
-const sinToken = require("express").Router();
-const Dish = require("../models/Dish");
 const User = require("../models/User");
+const Dish = require("../models/Dish");
 const jwt = require("jsonwebtoken");
 const config = require("../utils/config");
-const _ = require('lodash');
-
-//Ruta GET para traer todos los platos sin token
-// sinToken.get("/", async (request, response, next) => {
-//   const dish = await Dish.find({}).populate("user", { name: 1 });
-//   request.data = dish;
-//   request.statusCode = 200;
-//   next();
-// });
 
 //Ruta GET para traer todos los platos con token
 dishRouter.get("/", async (request, _response, next) => {
@@ -174,4 +164,5 @@ dishRouter.delete("/:id", async (request, _reponse, next) => {
   }
 });
 
-module.exports = { dishRouter, sinToken };
+
+module.exports = dishRouter;
