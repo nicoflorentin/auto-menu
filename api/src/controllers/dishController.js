@@ -12,7 +12,16 @@ dishRouter.get("/", async (request, _response, next) => {
 
     const userId = codeToken.id;
 
-    const dish = await Dish.find({ user: userId }).populate("user", {
+    const { category, archived, celiac, vegetarian, price } = request.query;
+  
+    const filter = { user: userId };
+    if (category) filter.category = category;
+    if (archived !== undefined) { filter.archived = archived === "true";}
+    if (celiac !== undefined) { filter.celiac = celiac === "true"} 
+    if (vegetarian !== undefined) { filter.vegetarian = vegetarian === "true"} 
+    if (price) filter.price = { $lte: parseFloat(price) };
+
+    const dish = await Dish.find(filter).populate("user", {
       name: 1,
     });
     request.data = dish;
