@@ -8,11 +8,11 @@ const withAuth = (OriginalComponent) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { loading, data: loggedUserData, error } = useSelector((state) => state.login);
     const localSavedUser = JSON.parse(localStorage.getItem('user'))
+    const { loading, data: loggedUserData, error } = useSelector((state) => state.login);
     // Si no hay token en el estado o en localstorage, navegar a login
     useEffect(() => {
-      if (!loggedUserData?.token && !localSavedUser) {        
+      if (!loggedUserData?.token && !localSavedUser?.token) {
         navigate('/login')
       } else {
         dispatch(storeUserGlobal(localSavedUser))

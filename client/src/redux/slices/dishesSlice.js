@@ -4,7 +4,7 @@ import dishServices from '../../services/dishServices'
 
 // Define una función asincrónica para obtener los datos de la API
 export const fetchDishes = createAsyncThunk('dishes/fetchDishes', async (payload) => {
-  const {token, filters} = payload
+  const { token, filters } = payload
   return await dishServices.getDishes(token, filters)
 });
 
@@ -23,9 +23,10 @@ export const editDish = createAsyncThunk('dishes/editDish', async (payload) => {
   const { id, values, token } = payload
   return await dishServices.editDish(id, values, token)
 });
+
 export const archiveDish = createAsyncThunk('dishes/archiveDish', async (payload) => {
-  const { id, values, token } = payload
-  return await dishServices.archiveDish(id, values, token)
+  const { dish, token } = payload
+  return await dishServices.archiveDish(dish, token)
 });
 
 
@@ -40,6 +41,9 @@ export const dishesSlice = createSlice({
   reducers: {
     clearDishes(state) {
       state.dishes = []
+    },
+    clearError(state) {
+      state.error = null
     },
   },
   extraReducers: (builder) => {
@@ -62,6 +66,7 @@ export const dishesSlice = createSlice({
       })
       .addCase(createDish.fulfilled, (state, action) => {
         state.loading = false;
+        state.dishes.push(action.payload.data)
       })
       .addCase(createDish.rejected, (state, action) => {
         state.loading = false;
@@ -73,10 +78,25 @@ export const dishesSlice = createSlice({
       })
       .addCase(editDish.fulfilled, (state, action) => {
         state.loading = false;
+        // state.dishes = state.dishes.filter(element => element.id !== action.payload.data.id)
+        // state.dishes.push(action.payload.data);
+      })
+      .addCase(editDish.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(archiveDish.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(archiveDish.fulfilled, (state, action) => {
+        state.loading = false;
+        console.log(action.payload) // aca esta el nuevo elemento con el archived modificado
+
         state.dishes = state.dishes.filter(element => element.id !== action.payload.data.id)
         state.dishes.push(action.payload.data);
       })
-      .addCase(editDish.rejected, (state, action) => {
+      .addCase(archiveDish.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
@@ -95,5 +115,5 @@ export const dishesSlice = createSlice({
   },
 });
 
-export const { clearDishes } = dishesSlice.actions
+export const { clearDishes, clearError } = dishesSlice.actions
 export default dishesSlice.reducer;
