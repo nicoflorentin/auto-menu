@@ -4,13 +4,13 @@ import { formatCategory } from "../../utilities/formatCategory"
 const DishItem = ({ dish, config }) => {
 	const { token } = useSelector(state => state.login.data)
 
-	const archivedItemStyle = () => {
-		return dish.archived ? "text-slate-400" : ""
+	const archivedItemStyles = () => {
+		return dish.archived ? "text-slate-500" : ""
 	}
 
 	const { category, celiac, description, id, image, price, title, vegetarian } = dish
 	return (
-		<div className={`flex flex-col border border-slate-300 w-96 p-2 ${archivedItemStyle()}`}>
+		<div className={`flex flex-col border border-gray-400 w-96 p-2 ${archivedItemStyles()}`}>
 			<div className="flex gap-1">
 				<span className="font-semibold">{title}</span>
 				<span onClick={config && (() => config.archive(dish, token))} className="ml-auto cursor-pointer hover:scale-125">

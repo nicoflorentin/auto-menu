@@ -1,8 +1,14 @@
 import axios from 'axios'
 import { LOCAL_URL } from './const'
+import { filterFalsyProperties } from '../utilities/filterFalsyProperties'
+import { user } from '@nextui-org/theme'
 // import { delay } from '../utilities/delay';
 
-const getDishes = async (token, filters) => {
+const getDishes = async (token, rawFilters) => {
+
+	const filters = filterFalsyProperties(rawFilters)
+	console.log('get dishes with filters', filters, 'and token' , token)
+
 	const axiosConfig = {
 		headers: {
 			Authorization: `Bearer ${token}`,
@@ -12,12 +18,6 @@ const getDishes = async (token, filters) => {
 	try {
 		const response = await axios.get(`${LOCAL_URL}/dish`, axiosConfig);
 		const { data } = response;
-		// if (filters.archived) {
-		// 	data.data = data.data.filter(element => !!element.archived)
-		// 	return data
-		// }
-		// await delay();
-		// data.data = data.data.filter(element => element.archived === false)
 		return data;
 	} catch (error) {
 		throw new Error(error.message)
@@ -34,10 +34,31 @@ const editDish = async (id, body, token) => {
 	console.log('input al servicio ', id, body, token)
 	try {
 		const response = await axios.put(`${LOCAL_URL}/dish/${id}`, body, axiosConfig)
-		console.log('response del servicio', response.data)
+		console.log('response del servicio edit', response.data)
 		return response.data
 	} catch (error) {
 		throw new Error('Edit dish error')
+	}
+}
+
+const archiveDish = async (dish, token) => {
+	const axiosConfig = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+
+	const toEditData = {
+		...dish,
+		archived: !dish.archived,
+	}
+
+	try {
+		const response = await axios.put(`${LOCAL_URL}/dish/${dish.id}`, toEditData, axiosConfig)
+		return response.data
+	} catch (error) {
+		console.log(error.message)
+		throw new Error('Archive dish error')
 	}
 }
 
@@ -46,12 +67,10 @@ const createDish = async (body, token) => {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
-		body: body
 	};
-	// await delay()
 	try {
 		console.log('cuerpo en el servicio:', body)
-		const response = await axios.post(`${LOCAL_URL}/dish`, axiosConfig)
+		const response = await axios.post(`${LOCAL_URL}/dish`, body, axiosConfig)
 		return response.data
 	} catch (error) {
 		throw new Error('Create dish error')
@@ -103,23 +122,4 @@ const getOneDish = async (id, token) => {
 	}
 }
 
-const archiveDish = async (dish, token) => {
-	const axiosConfig = {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	};
-
-	const toEditData = {
-		...dish,
-		archived: !dish.archived
-	}
-
-	try {
-		const response = await axios.get(`${LOCAL_URL}/dish/${dish.id}`, toEditData, axiosConfig)
-		return response.data
-	} catch (error) {
-		throw new Error(error.message)
-	}
-}
 export default { getDishes, createDish, editDish, deleteDish, getCategories, getOneDish, archiveDish }

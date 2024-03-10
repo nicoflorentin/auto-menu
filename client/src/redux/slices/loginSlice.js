@@ -51,7 +51,7 @@ export const loginSlice = createSlice({
       })
       .addCase(fetchLogin.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error;
+        state.error = action.error.message;
       })
       .addCase(fetchSignUp.fulfilled, (state, action) => {
         state.loading = false;

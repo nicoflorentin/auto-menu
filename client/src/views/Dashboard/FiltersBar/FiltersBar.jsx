@@ -2,35 +2,53 @@ import React, { useEffect, useState } from "react"
 import { useFormik } from "formik"
 import FilterElement from "../../../components/FilterElement/FilterElement"
 import dishServices from "../../../services/dishServices"
-import { useDispatch, useSelector } from "react-redux"
-import { fetchDishes } from "../../../redux/slices/dishesSlice"
+import { useDispatch } from "react-redux"
+import { clearDishes, fetchDishes } from "../../../redux/slices/dishesSlice"
 import Checkbox from "../../../components/Checkbox/Checkbox"
+import useToken from "../../../hooks/useToken"
+import { Button } from "@nextui-org/button"
 
-const FiltersBar = () => {
+const FiltersBar = ({ routeName }) => {
 	const dispatch = useDispatch()
-	const { token } = useSelector(state => state.login.data)
 	const [categories, setCategories] = useState([])
+	const token = useToken()
 	const [orderFilters] = useState([
 		{ label: "High first", value: "descendant" },
 		{ label: "Low first", value: "ascendant" },
 	])
 
+	const initialValues = {
+		celiac: false,
+		vegetarian: false,
+		order: '',
+		category: '',
+	}
+
+	const { values, handleChange, setValues } = useFormik({
+		initialValues,
+	})
+
 	useEffect(() => {
 		dishServices.getCategories().then(res => setCategories(res.data))
 	}, [])
 
-	const { values, handleChange, handleSubmit } = useFormik({
-		initialValues: {
-			category: "",
-			order: "",
-			celiac: false,
-			vegetarian: false,
-		},
-	})
-
 	useEffect(() => {
-		dispatch(fetchDishes(token, values)).then(() => console.log("fetch dishes with filters", values))
-	}, [values])
+		token &&
+			dispatch(
+				fetchDishes({
+					token,
+					filters: { ...values, archived: routeName === "archived" },
+				})
+			)
+	}, [values, routeName, token])
+
+	const resetFilters = () => {
+		console.log("reset filters")
+		setValues(initialValues)
+		// setUpdate(state=> !state)
+	}
+
+	console.log(values)
 
 	return (
 		<form>
@@ -50,24 +68,24 @@ const FiltersBar = () => {
 				<FilterElement
 					label="Category"
 					name="category"
-					radius="md"
 					selectionMode="single"
-					selectedKeys=""
+					value={values.category}
+					// selectedKeys=''
 					onChange={handleChange}
 					options={categories}
+					radius="md"
 				/>
 				<FilterElement
 					label="Order by price"
 					name="order"
-					radius="md"
 					selectionMode="single"
-					selectedKeys=""
+					// selectedKeys=""
 					onChange={handleChange}
 					options={orderFilters}
+					radius="md"
 				/>
+				<Button onClick={() => resetFilters()}>Reset</Button>
 			</div>
-			{/* Aquí puedes agregar botones de submit o cualquier otro elemento del formulario */}
-			<button type="submit">APPLY FILTERS</button>
 		</form>
 	)
 }

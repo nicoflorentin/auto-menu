@@ -85,14 +85,13 @@ const DashBoard = () => {
 	}
 
 	return (
-		<div id="section-container" className="p-1">
-			<div id="dashboard-container" className="flex flex-row border rounded-2xl">
+		<div id="section-container" className="flex-grow p-10">
+			<div id="dashboard-container" className="flex flex-row border h-full rounded-2xl">
 				<aside className="p-5 border-r w-72">
 					<AsideBar linksConfig={linksConfig} />
 				</aside>
 				<div className="p-5 w-full">
-					<Section sectionName={getSectionName(linksConfig)}>
-						
+					<Section sectionName={getSectionName(linksConfig)} className=''>
 						<Outlet />
 					</Section>
 				</div>
@@ -101,4 +100,4 @@ const DashBoard = () => {
 	)
 }
 
-export default withAuth(DashBoard)
+export default DashBoard

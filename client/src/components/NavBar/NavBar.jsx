@@ -1,7 +1,5 @@
 import { Button, User } from "@nextui-org/react"
 import React from "react"
-import withAuth from "../../views/Login/withAuth"
-import userIcon from '../../assets/user-icon.png'
 import { useSelector } from "react-redux"
 
 const NavBar = ({ logOut }) => {
@@ -24,4 +22,4 @@ const NavBar = ({ logOut }) => {
 	)
 }
 
-export default withAuth(NavBar)
+export default NavBar

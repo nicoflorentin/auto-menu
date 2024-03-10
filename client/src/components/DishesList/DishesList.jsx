@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react"
-import { fetchDishes, clearDishes, deleteDish, editDish, archiveDish } from "../../redux/slices/dishesSlice"
+import React, { useEffect } from "react"
+import { deleteDish, archiveDish, clearDishes } from "../../redux/slices/dishesSlice"
 import { useDispatch, useSelector } from "react-redux"
-import { useMatch, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { DeleteIcon, EditIcon, ArchiveIcon } from "../../assets/icons"
 import DishItem from "../DishItem/DishItem"
 import FiltersBar from "../../views/Dashboard/FiltersBar/FiltersBar"
+import Loading from "../Loading/Loading"
 
-const DishesList = () => {
+const DishesList = ({ routeName }) => {
 	const configList = [
 		{
 			action: id => {
 				navigate(`/dashboard/edit/${id}`)
 			},
-			archive: (id, values, token) => {
-				dispatch(archiveDish({ id, values, token }))
+			archive: (dish, token) => {
+				dispatch(archiveDish({ dish, token }))
 			},
 			label: "Edit",
 			route: "edit",
 			icon: <EditIcon size={20} />,
-			archiveIcon: <ArchiveIcon size={20} color="black" />,
+			archiveIcon: <ArchiveIcon size={20} color="grey" />,
 		},
 		{
 			action: (id, token) => {
@@ -32,8 +33,8 @@ const DishesList = () => {
 			action: id => {
 				navigate(`/dashboard/edit/${id}`)
 			},
-			archive: (id, values, token) => {
-				dispatch(archiveDish({ id, values, token }))
+			archive: (dish, token) => {
+				dispatch(archiveDish({ dish, token }))
 			},
 			label: "Archived",
 			route: "archived",
@@ -43,59 +44,32 @@ const DishesList = () => {
 	]
 
 	const navigate = useNavigate()
-	const match = useMatch("dashboard/:actionRoute")
-	const { actionRoute } = match.params
-	const [filters, setFilters] = useState({
-		archived: actionRoute === "archived",
-	})
-
 	const dispatch = useDispatch()
-	const { token } = useSelector(state => state.login.data)
 	const { loading, dishes } = useSelector(state => state.dishes)
-
-	console.log(dishes)
+	const currentConfig = configList.find(config => config.route === routeName)
 
 	useEffect(() => {
-		setFilters({
-			archived: actionRoute === "archived",
-		})
-		// return () => dispatch(clearDishes())
+		return () => dispatch(clearDishes())
 	}, [])
 
-	useEffect(() => {
-		console.log("dishes fetch with filters")
-		dispatch(fetchDishes({ token, filters }))
-
-		// return () => dispatch(clearDishes())
-	}, [dispatch, filters])
-
-	const currentConfig = configList.find(config => config.route === actionRoute)
-	console.log("Current config", currentConfig)
-
-	const RenderDishes = () => {
-		const toShowDishes = dishes?.filter(dish => {
-			if (currentConfig?.route === "archived") {
-				return dish.archived === true
-			} else {
-				return dish.archived === false
-			}
-		})
-		console.log(toShowDishes)
+	const renderDishes = () => {
 		return (
 			<div>
 				<div className="flex flex-wrap gap-5">
-					{toShowDishes.map(dish => (
-						<DishItem config={currentConfig} dish={dish} key={dish.id} iconSize="20" archived={dish.archived} />
-					))}
+					{dishes
+						?.filter(dish => (routeName === "archived" ? dish.archived : !dish.archived))
+						.map(dish => (
+							<DishItem config={currentConfig} dish={dish} key={dish.id} iconSize="20" archived={dish.archived} />
+						))}
 				</div>
 			</div>
 		)
 	}
 
 	return (
-		<div className="">
-			<FiltersBar />
-			<ul>{loading ? <p>loading</p> : <RenderDishes />}</ul>
+		<div className="flex flex-col">
+			<FiltersBar routeName={routeName} />
+			<div className="">{loading ? <Loading /> : renderDishes()}</div>
 		</div>
 	)
 }
