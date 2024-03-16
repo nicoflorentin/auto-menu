@@ -29,7 +29,7 @@ const Login = ({ login, signUp, loading }) => {
 	console.log(input)
 
 	return (
-		<section className="flex justify-center items-center h-screen">
+		<section className="flex flex-col justify-center items-center h-screen">
 			<Card className="max-w-full w-[340px] h-[400px]">
 				<CardBody className="overflow-hidden">
 					<Tabs fullWidth size="md" aria-label="Tabs form" selectedKey={selected} onSelectionChange={setSelected}>

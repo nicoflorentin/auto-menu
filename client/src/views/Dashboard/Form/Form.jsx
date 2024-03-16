@@ -13,7 +13,15 @@ import AskConfirmationModal from "../../../components/modals/AskConfirmationModa
 import ErrorModal from "../../../components/modals/ErrorModal/ErrorModal"
 import toast, { Toaster } from "react-hot-toast"
 
-const initialValues = { title: "", category: "", description: "", image: "", celiac: false, vegetarian: false }
+const initialValues = {
+	title: "",
+	category: "",
+	description: "",
+	image: "",
+	price: null,
+	celiac: false,
+	vegetarian: false,
+}
 const initialCategories = [
 	{
 		// label: "",
@@ -27,7 +35,7 @@ const Form = () => {
 	const [categories, setCategories] = useState(initialCategories)
 	const token = useToken()
 	const { loading, error } = useSelector((state) => state.dishes)
-	const [loadingFields, setLoadingFields] = useState(true)
+	const [loadingFields, setLoadingFields] = useState(false)
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 	const { values, handleChange, handleSubmit, setValues } = useFormik({
 		initialValues,
@@ -46,21 +54,23 @@ const Form = () => {
 					}
 			  })
 			: dispatch(createDish({ values, token })).then((res) => {
-				if (res.ok) {
-					// navigate("/dashboard/dishes")
-					console.log('res ok', res)
-					toast("Dish created succesfully!")
-				}
-			})
+					// if (res.ok) {
+
+					// 	console.log("res ok", res)
+					!res.error && toast("Dish created succesfully!")
+					setValues(initialValues)
+					// 	}
+					console.log(res)
+			  })
 	}
 
 	useEffect(() => {
 		//si hay un id en params, trae los datos del dish y rellena el formulario con los campos del dish
-		id &&
-			dishServices.getOneDish(id, token).then((res) => {
-				setValues(res.data)
-				setLoadingFields(false)
-			})
+		id && setLoadingFields(true)
+		dishServices.getOneDish(id, token).then((res) => {
+			setValues(res.data)
+			setLoadingFields(false)
+		})
 		return () => setValues(initialValues)
 	}, [id, token])
 
@@ -71,15 +81,29 @@ const Form = () => {
 		})
 	}, [])
 
-	console.log("loading", loading)
+	console.log("values", values)
 
 	return (
 		<>
 			<form className='flex flex-col' onSubmit={handleSubmit}>
 				<label htmlFor='title'>Name</label>
-				<Input id='title' name='title' type='text' onChange={handleChange} value={values.title} isDisabled={loadingFields}/>
+				<Input
+					id='title'
+					name='title'
+					type='text'
+					onChange={handleChange}
+					value={values.title}
+					isDisabled={loadingFields || loading}
+				/>
 				<label htmlFor='description'>Description</label>
-				<Input id='description' name='description' type='text' onChange={handleChange} value={values.description} isDisabled={loadingFields}/>
+				<Input
+					id='description'
+					name='description'
+					type='text'
+					onChange={handleChange}
+					value={values.description}
+					isDisabled={loadingFields || loading}
+				/>
 				<label htmlFor='category'>Category</label>
 				<Select
 					name='category'
@@ -89,7 +113,7 @@ const Form = () => {
 					selectedKeys={values.category ? [values.category] : null}
 					className=''
 					onChange={handleChange}
-					isDisabled={loading}
+					isDisabled={loadingFields || loading}
 				>
 					{categories?.map((option) => (
 						<SelectItem key={option.value} value={option.value}>
@@ -98,23 +122,37 @@ const Form = () => {
 					))}
 				</Select>
 				<label htmlFor='price'>Price</label>
-				<Input id='price' name='price' type='number' onChange={handleChange} value={values.price} isDisabled={loadingFields}/>
+				<Input
+					id='price'
+					name='price'
+					type='number'
+					onChange={handleChange}
+					value={values.price}
+					isDisabled={loadingFields || loading}
+				/>
 				<label htmlFor='image'>Image URL</label>
-				<Input id='image' name='image' type='text' onChange={handleChange} value={values.image} isDisabled={loadingFields}/>
+				<Input
+					id='image'
+					name='image'
+					type='text'
+					onChange={handleChange}
+					value={values.image}
+					isDisabled={loadingFields || loading}
+				/>
 				<label htmlFor='celiac'>Gluten</label>
 				<Checkbox
 					onChange={(e) => handleChange({ target: { name: "celiac", value: e.target.checked } })}
 					name='celiac'
 					label='Gluten Free'
 					isSelected={values.celiac}
-					isDisabled={loadingFields}
+					isDisabled={loadingFields || loading}
 				/>
 				<Checkbox
 					onChange={(e) => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
 					name='vegetarian'
 					label='Vegetarian'
 					isSelected={values.vegetarian}
-					isDisabled={loadingFields}
+					isDisabled={loadingFields || loading}
 				/>
 				{!loading ? (
 					<Button color='primary' variant='solid' onPress={onOpen} isDisabled={loadingFields}>
@@ -126,12 +164,7 @@ const Form = () => {
 					</Button>
 				)}
 				<AskConfirmationModal isOpen={isOpen} onOpenChange={onOpenChange} acceptFunction={submitHandler} />
-				<ErrorModal
-					error={error}
-					isOpen={error}
-					// onOpenChange={onOpenChange}
-					acceptFunction={() => dispatch(clearError())}
-				/>
+				<ErrorModal error={error} isOpen={error} acceptFunction={() => dispatch(clearError())} />
 			</form>
 			<Toaster></Toaster>
 		</>

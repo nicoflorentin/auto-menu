@@ -5,7 +5,6 @@ import { user } from '@nextui-org/theme'
 // import { delay } from '../utilities/delay';
 
 const getDishes = async (token, rawFilters) => {
-
 	const filters = filterFalsyProperties(rawFilters)
 	console.log('get dishes with filters', filters, 'and token' , token)
 
@@ -18,7 +17,7 @@ const getDishes = async (token, rawFilters) => {
 	try {
 		const response = await axios.get(`${LOCAL_URL}/dish`, axiosConfig);
 		const { data } = response;
-		return data;
+		return data
 	} catch (error) {
 		throw new Error(error.message)
 	}

@@ -6,7 +6,7 @@ const DashBoard = ({ icon, childrens, sectionName }) => {
 	const [isOpen, setIsOpen] = useState(false)
 
 	return (
-		<>
+		<div className="text-foreground">
 			<div className="cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
 				{/* <img className="h-5" src={icon} alt={icon} /> */}
 				<p>{sectionName}</p>
@@ -23,7 +23,7 @@ const DashBoard = ({ icon, childrens, sectionName }) => {
 				))}
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 

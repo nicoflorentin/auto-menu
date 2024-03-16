@@ -1,8 +1,8 @@
-const CheckIcon = ({ color, size }) => {
+const CheckIcon = ({ className, color, size }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			class="icon icon-tabler icon-tabler-check"
+			className={`fill-current ${className}`}
 			width={size || "30"}
 			height={size || "30"}
 			viewBox="0 0 24 24"
@@ -18,11 +18,11 @@ const CheckIcon = ({ color, size }) => {
 	)
 }
 
-const DeleteIcon = ({ color, size }) => {
+const DeleteIcon = ({ className, color, size }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			className="icon icon-tabler icon-tabler-trash-x-filled"
+			className={`fill-current ${className}`}
 			width={size || "30"}
 			height={size || "30"}
 			viewBox="0 0 24 24"
@@ -47,17 +47,17 @@ const DeleteIcon = ({ color, size }) => {
 	)
 }
 
-const EditIcon = ({ size, color }) => {
+const EditIcon = ({ className, size, color }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			className="icon icon-tabler icon-tabler-settings"
+			// className={`fill-current ${className}`}
 			width={size || "30"}
 			height={size || "30"}
 			viewBox="0 0 24 24"
 			strokeWidth="1.5"
 			stroke={color || "black"}
-			fill="none"
+			fill='none'
 			strokeLinecap="round"
 			strokeLinejoin="round"
 		>
@@ -68,26 +68,39 @@ const EditIcon = ({ size, color }) => {
 	)
 }
 
-const ArchiveIcon = ({ size, color }) => {
+const ArchiveIcon = ({ className, size, color }) => {
 	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			className="icon icon-tabler icon-tabler-archive"
-			width={size}
-			height={size}
-			viewBox={`0 0 24 24`}
-			strokeWidth="1.5"
-			stroke={color}
-			fill="none"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-		>
-			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-			<path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-			<path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-			<path d="M10 12l4 0" />
+		<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill={color} className={`fill-current ${className}`}>
+			<path d="m21.706 5.292-2.999-2.999A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.292A.994.994 0 0 0 2 6v13c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6a.994.994 0 0 0-.294-.708zM6.414 4h11.172l1 1H5.414l1-1zM4 19V7h16l.002 12H4z"></path><path d="M14 9h-4v3H7l5 5 5-5h-3z"></path>
 		</svg>
 	)
 }
 
-export { CheckIcon, DeleteIcon, EditIcon, ArchiveIcon }
+const DishIcon = ({ className, color, size }) => {
+	return (
+		<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill={color} className={`fill-current ${className}`}>
+			<path d="M21 15c0-4.625-3.507-8.441-8-8.941V4h-2v2.059c-4.493.5-8 4.316-8 8.941v2h18v-2zM5 15c0-3.859 3.141-7 7-7s7 3.141 7 7H5zm-3 3h20v2H2z" />
+		</svg>
+	)
+}
+
+const AddIcon = ({ className, color, size }) => {
+	return (
+		<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill={color} className={`fill-current ${className}`}>
+			<path d="M3 8v11c0 2.201 1.794 3 3 3h15v-2H6.012C5.55 19.988 5 19.806 5 19c0-.101.009-.191.024-.273.112-.576.584-.717.988-.727H21V4c0-1.103-.897-2-2-2H6c-1.206 0-3 .799-3 3v3zm3-4h13v12H5V5c0-.806.55-.988 1-1z"></path>
+			<path d="M11 14h2v-3h3V9h-3V6h-2v3H8v2h3z"></path>
+		</svg>
+	)
+}
+
+const PencilIcon = ({ className, color, size }) => {
+	return (
+		<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill={color} className={`fill-current ${className}`}>
+			<path d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"></path>
+		</svg>
+
+	)
+}
+
+export { CheckIcon, DeleteIcon, EditIcon, ArchiveIcon, DishIcon, AddIcon, PencilIcon }
+
