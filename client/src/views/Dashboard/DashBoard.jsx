@@ -1,69 +1,69 @@
 import React from "react"
 import AsideBar from "./AsideBar/AsideBar"
-import { Outlet, useLocation, useNavigate } from "react-router-dom"
-import withAuth from "../Login/withAuth.jsx"
+import { Outlet, useLocation } from "react-router-dom"
 import Section from "./Section/Section.jsx"
-import FiltersBar from "./FiltersBar/FiltersBar.jsx"
+import { DishIcon, AddIcon, PencilIcon, DeleteIcon, ArchiveIcon } from 'assets/icons'
 
 const DashBoard = () => {
 	const linksConfig = [
 		{
 			sectionPath: "dishes",
 			sectionName: "Dishes",
-			icon: "asd",
-			isGroup: false,
-		},
-		{
-			sectionPath: "add",
-			sectionName: "Add",
-			icon: "add",
+			Icon: DishIcon,
 			isGroup: false,
 		},
 		{
 			sectionPath: "edit",
 			sectionName: "Edit",
-			icon: "edit",
+			Icon: PencilIcon,
+			isGroup: false,
+		},
+		{
+			sectionPath: "add",
+			sectionName: "Add",
+			Icon: AddIcon,
 			isGroup: false,
 		},
 		{
 			sectionPath: "delete",
 			sectionName: "Delete",
-			icon: "delete",
+			Icon: DeleteIcon,
 			isGroup: false,
 		},
 		{
 			sectionPath: "archived",
 			sectionName: "Archived",
-			icon: "archived",
+			Icon: ArchiveIcon,
 			isGroup: false,
 		},
 		{
 			sectionPath: "statistics",
 			sectionName: "Statistics",
-			icon: "statistics",
+			Icon: "statistics",
 			isGroup: true,
 			childrens: [
 				{
 					sectionPath: "visits",
 					sectionName: "Visits",
-					icon: "Visits",
+					Icon: "Visits",
 					isGroup: false,
 				},
 				{
 					sectionPath: "comments",
 					sectionName: "Comments",
-					icon: "Comments",
+					Icon: "Comments",
 					isGroup: false,
 				},
 				{
 					sectionPath: "ratings",
 					sectionName: "Rating",
-					icon: "Rating",
+					Icon: "Rating",
 					isGroup: false,
 				},
 			],
 		},
 	]
+
 
 	const { pathname } = useLocation()
 	const pathSplitParts = pathname.split("/")
@@ -85,12 +85,12 @@ const DashBoard = () => {
 	}
 
 	return (
-		<div id="section-container" className="flex-grow p-10">
-			<div id="dashboard-container" className="flex flex-row border h-full rounded-2xl">
-				<aside className="p-5 border-r w-72">
+		<div id="section-container" className="flex flex-col flex-grow p-10">
+			<div id="dashboard-container" className="flex flex-row flex-grow m-auto w-[1300px] rounded-2xl">
+				<aside className="flex flex-col p-5 w-72">
 					<AsideBar linksConfig={linksConfig} />
 				</aside>
-				<div className="p-5 w-full">
+				<div className="w-full">
 					<Section sectionName={getSectionName(linksConfig)} className=''>
 						<Outlet />
 					</Section>

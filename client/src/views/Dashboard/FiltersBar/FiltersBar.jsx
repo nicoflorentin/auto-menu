@@ -48,8 +48,6 @@ const FiltersBar = ({ routeName }) => {
 		// setUpdate(state=> !state)
 	}
 
-	console.log(values)
-
 	return (
 		<form>
 			<div className="flex justify-end gap-5 mb-1 px-3">
@@ -84,6 +82,7 @@ const FiltersBar = ({ routeName }) => {
 					options={orderFilters}
 					radius="md"
 				/>
+				{/* aca iria la searchbar */}
 				<Button onClick={() => resetFilters()}>Reset</Button>
 			</div>
 		</form>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { DeleteIcon, EditIcon, ArchiveIcon } from "../../assets/icons"
 import DishItem from "../DishItem/DishItem"
 import FiltersBar from "../../views/Dashboard/FiltersBar/FiltersBar"
-import Loading from "../Loading/Loading"
+import Loading from "components/Loading/Loading"
 
 const DishesList = ({ routeName }) => {
 	const configList = [
@@ -27,7 +27,7 @@ const DishesList = ({ routeName }) => {
 			},
 			label: "Delete",
 			route: "delete",
-			icon: <DeleteIcon size={20} />,
+			icon: <DeleteIcon size={20}  />,
 		},
 		{
 			action: id => {
@@ -38,8 +38,8 @@ const DishesList = ({ routeName }) => {
 			},
 			label: "Archived",
 			route: "archived",
-			icon: <EditIcon size={20} />,
-			archiveIcon: <ArchiveIcon size={20} color="black" />,
+			icon: <EditIcon size={20}  />,
+			archiveIcon: <ArchiveIcon size={20} color='gray'/>,
 		},
 	]
 
@@ -50,7 +50,7 @@ const DishesList = ({ routeName }) => {
 
 	useEffect(() => {
 		return () => dispatch(clearDishes())
-	}, [])
+	}, [routeName])
 
 	const renderDishes = () => {
 		return (
