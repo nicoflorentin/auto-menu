@@ -53,7 +53,6 @@ export const dishesSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchDishes.fulfilled, (state, action) => {
-        console.log(action)
         state.loading = false;
         state.dishes = action.payload.data
       })
@@ -92,8 +91,6 @@ export const dishesSlice = createSlice({
       })
       .addCase(archiveDish.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload) // aca esta el nuevo elemento con el archived modificado
-
         state.dishes = state.dishes.filter(element => element.id !== action.payload.data.id)
         state.dishes.push(action.payload.data);
       })

@@ -33,8 +33,8 @@ const Login = ({ login, signUp, loading }) => {
 			<Card className="max-w-full w-[340px] h-[400px]">
 				<CardBody className="overflow-hidden">
 					<Tabs fullWidth size="md" aria-label="Tabs form" selectedKey={selected} onSelectionChange={setSelected}>
-						<Tab key="login" title="Login">
-							<form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+						<Tab key="login" title="Login" className="h-full">
+							<form className="flex flex-col gap-4 h-[300px]" onSubmit={handleSubmit}>
 								<Input
 									isRequired
 									name="username"
@@ -57,10 +57,10 @@ const Login = ({ login, signUp, loading }) => {
 										Sign up
 									</Link>
 								</p>
-								<div className="flex gap-2 justify-end">
+								<div className="flex gap-2 justify-end mt-auto">
 									{!loading ? (
 										<Button className="w-full" color="primary" type="submit" variant="solid">
-											Sign in
+											Login
 										</Button>
 									) : (
 										<Button className="w-full" variant="solid" color="primary" spinner={<Spinner />} isLoading>
@@ -96,13 +96,7 @@ const Login = ({ login, signUp, loading }) => {
 									type="password"
 									onChange={e => handleInput(e)}
 								/>
-								<p className="text-center text-small">
-									Already have an account?{" "}
-									<Link size="sm" onClick={() => setSelected("login")}>
-										Login
-									</Link>
-								</p>
-								<div className="flex gap-2 justify-end">
+								<div className="flex gap-2 justify-end mt-auto">
 									{!loading ? (
 										<Button className="w-full" color="primary" type="submit" variant="solid">
 											Sign up

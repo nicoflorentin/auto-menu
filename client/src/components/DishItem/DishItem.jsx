@@ -10,14 +10,15 @@ const DishItem = ({ dish, config }) => {
 	const titleMaxLength = 25
 
 	const archivedItemStyles = () => {
-		return dish.archived ? "opacity-75 grayscale" : ""
+		return dish.archived ? "opacity-80 grayscale" : ""
 	}
 
 	return (
-		<div className={`flex flex-col gap-1 w-72 h-40 px-4 py-2 ${archivedItemStyles()} bg-secondary text-secondary-foreground rounded-small`}>
-			<div className="flex items-center">
-				<Chip radius="sm" color="default" size="sm" variant='solid' className="h-4 uppercase text-tiny text-secondary">{formatCategory(category)}</Chip>
-				<div className="flex gap-1 ml-auto">
+		<div className={`flex flex-col w-72 h-40 px-2 py-3 ${archivedItemStyles()} bg-secondary text-secondary-foreground rounded-small`}>
+			<div className="flex items-center justify-between">
+				<Chip color="default" size="sm" variant='solid' className="h-4 uppercase text-tiny text-secondary rounded">{formatCategory(category)}</Chip>
+				{dish.archived && <p className="text-tiny">(Archived)</p>}
+				<div className="flex gap-1">
 					<span onClick={config && (() => config.archive(dish, token))} className="ml-auto cursor-pointer hover:scale-125">
 						{config && config.archiveIcon}
 					</span>
@@ -34,8 +35,8 @@ const DishItem = ({ dish, config }) => {
 			<div className="flex mt-auto">
 				<p className="text-end text-large font-semibold">{price} <span className="text-medium">USD</span></p>
 				<span className="flex ml-auto items-center">
-					{vegetarian ? <Tooltip showArrow={true} placement='top-end' content="Vegetarian recipe"><div><VegetarianIcon size='23' className='text-green-700' /></div></Tooltip> : ""}
-					{celiac ? <Tooltip showArrow={true} placement='top-end' content='Gluten Free'><div><GlutenFreeIcon size='25' className='text-foreground' /></div></Tooltip> : ""}
+					{vegetarian ? <Tooltip placement='top-end' content="Vegetarian recipe"><div><VegetarianIcon size='23' className='text-green-700' /></div></Tooltip> : ""}
+					{celiac ? <Tooltip placement='top-end' content='Gluten Free'><div><GlutenFreeIcon size='25' className='text-foreground' /></div></Tooltip> : ""}
 				</span>
 			</div>
 		</div>

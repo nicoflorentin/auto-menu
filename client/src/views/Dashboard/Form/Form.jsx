@@ -44,24 +44,29 @@ const Form = () => {
 			console.log("Submitted form with values:", values)
 		},
 	})
+	const navigate = useNavigate()
 
 	const submitHandler = () => {
 		// si hay id en params edita un dish y si no hay, crea un dish
 		id
 			? dispatch(editDish({ id, values, token })).then((res) => {
-				if (res.ok) {
-					// navigate("/dashboard/dishes")
-					toast(`${values.title} edited successfully!`)
-				}
+				console.log(res);
+				// navigate("/dashboard/dishes")
+				!res.error && toast(
+					`${values.title} edited successfully!`, {
+					position: 'bottom-center'
+				})
+				setTimeout(() => {
+					navigate('/dashboard/dishes')
+				}, 2000);
 			})
 			: dispatch(createDish({ values, token })).then((res) => {
-				// if (res.ok) {
-
-				// 	console.log("res ok", res)
-				!res.error && toast("Dish created succesfully!")
+				console.log("res", res)
+				!res.error && toast(
+					`${values.title} created successfully!`, {
+					position: 'bottom-center'
+				})
 				setValues(initialValues)
-				// 	}
-				console.log(res)
 			})
 	}
 
@@ -92,8 +97,6 @@ const Form = () => {
 			setCategories(res.data)
 		})
 	}, [])
-
-	console.log("values", values)
 
 	return (
 		<>
