@@ -19,7 +19,7 @@ const DishesList = ({ routeName }) => {
 			label: "Edit",
 			route: "edit",
 			icon: <EditIcon size={20} />,
-			archiveIcon: <ArchiveIcon size={20} color="grey" />,
+			archiveIcon: <ArchiveIcon size={20} className='opacity-75' />,
 		},
 		{
 			action: (id, token) => {

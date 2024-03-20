@@ -18,10 +18,11 @@ const initialValues = {
 	category: "",
 	description: "",
 	image: "",
-	price: null,
+	price: "",
 	celiac: false,
 	vegetarian: false,
 }
+
 const initialCategories = [
 	{
 		// label: "",
@@ -48,25 +49,36 @@ const Form = () => {
 		// si hay id en params edita un dish y si no hay, crea un dish
 		id
 			? dispatch(editDish({ id, values, token })).then((res) => {
-					if (res.ok) {
-						// navigate("/dashboard/dishes")
-						toast("Dish edited succesfully!")
-					}
-			  })
+				if (res.ok) {
+					// navigate("/dashboard/dishes")
+					toast(`${values.title} edited successfully!`)
+				}
+			})
 			: dispatch(createDish({ values, token })).then((res) => {
-					// if (res.ok) {
+				// if (res.ok) {
 
-					// 	console.log("res ok", res)
-					!res.error && toast("Dish created succesfully!")
-					setValues(initialValues)
-					// 	}
-					console.log(res)
-			  })
+				// 	console.log("res ok", res)
+				!res.error && toast("Dish created succesfully!")
+				setValues(initialValues)
+				// 	}
+				console.log(res)
+			})
 	}
 
 	useEffect(() => {
 		//si hay un id en params, trae los datos del dish y rellena el formulario con los campos del dish
-		id && setLoadingFields(true)
+		if (id) {
+			setLoadingFields(true)
+			setValues({
+				title: "Loading...",
+				category: "Loading...",
+				description: "Loading...",
+				image: "Loading...",
+				price: "Loading...",
+				celiac: false,
+				vegetarian: false,
+			})
+		}
 		dishServices.getOneDish(id, token).then((res) => {
 			setValues(res.data)
 			setLoadingFields(false)
