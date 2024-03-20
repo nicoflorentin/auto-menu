@@ -1,21 +1,18 @@
 import "./App.css"
 import Login from "./views/Login/Login"
-import NavBar from "./components/NavBar/NavBar"
 import DishesList from "./components/DishesList/DishesList"
 
-import { Navigate, Route, Routes, useLocation } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 import DashBoard from "./views/Dashboard/DashBoard"
 import Form from "./views/Dashboard/Form/Form"
 import withAuth from "./views/Login/withAuth"
 import useDarkMode from "use-dark-mode"
 
 function App({ logout }) {
-	const { pathname } = useLocation()
 	const darkMode = useDarkMode()
 
 	return (
 		<div className={`${darkMode.value ? 'dark' : ''} flex flex-col min-h-screen bg-background text-foreground`}>
-			{/* {pathname !== "/login" && <NavBar/>} */}
 			<Routes>
 				<Route path='/' element={<Navigate to='/login' />} />
 				<Route path='/login' element={<Login />} />

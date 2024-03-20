@@ -6,7 +6,10 @@ const DashboardLink = ({ sectionPath, sectionName, Icon }) => {
 	console.log(Icon)
 
 	const stylesHandler = ({ isActive }) => {
-		return `pl-3 pr-60 py-2 flex gap-4 rounded-small [clip-path:polygon(0%_0%,95%_0%,100%_50%,95%_100%,0%_100%)] ${isActive && 'bg-gray-600'}`
+		return `flex items-center gap-4 rounded-small pl-3 pr-60 py-2 my-[2px]
+		hover:bg-gray-700
+		[clip-path:polygon(0%_0%,95%_0%,100%_50%,95%_100%,0%_100%)]
+		${isActive && 'bg-gray-600'}`
 	}
 
 	return (
@@ -14,8 +17,8 @@ const DashboardLink = ({ sectionPath, sectionName, Icon }) => {
 			to={`/dashboard/${sectionPath}`}
 			className={stylesHandler}
 		>
-			<span>{Icon && <Icon size={24} className='text-foreground'></Icon>}</span>
-			<span>{sectionName}</span>
+			<span>{Icon && <Icon size={30} className='text-foreground'></Icon>}</span>
+			<span className="text-large">{sectionName}</span>
 		</NavLink>
 
 	)

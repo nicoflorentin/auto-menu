@@ -3,8 +3,8 @@ import React from "react"
 
 const FilterElement = ({ options, ...props }) => {
 	return (
-		<div className="font-bold w-40">
-			<Select {...props} size="sm" >
+		<div className="font-bold w-36">
+			<Select {...props} size="sm">
 				{options?.map(option => (
 					<SelectItem key={option.value} value={option.value}>
 						{option.label}

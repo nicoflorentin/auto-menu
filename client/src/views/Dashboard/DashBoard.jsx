@@ -36,32 +36,32 @@ const DashBoard = () => {
 			Icon: ArchiveIcon,
 			isGroup: false,
 		},
-		{
-			sectionPath: "statistics",
-			sectionName: "Statistics",
-			Icon: "statistics",
-			isGroup: true,
-			childrens: [
-				{
-					sectionPath: "visits",
-					sectionName: "Visits",
-					Icon: "Visits",
-					isGroup: false,
-				},
-				{
-					sectionPath: "comments",
-					sectionName: "Comments",
-					Icon: "Comments",
-					isGroup: false,
-				},
-				{
-					sectionPath: "ratings",
-					sectionName: "Rating",
-					Icon: "Rating",
-					isGroup: false,
-				},
-			],
-		},
+		// {
+		// 	sectionPath: "statistics",
+		// 	sectionName: "Statistics",
+		// 	Icon: "statistics",
+		// 	isGroup: true,
+		// 	childrens: [
+		// 		{
+		// 			sectionPath: "visits",
+		// 			sectionName: "Visits",
+		// 			Icon: "Visits",
+		// 			isGroup: false,
+		// 		},
+		// 		{
+		// 			sectionPath: "comments",
+		// 			sectionName: "Comments",
+		// 			Icon: "Comments",
+		// 			isGroup: false,
+		// 		},
+		// 		{
+		// 			sectionPath: "ratings",
+		// 			sectionName: "Rating",
+		// 			Icon: "Rating",
+		// 			isGroup: false,
+		// 		},
+		// 	],
+		// },
 	]
 
 
@@ -69,6 +69,7 @@ const DashBoard = () => {
 	const pathSplitParts = pathname.split("/")
 	const searchWord = pathSplitParts[2]
 
+	//funcion recursiva para buscar el nombre de la seccion en la configuracion
 	const getSectionName = linksConfig => {
 		for (const config of linksConfig) {
 			if (config.sectionPath === searchWord) {
@@ -85,9 +86,9 @@ const DashBoard = () => {
 	}
 
 	return (
-		<div id="section-container" className="flex flex-col flex-grow p-10">
-			<div id="dashboard-container" className="flex flex-row flex-grow m-auto w-[1300px] rounded-2xl">
-				<aside className="flex flex-col p-5 w-72">
+		<div id="section-container" className="flex flex-col flex-grow py-2">
+			<div id="dashboard-container" className="flex flex-row flex-grow m-auto w-[1300px] border border-red-300">
+				<aside className="flex flex-col p-5 w-80 max-h-[700px]">
 					<AsideBar linksConfig={linksConfig} />
 				</aside>
 				<div className="w-full">

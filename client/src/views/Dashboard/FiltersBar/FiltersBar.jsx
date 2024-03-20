@@ -3,7 +3,7 @@ import { useFormik } from "formik"
 import FilterElement from "../../../components/FilterElement/FilterElement"
 import dishServices from "../../../services/dishServices"
 import { useDispatch } from "react-redux"
-import { clearDishes, fetchDishes } from "../../../redux/slices/dishesSlice"
+import { fetchDishes } from "../../../redux/slices/dishesSlice"
 import Checkbox from "../../../components/Checkbox/Checkbox"
 import useToken from "../../../hooks/useToken"
 import { Button } from "@nextui-org/button"
@@ -45,12 +45,11 @@ const FiltersBar = ({ routeName }) => {
 	const resetFilters = () => {
 		console.log("reset filters")
 		setValues(initialValues)
-		// setUpdate(state=> !state)
 	}
 
 	return (
 		<form>
-			<div className="flex justify-end gap-5 mb-1 px-3">
+			<div className="flex flex-wrap justify-end items-center gap-2 mb-1 px-1">
 				<Checkbox
 					onChange={e => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
 					name="vegetarian"
@@ -62,6 +61,7 @@ const FiltersBar = ({ routeName }) => {
 					name="celiac"
 					label="Gluten Free"
 					isSelected={values.celiac}
+					className='mr-auto'
 				/>
 				<FilterElement
 					label="Category"

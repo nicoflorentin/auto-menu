@@ -26,7 +26,7 @@ export default {
           tiny: "0.75rem", // text-tiny
           small: "0.875rem", // text-small
           medium: "1rem", // text-medium
-          large: "1.125rem", // text-large
+          large: "1.250rem", // text-large
         },
         lineHeight: {
           tiny: "1rem", // text-tiny
@@ -48,14 +48,14 @@ export default {
       themes: {
         light: {
           colors: {
-            background: '#465277',
+            background: 'rgb(213, 217, 235)',
             foreground: '#111111',
             primary: {
               DEFAULT: 'rgb(162, 162, 162)',
               //... 50 to 900
             },
             secondary: {
-              DEFAULT:'rgb(152, 255, 129)',
+              DEFAULT: 'rgb(152, 255, 129)',
               foreground: 'rgb(121, 121, 121)',
             }
             // ... rest of the colors
@@ -66,15 +66,16 @@ export default {
         },
         dark: {
           colors: {
-            background: '#1F1F1F',
+            background: 'rgb(39, 39, 39)',
             foreground: "#f0f0f0",
             primary: {
               DEFAULT: "rgb(152, 255, 129)",
               foreground: '#101010'
             },
             secondary: {
-              DEFAULT: "#f0f0f0",
-              foreground: "#070707",
+              DEFAULT: "#e7e5dd",
+              background: '#1F1F1F',
+              foreground: "#1F1F1F",
             },
             letters: {
               DEFAULT: '#f0f0f0',
