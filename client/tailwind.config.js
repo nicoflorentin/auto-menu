@@ -13,7 +13,11 @@ export default {
     // './node_modules/@nextui-org/theme/dist/components/(button|input).js'
   ],
   theme: {
-    extend: {},
+    extend: {
+      transitionProperty: {
+        'width': 'width'
+      },
+    },
   },
   darkMode: "class",
   plugins: [

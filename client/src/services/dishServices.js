@@ -1,19 +1,16 @@
 import axios from 'axios'
 import { LOCAL_URL } from './const'
 import { filterFalsyProperties } from '../utilities/filterFalsyProperties'
-import { user } from '@nextui-org/theme'
-// import { delay } from '../utilities/delay';
 
 const getDishes = async (token, rawFilters) => {
 	const filters = filterFalsyProperties(rawFilters)
-	console.log('get dishes with filters', filters, 'and token' , token)
-
 	const axiosConfig = {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
 		params: filters
-	};
+	}
+
 	try {
 		const response = await axios.get(`${LOCAL_URL}/dish`, axiosConfig);
 		const { data } = response;
@@ -30,7 +27,6 @@ const editDish = async (id, body, token) => {
 		},
 	};
 
-	console.log('input al servicio ', id, body, token)
 	try {
 		const response = await axios.put(`${LOCAL_URL}/dish/${id}`, body, axiosConfig)
 		console.log('response del servicio edit', response.data)
@@ -68,7 +64,6 @@ const createDish = async (body, token) => {
 		},
 	};
 	try {
-		console.log('cuerpo en el servicio:', body)
 		const response = await axios.post(`${LOCAL_URL}/dish`, body, axiosConfig)
 		return response.data
 	} catch (error) {
@@ -90,13 +85,7 @@ const deleteDish = async (id, token) => {
 	}
 }
 
-const getCategories = async (token) => {
-	const axiosConfig = {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	};
-
+const getCategories = async () => {
 	try {
 		// await delay()
 		const response = await axios.get(`${LOCAL_URL}/categories`)

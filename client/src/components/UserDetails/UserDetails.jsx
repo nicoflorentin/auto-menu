@@ -1,7 +1,7 @@
 import { Avatar, Button } from "@nextui-org/react"
 import { useSelector } from "react-redux"
 
-const UserDetails = () => {
+const UserDetails = ({logoutHandler}) => {
 	const { username, name } = useSelector(state => state.login.data)
 
 	return (
@@ -11,7 +11,7 @@ const UserDetails = () => {
 				<p>{name}</p>
 				<p className="text-tiny">{username}</p>
 			</div>
-			<Button color='danger' className="h-6">Logout</Button>
+			<Button onClick={() => logoutHandler()} color='danger' className="h-6">Logout</Button>
 		</div>
 	)
 }
