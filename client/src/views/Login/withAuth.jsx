@@ -21,7 +21,7 @@ const withAuth = (OriginalComponent) => {
 
     const handleLogin = async (loginData) => {
       try {
-        await dispatch(fetchLogin(loginData))
+        return dispatch(fetchLogin(loginData))
       } catch (error) {
         console.log('Login error:', error);
       }

@@ -13,9 +13,7 @@ function App({ logOut }) {
 	const darkMode = useDarkMode()
 
 	return (
-		<div className={`${darkMode.value ? 'dark' : ''} flex flex-col p-2 transition
-		 min-h-screen min-w-screen 
-		 bg-background text-foreground`}>
+		<div className={`${darkMode.value ? 'dark' : ''} flex flex-col transition w-screen bg-background text-foreground border-red-500`}>
 			<Routes>
 				<Route path='/' element={<Navigate to='/login' />} />
 				<Route path='/login' element={<Login />} />
@@ -26,6 +24,7 @@ function App({ logOut }) {
 					<Route path='archived' element={<DishesList routeName='archived' />} />
 					<Route path='delete' element={<DishesList routeName='delete' />} />
 					<Route path='add' element={<Form />} />
+					<Route path='restaurant' element={<div>Restaurant configuration</div>} />
 					<Route path='edit/:id' element={<Form />} />
 				</Route>
 				<Route path='*' element={<RequestError404 />} />

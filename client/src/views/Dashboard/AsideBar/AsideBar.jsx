@@ -7,6 +7,7 @@ import { Button } from "@nextui-org/button"
 
 const AsideBar = ({ linksConfig, logoutHandler }) => {
 	const darkMode = useDarkMode(false)
+	console.log(darkMode);
 
 	return (
 		<>
@@ -32,7 +33,7 @@ const AsideBar = ({ linksConfig, logoutHandler }) => {
 				}
 			})}
 			<UserDetails logoutHandler={logoutHandler} />
-			<Button size='sm' className="w-1" onPress={darkMode.toggle}>🌙</Button>
+			<button className="w-1" onClick={darkMode.toggle}>{!darkMode.value ? <span>🌙</span> : <span>🌞</span>}</button>
 		</>
 	)
 }

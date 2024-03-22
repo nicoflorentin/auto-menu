@@ -3,6 +3,7 @@ import withAuth from "./withAuth"
 import { Input, Button, Card, CardBody, Tabs, Tab } from "@nextui-org/react"
 import Spinner from "../../components/Spinner"
 import { Link, useNavigate } from "react-router-dom"
+import logo from 'assets/page-logo.png'
 
 const Login = ({ login, signUp, loading }) => {
 	const [selected, setSelected] = useState("login")
@@ -15,7 +16,14 @@ const Login = ({ login, signUp, loading }) => {
 
 	const handleSubmit = async e => {
 		e.preventDefault()
-		selected === "login" ? login(input).then(() => navigate("/dashboard")) : signUp(input).then(() => setSelected("login"))
+		selected === "login"
+			? login(input).then((res) => {
+				console.log(res)
+				if (!res.error) {
+					navigate('/dashboard')
+				}
+			})
+			: signUp(input).then(() => setSelected("login"))
 	}
 
 	const handleInput = e => {
@@ -29,7 +37,8 @@ const Login = ({ login, signUp, loading }) => {
 	console.log(input)
 
 	return (
-		<section className="flex flex-col justify-center items-center h-screen">
+		<section className="flex flex-col gap-5 justify-center items-center h-dvh">
+			<img className="h-20" src={logo} alt="page-logo" />
 			<Card className="max-w-full w-[340px] h-[400px]">
 				<CardBody className="overflow-hidden">
 					<Tabs fullWidth size="md" aria-label="Tabs form" selectedKey={selected} onSelectionChange={setSelected}>
@@ -50,6 +59,7 @@ const Login = ({ login, signUp, loading }) => {
 									placeholder="Enter your password"
 									type="password"
 									onChange={e => handleInput(e)}
+									autocomplete="current-password"
 								/>
 								<p className="text-center text-small">
 									Need to create an account?{" "}

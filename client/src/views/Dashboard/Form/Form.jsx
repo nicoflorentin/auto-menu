@@ -154,7 +154,7 @@ const Form = () => {
 					value={values.image}
 					isDisabled={loadingFields || loading}
 				/>
-				<label htmlFor='celiac'>Gluten</label>
+				{/* <label htmlFor='celiac'>Gluten</label> */}
 				<Checkbox
 					onChange={(e) => handleChange({ target: { name: "celiac", value: e.target.checked } })}
 					name='celiac'

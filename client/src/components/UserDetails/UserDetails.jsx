@@ -16,4 +16,4 @@ const UserDetails = ({logoutHandler}) => {
 	)
 }
 
-export default UserDetails
+export default UserDetails 

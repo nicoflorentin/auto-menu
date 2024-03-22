@@ -53,7 +53,7 @@ const DishesList = ({ routeName }) => {
 
 	const RenderDishes = () => {
 		return (
-			<div className="flex flex-wrap gap-5 w-full">
+			<div className="flex flex-wrap gap-5">
 				{dishes?.filter(dish => (routeName === "archived" ? dish.archived : !dish.archived))
 					.map(dish => (
 						<DishItem config={currentConfig} dish={dish} key={dish.id} iconSize="20" archived={dish.archived} />

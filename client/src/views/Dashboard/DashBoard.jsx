@@ -2,7 +2,7 @@ import React from "react"
 import AsideBar from "./AsideBar/AsideBar"
 import { Outlet, useLocation } from "react-router-dom"
 import Section from "./Section/Section.jsx"
-import { DishIcon, AddIcon, PencilIcon, DeleteIcon, ArchiveIcon } from 'assets/icons'
+import { DishIcon, AddIcon, PencilIcon, DeleteIcon, ArchiveIcon, MenuIcon } from 'assets/icons'
 import FiltersBar from "./FiltersBar/FiltersBar"
 
 const DashBoard = ({logoutHandler}) => {
@@ -37,6 +37,12 @@ const DashBoard = ({logoutHandler}) => {
 			Icon: ArchiveIcon,
 			isGroup: false,
 		},
+		{
+			sectionPath: "restaurant",
+			sectionName: "Restaurant",
+			Icon: MenuIcon,
+			isGroup: false,
+		},
 		// {
 		// 	sectionPath: "statistics",
 		// 	sectionName: "Statistics",
@@ -65,7 +71,6 @@ const DashBoard = ({logoutHandler}) => {
 		// },
 	]
 
-
 	const { pathname } = useLocation()
 	const pathSplitParts = pathname.split("/")
 	const searchWord = pathSplitParts[2]
@@ -87,19 +92,21 @@ const DashBoard = ({logoutHandler}) => {
 	}
 
 	return (
-		<div id="section-container" className="py-1 m-auto w-[1250px] min-h-screen">
+		<section id="section-container" className="py-1 m-auto w-[1250px] min-h-lvh">
 			<FiltersBar routeName={searchWord}/>
 			<div id="dashboard-container" className="flex flex-row flex-grow">
-				<aside className="flex flex-col w-80 h-[550px] py-5 pr-5">
+				<aside className="flex flex-col
+				w-72 h-[570px] py-5 pr-5
+				">
 					<AsideBar linksConfig={linksConfig} logoutHandler={logoutHandler} />
 				</aside>
 				<div className="w-full">
-					<Section sectionName={getSectionName(linksConfig)} className='border border-red-700'>
+					<Section sectionName={getSectionName(linksConfig)} className=''>
 						<Outlet />
 					</Section>
 				</div>
 			</div>
-		</div>
+		</section>
 	)
 }
 
