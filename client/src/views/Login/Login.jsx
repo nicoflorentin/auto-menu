@@ -37,7 +37,7 @@ const Login = ({ login, signUp, loading }) => {
 	console.log(input)
 
 	return (
-		<section className="flex flex-col gap-5 justify-center items-center h-dvh">
+		<section className="flex flex-col gap-5 justify-center items-center h-dvh m-auto">
 			<img className="h-20" src={logo} alt="page-logo" />
 			<Card className="max-w-full w-[340px] h-[400px]">
 				<CardBody className="overflow-hidden">

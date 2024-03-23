@@ -13,7 +13,10 @@ function App({ logOut }) {
 	const darkMode = useDarkMode()
 
 	return (
-		<div className={`${darkMode.value ? 'dark' : ''} flex flex-col transition w-screen bg-background text-foreground border-red-500`}>
+		<div className={`${darkMode.value ? 'dark' : ''} flex transition
+		 bg-background text-foreground border-red-500
+		 vanillaClass
+		 `}>
 			<Routes>
 				<Route path='/' element={<Navigate to='/login' />} />
 				<Route path='/login' element={<Login />} />

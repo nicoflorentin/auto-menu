@@ -3,7 +3,7 @@ import React from "react"
 
 const Loading = () => {
 	return (
-		<div className="mt-20 flex justify-center items-center h-full">
+		<div className="mt-20 flex justify-center items-center">
 			<Spinner size="lg"/>
 		</div>
 	)
