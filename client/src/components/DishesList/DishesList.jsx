@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom"
 import { DeleteIcon, EditIcon, ArchiveIcon } from "../../assets/icons"
 import DishItem from "../DishItem/DishItem"
 import Loading from "components/Loading/Loading"
+import Title from "components/Title/Title"
 
-const DishesList = ({ routeName }) => {
+const DishesList = ({ routeName, title }) => {
 	const configList = [
 		{
 			action: id => {
@@ -26,7 +27,7 @@ const DishesList = ({ routeName }) => {
 			},
 			label: "Delete",
 			route: "delete",
-			icon: <DeleteIcon size={20} />,
+			icon: <DeleteIcon size={20} className='text-red-800' />,
 		},
 		{
 			action: id => {
@@ -64,6 +65,7 @@ const DishesList = ({ routeName }) => {
 
 	return (
 		<div className="">
+			<Title>{title}</Title>
 			<div className="">{loading ? <Loading /> : <RenderDishes />}</div>
 		</div>
 	)

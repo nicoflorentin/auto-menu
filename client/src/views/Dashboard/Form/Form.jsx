@@ -12,6 +12,7 @@ import useToken from "../../../hooks/useToken"
 import AskConfirmationModal from "../../../components/modals/AskConfirmationModal/AskConfirmationModal"
 import ErrorModal from "../../../components/modals/ErrorModal/ErrorModal"
 import toast, { Toaster } from "react-hot-toast"
+import Title from "components/Title/Title"
 
 const initialValues = {
 	title: "",
@@ -30,7 +31,7 @@ const initialCategories = [
 	},
 ]
 
-const Form = () => {
+const Form = ({ title }) => {
 	const dispatch = useDispatch()
 	const { id } = useParams()
 	const [categories, setCategories] = useState(initialCategories)
@@ -83,11 +84,12 @@ const Form = () => {
 				celiac: false,
 				vegetarian: false,
 			})
+
+			dishServices.getOneDish(id, token).then((res) => {
+				setValues(res.data)
+				setLoadingFields(false)
+			})
 		}
-		dishServices.getOneDish(id, token).then((res) => {
-			setValues(res.data)
-			setLoadingFields(false)
-		})
 		return () => setValues(initialValues)
 	}, [id, token])
 
@@ -100,6 +102,7 @@ const Form = () => {
 
 	return (
 		<>
+			<Title>{title}</Title>
 			<form className='flex flex-col' onSubmit={handleSubmit}>
 				<label htmlFor='title'>Name</label>
 				<Input
@@ -145,7 +148,7 @@ const Form = () => {
 					value={values.price}
 					isDisabled={loadingFields || loading}
 				/>
-				<label htmlFor='image'>Image URL</label>
+				{/* <label htmlFor='image'>Image URL</label>
 				<Input
 					id='image'
 					name='image'
@@ -153,7 +156,7 @@ const Form = () => {
 					onChange={handleChange}
 					value={values.image}
 					isDisabled={loadingFields || loading}
-				/>
+				/> */}
 				{/* <label htmlFor='celiac'>Gluten</label> */}
 				<Checkbox
 					onChange={(e) => handleChange({ target: { name: "celiac", value: e.target.checked } })}

@@ -16,7 +16,7 @@ const DishItem = ({ dish, config }) => {
 	return (
 		<div className={`flex flex-col w-72 h-40 px-2 py-3 ${archivedItemStyles()} bg-secondary text-secondary-foreground rounded-small`}>
 			<div className="flex items-center justify-between">
-				<Chip color="default" size="sm" variant='solid' className="h-4 uppercase text-tiny text-secondary rounded">{formatCategory(category)}</Chip>
+				<Chip color="default" size="sm" variant='solid' className="h-4 px-0 uppercase text-tiny text-secondary rounded">{formatCategory(category)}</Chip>
 				{dish.archived && <p className="text-tiny">(Archived)</p>}
 				<div className="flex gap-1">
 					<span onClick={config && (() => config.archive(dish, token))} className="ml-auto cursor-pointer hover:scale-125">

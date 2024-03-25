@@ -7,7 +7,6 @@ import { Button } from "@nextui-org/button"
 
 const AsideBar = ({ linksConfig, logoutHandler }) => {
 	const darkMode = useDarkMode(false)
-	console.log(darkMode);
 
 	return (
 		<>

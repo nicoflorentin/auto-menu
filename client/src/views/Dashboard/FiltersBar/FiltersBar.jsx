@@ -8,7 +8,6 @@ import Checkbox from "../../../components/Checkbox/Checkbox"
 import useToken from "../../../hooks/useToken"
 import { Button } from "@nextui-org/button"
 import logo from 'assets/page-logo.png'
-console.log(logo);
 
 const FiltersBar = ({ routeName }) => {
 	const dispatch = useDispatch()
