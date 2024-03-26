@@ -12,6 +12,7 @@ import useToken from "../../../hooks/useToken"
 import AskConfirmationModal from "../../../components/modals/AskConfirmationModal/AskConfirmationModal"
 import ErrorModal from "../../../components/modals/ErrorModal/ErrorModal"
 import toast, { Toaster } from "react-hot-toast"
+import Title from "components/Title/Title"
 
 const initialValues = {
 	title: "",
@@ -30,7 +31,7 @@ const initialCategories = [
 	},
 ]
 
-const Form = () => {
+const Form = ({ title }) => {
 	const dispatch = useDispatch()
 	const { id } = useParams()
 	const [categories, setCategories] = useState(initialCategories)
@@ -83,11 +84,12 @@ const Form = () => {
 				celiac: false,
 				vegetarian: false,
 			})
+
+			dishServices.getOneDish(id, token).then((res) => {
+				setValues(res.data)
+				setLoadingFields(false)
+			})
 		}
-		dishServices.getOneDish(id, token).then((res) => {
-			setValues(res.data)
-			setLoadingFields(false)
-		})
 		return () => setValues(initialValues)
 	}, [id, token])
 
@@ -100,12 +102,14 @@ const Form = () => {
 
 	return (
 		<>
-			<form className='flex flex-col' onSubmit={handleSubmit}>
+			<Title>{title}</Title>
+			<form className='flex flex-col gap-5' onSubmit={handleSubmit}>
 				<label htmlFor='title'>Name</label>
 				<Input
 					id='title'
 					name='title'
 					type='text'
+					color='primary'
 					onChange={handleChange}
 					value={values.title}
 					isDisabled={loadingFields || loading}
@@ -145,7 +149,7 @@ const Form = () => {
 					value={values.price}
 					isDisabled={loadingFields || loading}
 				/>
-				<label htmlFor='image'>Image URL</label>
+				{/* <label htmlFor='image'>Image URL</label>
 				<Input
 					id='image'
 					name='image'
@@ -153,22 +157,24 @@ const Form = () => {
 					onChange={handleChange}
 					value={values.image}
 					isDisabled={loadingFields || loading}
-				/>
-				<label htmlFor='celiac'>Gluten</label>
-				<Checkbox
-					onChange={(e) => handleChange({ target: { name: "celiac", value: e.target.checked } })}
-					name='celiac'
-					label='Gluten Free'
-					isSelected={values.celiac}
-					isDisabled={loadingFields || loading}
-				/>
-				<Checkbox
-					onChange={(e) => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
-					name='vegetarian'
-					label='Vegetarian'
-					isSelected={values.vegetarian}
-					isDisabled={loadingFields || loading}
-				/>
+				/> */}
+				{/* <label htmlFor='celiac'>Gluten</label> */}
+				<div className="flex gap-5">
+					<Checkbox
+						onChange={(e) => handleChange({ target: { name: "celiac", value: e.target.checked } })}
+						name='celiac'
+						label='Gluten Free'
+						isSelected={values.celiac}
+						isDisabled={loadingFields || loading}
+					/>
+					<Checkbox
+						onChange={(e) => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
+						name='vegetarian'
+						label='Vegetarian'
+						isSelected={values.vegetarian}
+						isDisabled={loadingFields || loading}
+					/>
+				</div>
 				{!loading ? (
 					<Button color='primary' variant='solid' onPress={onOpen} isDisabled={loadingFields}>
 						{id ? "Edit" : "Create"}

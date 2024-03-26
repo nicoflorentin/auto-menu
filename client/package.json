@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.13.0",
+    "@cloudinary/url-gen": "^1.19.0",
     "@nextui-org/button": "^2.0.26",
     "@nextui-org/input": "^2.1.16",
     "@nextui-org/react": "^2.2.9",

@@ -1,0 +1,4 @@
+/* https://dev.to/rashidshamloo/preventing-the-layout-shift-caused-by-scrollbars-2flp */
+.vanillaClass {
+		padding-left: calc(100vw - 100%);
+}
