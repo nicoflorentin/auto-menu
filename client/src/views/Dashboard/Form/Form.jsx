@@ -103,12 +103,13 @@ const Form = ({ title }) => {
 	return (
 		<>
 			<Title>{title}</Title>
-			<form className='flex flex-col' onSubmit={handleSubmit}>
+			<form className='flex flex-col gap-5' onSubmit={handleSubmit}>
 				<label htmlFor='title'>Name</label>
 				<Input
 					id='title'
 					name='title'
 					type='text'
+					color='primary'
 					onChange={handleChange}
 					value={values.title}
 					isDisabled={loadingFields || loading}
@@ -158,20 +159,22 @@ const Form = ({ title }) => {
 					isDisabled={loadingFields || loading}
 				/> */}
 				{/* <label htmlFor='celiac'>Gluten</label> */}
-				<Checkbox
-					onChange={(e) => handleChange({ target: { name: "celiac", value: e.target.checked } })}
-					name='celiac'
-					label='Gluten Free'
-					isSelected={values.celiac}
-					isDisabled={loadingFields || loading}
-				/>
-				<Checkbox
-					onChange={(e) => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
-					name='vegetarian'
-					label='Vegetarian'
-					isSelected={values.vegetarian}
-					isDisabled={loadingFields || loading}
-				/>
+				<div className="flex gap-5">
+					<Checkbox
+						onChange={(e) => handleChange({ target: { name: "celiac", value: e.target.checked } })}
+						name='celiac'
+						label='Gluten Free'
+						isSelected={values.celiac}
+						isDisabled={loadingFields || loading}
+					/>
+					<Checkbox
+						onChange={(e) => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
+						name='vegetarian'
+						label='Vegetarian'
+						isSelected={values.vegetarian}
+						isDisabled={loadingFields || loading}
+					/>
+				</div>
 				{!loading ? (
 					<Button color='primary' variant='solid' onPress={onOpen} isDisabled={loadingFields}>
 						{id ? "Edit" : "Create"}

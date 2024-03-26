@@ -15,7 +15,7 @@ function App({ logOut }) {
 
 	return (
 		<div className={`${darkMode.value ? 'dark' : ''} flex transition
-		 bg-background text-foreground px-2
+		 bg-background text-foreground
 		 vanillaClass
 		 `}>
 			<Routes>

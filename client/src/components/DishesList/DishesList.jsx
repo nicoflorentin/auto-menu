@@ -7,7 +7,22 @@ import DishItem from "../DishItem/DishItem"
 import Loading from "components/Loading/Loading"
 import Title from "components/Title/Title"
 
+// pasar a archivo de constante
+
+const categoriesOrder = ["platosPrincipales", "entrantes", "bebidas", "postres"]
+
+const RenderDishes = ({dishes, currentConfig, routeName }) =>
+(
+	<div className="flex flex-wrap gap-5">
+		{dishes?.filter(dish => (routeName === "archived" ? dish.archived : !dish.archived))
+			.sort((a, b) => categoriesOrder.indexOf(a.category) - categoriesOrder.indexOf(b.category) ).map(dish => (
+				<DishItem config={currentConfig} dish={dish} key={dish.id} iconSize="20" archived={dish.archived} />
+			))}
+	</div>
+)
+
 const DishesList = ({ routeName, title }) => {
+
 	const configList = [
 		{
 			action: id => {
@@ -46,27 +61,19 @@ const DishesList = ({ routeName, title }) => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const { loading, dishes } = useSelector(state => state.dishes)
+	console.warn({dishes})
+
 	const currentConfig = configList.find(config => config.route === routeName)
 
 	useEffect(() => {
 		return () => dispatch(clearDishes())
 	}, [routeName])
 
-	const RenderDishes = () => {
-		return (
-			<div className="flex flex-wrap gap-5">
-				{dishes?.filter(dish => (routeName === "archived" ? dish.archived : !dish.archived))
-					.map(dish => (
-						<DishItem config={currentConfig} dish={dish} key={dish.id} iconSize="20" archived={dish.archived} />
-					))}
-			</div>
-		)
-	}
 
 	return (
 		<div className="">
 			<Title>{title}</Title>
-			<div className="">{loading ? <Loading /> : <RenderDishes />}</div>
+			<div className="">{loading ? <Loading /> : <RenderDishes dishes={dishes} currentConfig={currentConfig} routeName={routeName} />}</div>
 		</div>
 	)
 }

@@ -1,6 +1,6 @@
 const Subtitle = ({ children }) => {
 	return (
-		<p className="text-medium my-3 font-semibold">{children}</p>
+		<p className="text-medium my-1 font-semibold">{children}</p>
 	)
 }
 

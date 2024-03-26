@@ -42,10 +42,10 @@ const Restaurant = () => {
 	}
 
 	return (
-		<div className="">
+		<div className="flex flex-col gap-5">
 			<Title>Restaurant Configuration</Title>
-			<div className="flex">
-				<div className="grow"> 
+			<div className="flex gap-4">
+				<div className="grow">
 					<Subtitle>Restaurant name</Subtitle>
 					<Input
 						// className="w-96"
@@ -70,18 +70,20 @@ const Restaurant = () => {
 					/>
 				</div>
 			</div>
-			<Subtitle>Portrait image</Subtitle>
-			<div className="">
-				<div className="flex items-center  h-40 bg-slate-50 text-center rounded-xl my-5 text-black overflow-hidden">
-					{
-						!values.image
-							? <p className="m-auto">No image has been uploaded yet</p>
-							: <img className="w-full h-auto block" src={values.image} alt="selected portrait image" />
-					}
+			<div>
+				<Subtitle>Portrait image</Subtitle>
+				<div className="">
+					<div className="flex items-center  h-40 bg-slate-50 text-center rounded-xl  text-black overflow-hidden">
+						{
+							!values.image
+								? <p className="m-auto">No image has been uploaded yet</p>
+								: <img className="w-full h-auto block" src={values.image} alt="selected portrait image" />
+						}
+					</div>
+					<Button className="my-2" color='primary' onPress={() => widgetHandler()}>
+						Upload and change
+					</Button>
 				</div>
-				<Button className="" color='primary' onPress={() => widgetHandler()}>
-					Upload and change
-				</Button>
 
 			</div>
 		</div>
