@@ -12,7 +12,7 @@ const DashboardLink = ({ sectionPath, sectionName, Icon }) => {
 
 	return (
 		<NavLink
-			to={`/dashboard/${sectionPath}`}
+			to={`/admin/dashboard/${sectionPath}`}
 			className={stylesHandler}
 		>
 			<span>{Icon && <Icon size={30} className='text-foreground'></Icon>}</span>

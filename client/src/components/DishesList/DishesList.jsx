@@ -61,8 +61,6 @@ const DishesList = ({ routeName, title }) => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const { loading, dishes } = useSelector(state => state.dishes)
-	console.warn({dishes})
-
 	const currentConfig = configList.find(config => config.route === routeName)
 
 	useEffect(() => {

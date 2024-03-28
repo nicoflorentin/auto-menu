@@ -13,7 +13,7 @@ const withAuth = (OriginalComponent) => {
     // Si no hay token en el estado o en localstorage, navegar a login
     useEffect(() => {
       if (!loggedUserData?.token && !localSavedUser?.token) {
-        navigate('/login')
+        navigate('/admin/login')
       } else {
         dispatch(storeUserGlobal(localSavedUser))
       }
@@ -37,7 +37,7 @@ const withAuth = (OriginalComponent) => {
 
     const handleLogOut = () => {
       dispatch(logOut())
-      navigate('/login')
+      navigate('/admin/login')
     }
 
     return (

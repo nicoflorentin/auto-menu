@@ -21,7 +21,7 @@ const Login = ({ login, signUp, loading }) => {
 			? login(input).then((res) => {
 				console.log(res)
 				if (!res.error) {
-					navigate('/dashboard')
+					navigate('/admin/dashboard')
 				}
 			})
 			: signUp(input).then(() => setSelected("login"))

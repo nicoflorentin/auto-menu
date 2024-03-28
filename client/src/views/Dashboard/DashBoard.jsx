@@ -73,7 +73,7 @@ const DashBoard = ({ logoutHandler }) => {
 
 	const { pathname } = useLocation()
 	const pathSplitParts = pathname.split("/")
-	const searchWord = pathSplitParts[2]
+	const searchWord = pathSplitParts[3]
 
 	//funcion recursiva para buscar el nombre de la seccion en la configuracion
 	const getSectionName = linksConfig => {
