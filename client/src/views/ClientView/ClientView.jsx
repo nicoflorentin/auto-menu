@@ -1,11 +1,14 @@
 import { useParams } from "react-router-dom"
+import Menu from "./Menu/Menu"
 
 const ClientView = () => {
 
 	const {restaurantName} = useParams()
 
 	return (
-		<div>{`Estas viendo el menu de ${restaurantName}`}</div>
+		<div>
+			<Menu></Menu>
+			</div>
 	)
 }
 

@@ -1,12 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 import RequestError404 from 'views/RequestError404/RequestError404'
-import useDarkMode from "use-dark-mode"
 import AdminView from "views/AdminView/AdminView"
 import ClientView from "views/ClientView/ClientView"
 
 function App() {
 	return (
-		<div className={``}>
+		<div className=''>
 			<Routes>
 				<Route path='/' element={<Navigate to='/menu' />} />
 				<Route path='/admin/*' element={<AdminView />} />

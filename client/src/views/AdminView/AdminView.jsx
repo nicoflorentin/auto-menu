@@ -2,9 +2,8 @@ import Login from "views/Login/Login"
 import DishesList from "components/DishesList/DishesList"
 import { Navigate, Route, Routes } from "react-router-dom"
 import DashBoard from "views/Dashboard/DashBoard"
-import RequestError404 from 'views/RequestError404/RequestError404'
 import Form from "views/Dashboard/Form/Form"
-import withAuth from "views/Login/withAuth"
+import withAuth from "views/Login/withAuth"   
 import useDarkMode from "use-dark-mode"
 import Restaurant from "views/Dashboard/Restaurant/Restaurant"
 
@@ -12,8 +11,8 @@ function AdminView({ logOut }) {
 	const darkMode = useDarkMode()
 
 	return (
-		<div className={`${darkMode.value ? 'dark' : ''} flex transition
-		 bg-background text-foreground
+		<div className={`${darkMode.value ? 'dark bg-gradient-to-r from-[#1f1f1f] from-40% to-[#34343b] to-100%' : 'light bg-white'} flex transition
+		 text-foreground font-inter
 		 vanillaClass
 		 `}>
 			<Routes>

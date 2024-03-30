@@ -8,18 +8,29 @@ const DishItem = ({ dish, config }) => {
 	const { token } = useSelector(state => state.login.data)
 	const { category, celiac, description, id, image, price, title, vegetarian } = dish
 	const titleMaxLength = 25
+	const descriptionMaxLength = 50
+
+	const customContent = (text) => (
+		<p className="w-44">
+			{text}
+		</p>
+	)
 
 	const archivedItemStyles = () => {
 		return dish.archived ? "opacity-80 grayscale" : ""
 	}
 
 	return (
-		<div className={`flex flex-col w-72 h-40 px-2 py-3 ${archivedItemStyles()} bg-secondary text-secondary-foreground rounded-small`}>
+		<div className={`flex flex-col w-72 h-40 px-4 py-5 ${archivedItemStyles()} bg-secondary text-secondary-foreground rounded-small`}>
 			<div className="flex items-center justify-between">
 				<Chip color="default" size="sm" variant='solid' className="h-4 px-0 uppercase text-tiny text-secondary rounded">{formatCategory(category)}</Chip>
 				{dish.archived && <p className="text-tiny">(Archived)</p>}
 				<div className="flex gap-1">
-					<span onClick={config && (() => config.archive(dish, token))} className="ml-auto cursor-pointer hover:scale-125">
+					<span onClick={config && (() => config.archive(dish, token))} className="ml-auto cursor-pointer
+																																									transition-all
+																																									hover:scale-125
+																																									"
+					>
 						{config && config.archiveIcon}
 					</span>
 					<span onClick={config && (() => config.action(id, token))} className="cursor-pointer hover:scale-125">
@@ -28,10 +39,14 @@ const DishItem = ({ dish, config }) => {
 				</div>
 			</div>
 			{title.length > titleMaxLength
-				? <Tooltip showArrow={true} placement='top-end' content={title}><p className="font-bold text-medium">{longStringTrunc(title, titleMaxLength)}</p></Tooltip>
+				? <Tooltip showArrow={false} placement='center' closeDelay={0} content={customContent(title)}><p className="font-bold text-medium">{longStringTrunc(title, titleMaxLength)}</p></Tooltip>
 				: <p className="font-bold text-medium">{title}</p>
 			}
-			<p className="text-small">{description}</p>
+			{description.length > descriptionMaxLength
+				? <Tooltip showArrow={false} placement='center' closeDelay={0} content={customContent(description)}><p className="text-small">{longStringTrunc(description, descriptionMaxLength)}</p></Tooltip>
+				: <p className="text-small">{description}</p>
+			}
+
 			<div className="flex mt-auto">
 				<p className="text-end text-large font-semibold">{price} <span className="text-medium">USD</span></p>
 				<span className="flex ml-auto items-center">
