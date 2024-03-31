@@ -17,6 +17,9 @@ export default {
       transitionProperty: {
         'width': 'width'
       },
+      fontFamily: {
+        inter: ['"Inter"'],
+      },
     },
   },
   darkMode: "class",
@@ -52,7 +55,7 @@ export default {
       themes: {
         light: {
           colors: {
-            background: 'rgb(213, 217, 235)',
+            background: '#ffffff',
             foreground: '#111111',
             primary: {
               DEFAULT: 'rgb(162, 162, 162)',
@@ -70,6 +73,7 @@ export default {
         },
         dark: {
           colors: {
+            myRed: 'rgb(151, 37, 17)',
             background: 'rgb(39, 39, 39)',
             foreground: "#f0f0f0",
             primary: {

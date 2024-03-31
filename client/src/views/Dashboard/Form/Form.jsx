@@ -109,7 +109,6 @@ const Form = ({ title }) => {
 					id='title'
 					name='title'
 					type='text'
-					color='primary'
 					onChange={handleChange}
 					value={values.title}
 					isDisabled={loadingFields || loading}

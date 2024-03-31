@@ -26,7 +26,7 @@ const DishesList = ({ routeName, title }) => {
 	const configList = [
 		{
 			action: id => {
-				navigate(`/dashboard/edit/${id}`)
+				navigate(`${id}`)
 			},
 			archive: (dish, token) => {
 				dispatch(archiveDish({ dish, token }))
@@ -46,7 +46,7 @@ const DishesList = ({ routeName, title }) => {
 		},
 		{
 			action: id => {
-				navigate(`/dashboard/edit/${id}`)
+				navigate(`	${id}`)
 			},
 			archive: (dish, token) => {
 				dispatch(archiveDish({ dish, token }))
@@ -61,8 +61,6 @@ const DishesList = ({ routeName, title }) => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const { loading, dishes } = useSelector(state => state.dishes)
-	console.warn({dishes})
-
 	const currentConfig = configList.find(config => config.route === routeName)
 
 	useEffect(() => {
