@@ -19,6 +19,7 @@ export default {
       },
       fontFamily: {
         inter: ['"Inter"'],
+        ubuntu: ['"Ubuntu"'],
       },
     },
   },
