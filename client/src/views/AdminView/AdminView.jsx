@@ -18,8 +18,8 @@ function AdminView({ logOut }) {
 			<Routes>
 				<Route path='/' element={<Navigate to='login' />} />
 				<Route path='/login' element={<Login />} />
-				<Route path='dashboard' element={<DashBoard logoutHandler={logOut} />}>
-					<Route path='' element={<div className='text-center font-semibold text-3xl'>WELCOME</div>} />
+				<Route path='/dashboard' element={<DashBoard logoutHandler={logOut} />}>
+					<Route path='' element={<Navigate to='dishes' />} />
 					<Route path='dishes' element={<DishesList routeName='dishes' title='Dishes' />} />
 					<Route path='edit' element={<DishesList routeName='edit'  title='Edit'/>} />
 					<Route path='archived' element={<DishesList routeName='archived'  title='Archived'/>} />

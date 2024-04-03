@@ -1,14 +1,14 @@
 import { useSelector } from "react-redux"
 import { formatCategory } from "../../utilities/formatCategory"
 import { VegetarianIcon, GlutenFreeIcon } from 'assets/icons'
-import { Button, Chip, Tooltip, useTooltip } from "@nextui-org/react";
+import { Chip, Tooltip } from "@nextui-org/react";
 import { longStringTrunc } from "utilities/longStringTrunc";
+import dishItemConfig from 'components/DishItem/dishItemConfig'
 
 const DishItem = ({ dish, config }) => {
 	const { token } = useSelector(state => state.login.data)
 	const { category, celiac, description, id, image, price, title, vegetarian } = dish
-	const titleMaxLength = 25
-	const descriptionMaxLength = 50
+	const { TITLE_MAX_LENGTH, DESCRIPTION_MAX_LENGTH } = dishItemConfig
 
 	const customContent = (text) => (
 		<p className="w-44">
@@ -26,10 +26,7 @@ const DishItem = ({ dish, config }) => {
 				<Chip color="default" size="sm" variant='solid' className="h-4 px-0 uppercase text-tiny text-secondary rounded">{formatCategory(category)}</Chip>
 				{dish.archived && <p className="text-tiny">(Archived)</p>}
 				<div className="flex gap-1">
-					<span onClick={config && (() => config.archive(dish, token))} className="ml-auto cursor-pointer
-																																									transition-all
-																																									hover:scale-125
-																																									"
+					<span onClick={config && (() => config.archive(dish, token))} className="ml-auto cursor-pointer transition-all hover:scale-125"
 					>
 						{config && config.archiveIcon}
 					</span>
@@ -38,12 +35,12 @@ const DishItem = ({ dish, config }) => {
 					</span>
 				</div>
 			</div>
-			{title.length > titleMaxLength
-				? <Tooltip showArrow={false} placement='center' closeDelay={0} content={customContent(title)}><p className="font-bold text-medium">{longStringTrunc(title, titleMaxLength)}</p></Tooltip>
+			{title.length > TITLE_MAX_LENGTH
+				? <Tooltip showArrow={false} placement='center' closeDelay={0} content={customContent(title)}><p className="font-bold text-medium">{longStringTrunc(title, TITLE_MAX_LENGTH)}</p></Tooltip>
 				: <p className="font-bold text-medium">{title}</p>
 			}
-			{description.length > descriptionMaxLength
-				? <Tooltip showArrow={false} placement='center' closeDelay={0} content={customContent(description)}><p className="text-small">{longStringTrunc(description, descriptionMaxLength)}</p></Tooltip>
+			{description.length > DESCRIPTION_MAX_LENGTH
+				? <Tooltip showArrow={false} placement='center' closeDelay={0} content={customContent(description)}><p className="text-small">{longStringTrunc(description, DESCRIPTION_MAX_LENGTH)}</p></Tooltip>
 				: <p className="text-small">{description}</p>
 			}
 
