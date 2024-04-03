@@ -11,3 +11,4 @@ GET http://localhost:3001/api/filter?category=Platos%20principales Content-Type:
 
 ###
 
+GET http://localhost:3001/api/dish Content-Type: application/json
