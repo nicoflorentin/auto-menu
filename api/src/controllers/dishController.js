@@ -119,7 +119,7 @@ dishRouter.post("/", async (request, response, next) => {
     user.dishes = user.dishes.concat(saveDish._id);
     await user.save();
 
-    request.data = [saveDish];
+    request.data = saveDish;
     request.statusCode = 201;
     next();
   } catch (error) {
