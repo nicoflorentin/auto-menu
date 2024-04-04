@@ -40,7 +40,9 @@ const errorHandler = (error, request, response, next) => {
     error.message === "The user already exists or data is missing" ||
     error.message === "Missing data, error creating" ||
     error.message === "Dish not found" ||
-    error.message === "User does not have permission to edit this dish"
+    error.message === "Restaurant not found" ||
+    error.message === "User does not have permission to edit this dish" ||
+    error.message === "The user does not have an associated restaurant"
   ) {
     statusCode = 400;
   } else if (
