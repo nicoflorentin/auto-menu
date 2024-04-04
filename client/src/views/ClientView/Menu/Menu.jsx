@@ -7,18 +7,18 @@ import CategorizedDishes from "views/ClientView/Menu/CategorizedDishes.jsx/Categ
 const Menu = () => {
 	const categories = ['Platos Principales', 'Entrantes', 'Postres', 'Bebidas'];
 	const dishes = [
-		{ category: 'platosPrincipales', title: 'Pollo' },
-		{ category: 'platosPrincipales', title: 'Asado' },
-		{ category: 'entrantes', title: 'Rabas' },
-		{ category: 'postres', title: 'Helado' },
-		{ category: 'bebidas', title: 'Vino' },
+		{ category: 'platosPrincipales', title: 'Pollo', price: 11, description: 'A brief yummy description' },
+		{ category: 'platosPrincipales', title: 'Asado', price: 9, description: 'A brief yummy description' },
+		{ category: 'entrantes', title: 'Rabas', price: 4, description: 'A brief yummy description' },
+		{ category: 'postres', title: 'Helado', price: 2, description: 'A brief yummy description' },
+		{ category: 'bebidas', title: 'Vino', price: 15, description: 'A brief yummy description' },
 	];
 
-	const { restaurantName: name } = useParams();
+	const { restaurantName } = useParams();
 
 	return (
-		<div className="font-ubuntu">
-			<RestaurantProfile name={name} />
+		<div className="font-inter">
+			<RestaurantProfile name={restaurantName} />
 			<NavBar />
 			<CategorizedDishes dishes={dishes} categories={categories} />
 		</div>
