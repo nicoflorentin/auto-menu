@@ -48,9 +48,9 @@ Para autenticar a un usuario, envía una solicitud POST a la siguiente ruta:
     {
       "error": false,
       "data": {
-        "username": "admin4@gmail.com",
-        "name": "Nombre del usuario",
-        "token": "jwt_token"
+        "token": "jwt_token",
+        "username": "nuevo_usuario@gmail.com",
+        "restaurantId": "660ef583b27719e07c4ab918"
       }
     }
     ```
@@ -233,6 +233,7 @@ Para eliminar un plato específico por su ID, envía una solicitud DELETE a la s
   - `id` (string): El ID único del plato que se desea eliminar.
 - **Cabecera de Autorización:**
   - `Authorization` (string): Token JWT de autenticación.
+
 ---
 
 ### Actualización de un Restaurante por su ID
@@ -252,16 +253,17 @@ Para actualizar un restaurante específico por su ID, envía una solicitud PUT a
 - **Cuerpo de la solicitud:** Un objeto JSON que contiene los campos actualizados del restaurante.
 - **Respuesta Exitosa (201 Created):**
   - **Cuerpo de la respuesta:** Un objeto que representa el restaurante actualizado.
-   ```json
-    {
-        "owner": "ID_del_dueño_del_restaurante",
-        "dishes": ["ID_del_plato_1", "ID_del_plato_2"],
-        "name": "Nuevo Nombre del Restaurante",
-        "description": "Nueva Descripción del Restaurante",
-        "image": "nueva_ruta_de_la_imagen.jpg",
-        "id": "ID_del_restaurante"
-    }
-    ```
+  ```json
+  {
+    "owner": "ID_del_dueño_del_restaurante",
+    "dishes": ["ID_del_plato_1", "ID_del_plato_2"],
+    "name": "Nuevo Nombre del Restaurante",
+    "description": "Nueva Descripción del Restaurante",
+    "image": "nueva_ruta_de_la_imagen.jpg",
+    "id": "ID_del_restaurante"
+  }
+  ```
+
 ---
 
 ### Obtención de un Restaurante por su Nombre
@@ -278,39 +280,67 @@ Para obtener un restaurante específico por su nombre, envía una solicitud GET 
   - `name` (string): El nombre del restaurante que se desea obtener.
 - **Respuesta Exitosa (200 OK):**
   - **Cuerpo de la respuesta:** Un objeto que representa el restaurante solicitado.
- (200 OK):**
+    (200 OK):\*\*
   - **Cuerpo de la respuesta:** Un objeto que representa el restaurante solicitado.
     ```json
     {
-        "owner": "ID_del_dueño_del_restaurante",
-        "dishes": [
-            {
-                "title": "Nombre del Plato",
-                "description": "Descripción del Plato",
-                "category": "Categoría del Plato",
-                "price": 100,
-                "image": "ruta_de_la_imagen.jpg",
-                "celiac": false,
-                "vegetarian": false,
-                "restaurant": "ID_del_restaurante",
-                "id": "ID_del_plato"
-            },
-            {
-                "title": "Nombre del Otro Plato",
-                "description": "Descripción del Otro Plato",
-                "category": "Categoría del Otro Plato",
-                "price": 150,
-                "image": "ruta_del_otro_imagen.jpg",
-                "celiac": true,
-                "vegetarian": true,
-                "restaurant": "ID_del_restaurante",
-                "id": "ID_del_otro_plato"
-            }
-        ],
-        "description": "Descripción del Restaurante",
-        "image": "ruta_de_la_imagen.jpg",
-        "name": "Nombre del Restaurante",
-        "id": "ID_del_restaurante"
+      "owner": "ID_del_dueño_del_restaurante",
+      "dishes": [
+        {
+          "title": "Nombre del Plato",
+          "description": "Descripción del Plato",
+          "category": "Categoría del Plato",
+          "price": 100,
+          "image": "ruta_de_la_imagen.jpg",
+          "celiac": false,
+          "vegetarian": false,
+          "restaurant": "ID_del_restaurante",
+          "id": "ID_del_plato"
+        },
+        {
+          "title": "Nombre del Otro Plato",
+          "description": "Descripción del Otro Plato",
+          "category": "Categoría del Otro Plato",
+          "price": 150,
+          "image": "ruta_del_otro_imagen.jpg",
+          "celiac": true,
+          "vegetarian": true,
+          "restaurant": "ID_del_restaurante",
+          "id": "ID_del_otro_plato"
+        }
+      ],
+      "description": "Descripción del Restaurante",
+      "image": "ruta_de_la_imagen.jpg",
+      "name": "Nombre del Restaurante",
+      "id": "ID_del_restaurante"
+    }
+    ```
+
 ---
 
+### Obtención de un Restaurante por su ID
 
+#### Ruta de Obtención de un Restaurante por su ID
+
+Para obtener un restaurante específico por su ID, envía una solicitud GET a la siguiente ruta:
+
+
+- **Endpoint:** `/api/restaurant/:id`
+- **Método HTTP:** GET
+- **Descripción:** Esta ruta se utiliza para obtener un restaurante específico por su ID. Se requiere el ID del restaurante como parámetro en la URL.
+- **Parámetros de la solicitud:**
+  - `id` (string): El ID único del restaurante que se desea obtener.
+- **Respuesta Exitosa (200 OK):**
+
+  - **Cuerpo de la respuesta:** Un objeto que representa el restaurante solicitado.
+
+    ```json
+    {
+      "owner": "ID_del_dueño_del_restaurante",
+      "dishes": ["ID_del_plato_1", "ID_del_plato_2"],
+      "description": "Descripción del Restaurante",
+      "image": "ruta_de_la_imagen.jpg",
+      "name": "Nombre del Restaurante",
+      "id": "ID_del_restaurante"
+    }
+    ```

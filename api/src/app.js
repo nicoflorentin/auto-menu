@@ -33,7 +33,7 @@ app.use("/api/dish", dishRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/user", userRouter);
 app.use("/api/login", loginRouter);
-app.use("/restaurant", restaurantRouter)
+app.use("/api/restaurant", restaurantRouter)
 app.use("/restaurant/edit", restaurantRouter)
 app.use("/menu", publicRestaurantRouter)
 

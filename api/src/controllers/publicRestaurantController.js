@@ -1,6 +1,7 @@
 const publicRestaurantRouter = require("express").Router();
 const Restaurant = require("../models/Restaurant");
 
+//Ruta publica para traer los restaurantes por nombre
 publicRestaurantRouter.get("/:name", async (request, _response, next) => {
   try {
     const restaurantName = request.params.name;
