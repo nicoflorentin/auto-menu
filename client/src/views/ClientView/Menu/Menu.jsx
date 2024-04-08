@@ -1,24 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RestaurantProfile from "views/ClientView/Menu/RestaurantProfile/RestaurantProfile";
 import { useParams } from "react-router-dom";
 import NavBar from "views/ClientView/Menu/NavBar/NavBar";
 import CategorizedDishes from "views/ClientView/Menu/CategorizedDishes.jsx/CategorizedDishes";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRestaurantData } from "redux/slices/restaurantSlice";
 
 const Menu = () => {
-	const categories = ['Platos Principales', 'Entrantes', 'Postres', 'Bebidas'];
-	const dishes = [
-		{ category: 'platosPrincipales', title: 'Pollo', price: 11, description: 'A brief yummy description' },
-		{ category: 'platosPrincipales', title: 'Asado', price: 9, description: 'A brief yummy description' },
-		{ category: 'entrantes', title: 'Rabas', price: 4, description: 'A brief yummy description' },
-		{ category: 'postres', title: 'Helado', price: 2, description: 'A brief yummy description' },
-		{ category: 'bebidas', title: 'Vino', price: 15, description: 'A brief yummy description' },
-	];
+	const { dishes, name, description, categories: unformattedCategories } = useSelector(state => state.restaurant.data)
+
+	const categories = unformattedCategories?.map(category => category.label)
 
 	const { restaurantName } = useParams();
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(fetchRestaurantData(restaurantName))
+	}, [])
 
 	return (
-		<div className="font-inter">
-			<RestaurantProfile name={restaurantName} />
+		<div className="font-inter m-auto">
+			<RestaurantProfile name={restaurantName} description={description} />
 			<NavBar />
 			<CategorizedDishes dishes={dishes} categories={categories} />
 		</div>

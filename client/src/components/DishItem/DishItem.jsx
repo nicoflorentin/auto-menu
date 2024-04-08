@@ -48,7 +48,7 @@ const DishItem = ({ dish, config }) => {
 				<p className="text-end text-large font-semibold">{price} <span className="text-medium">USD</span></p>
 				<span className="flex ml-auto items-center">
 					{vegetarian ? <Tooltip placement='top-end' content="Vegetarian recipe"><div><VegetarianIcon size='23' className='text-green-700' /></div></Tooltip> : ""}
-					{celiac ? <Tooltip placement='top-end' content='Gluten Free'><div><GlutenFreeIcon size='25' className='text-foreground' /></div></Tooltip> : ""}
+					{celiac ? <Tooltip placement='top-end' content='Gluten Free'><div><GlutenFreeIcon size='25' className='text-zinc-800' /></div></Tooltip> : ""}
 				</span>
 			</div>
 		</div>

@@ -6,13 +6,13 @@ import { LOCAL_URL } from '../../services/const'
 // Define una función asincrónica para obtener los datos de la API
 export const fetchLogin = createAsyncThunk('login/fetchLogin', async (loginData) => {
   console.log(loginData)
-  const response = await axios.post(`${LOCAL_URL}/login`, loginData)
+  const response = await axios.post(`${LOCAL_URL}/api/login`, loginData)
   await delay()
   return response.data
 });
 
 export const fetchSignUp = createAsyncThunk('login/fetchSignUp', async (SignUpData) => {
-  const response = await axios.post(`${LOCAL_URL}/user`, SignUpData)
+  const response = await axios.post(`${LOCAL_URL}/api/user`, SignUpData)
   await delay()
   return response.data
 });
@@ -47,6 +47,7 @@ export const loginSlice = createSlice({
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload.data;
+        console.log(action.payload.data);
         localStorage.setItem('user', JSON.stringify(action.payload.data));
       })
       .addCase(fetchLogin.rejected, (state, action) => {

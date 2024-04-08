@@ -3,7 +3,9 @@ import { Input } from "@nextui-org/input";
 import Subtitle from "components/Subtitle/Subtitle";
 import Title from "components/Title/Title";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchRestaurantData } from "redux/slices/restaurantSlice";
 
 const initialValues = {
 	name: '',
@@ -20,6 +22,12 @@ const Restaurant = () => {
 			console.log("Submitted form with values:", values)
 		},
 	})
+
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		// dispatch(fetchRestaurantData({name: restaurantName}))
+	}, [])
 
 	const widgetHandler = () => {
 		setLoading(true)
