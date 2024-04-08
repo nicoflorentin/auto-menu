@@ -12,7 +12,7 @@ const getDishes = async (token, rawFilters) => {
 	}
 
 	try {
-		const response = await axios.get(`${LOCAL_URL}/dish`, axiosConfig);
+		const response = await axios.get(`${LOCAL_URL}/api/dish`, axiosConfig);
 		const { data } = response;
 		return data
 	} catch (error) {
@@ -28,7 +28,7 @@ const editDish = async (id, body, token) => {
 	};
 
 	try {
-		const response = await axios.put(`${LOCAL_URL}/dish/${id}`, body, axiosConfig)
+		const response = await axios.put(`${LOCAL_URL}/api/dish/${id}`, body, axiosConfig)
 		console.log('response del servicio edit', response.data)
 		return response.data
 	} catch (error) {
@@ -49,7 +49,7 @@ const archiveDish = async (dish, token) => {
 	}
 
 	try {
-		const response = await axios.put(`${LOCAL_URL}/dish/${dish.id}`, toEditData, axiosConfig)
+		const response = await axios.put(`${LOCAL_URL}/api/dish/${dish.id}`, toEditData, axiosConfig)
 		return response.data
 	} catch (error) {
 		console.log(error.message)
@@ -64,7 +64,7 @@ const createDish = async (body, token) => {
 		},
 	};
 	try {
-		const response = await axios.post(`${LOCAL_URL}/dish`, body, axiosConfig)
+		const response = await axios.post(`${LOCAL_URL}/api/dish`, body, axiosConfig)
 		return response.data
 	} catch (error) {
 		throw new Error('Create dish error')
@@ -79,7 +79,7 @@ const deleteDish = async (id, token) => {
 	};
 
 	try {
-		return await axios.delete(`${LOCAL_URL}/dish/${id}`, axiosConfig)
+		return await axios.delete(`${LOCAL_URL}/api/dish/${id}`, axiosConfig)
 	} catch (error) {
 		throw new Error(error.message)
 	}
@@ -87,8 +87,7 @@ const deleteDish = async (id, token) => {
 
 const getCategories = async () => {
 	try {
-		// await delay()
-		const response = await axios.get(`${LOCAL_URL}/categories`)
+		const response = await axios.get(`${LOCAL_URL}/api/categories`)
 		return response.data
 	} catch (error) {
 		console.log(error)
@@ -103,7 +102,7 @@ const getOneDish = async (id, token) => {
 	};
 
 	try {
-		const response = await axios.get(`${LOCAL_URL}/dish/${id}`, axiosConfig)
+		const response = await axios.get(`${LOCAL_URL}/api/dish/${id}`, axiosConfig)
 		return response.data
 	} catch (error) {
 		throw new Error(error.message)

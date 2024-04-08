@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { restaurantServices } from 'services/restaurantServices';
 
 // Define una función asincrónica para obtener los datos de la API
 export const fetchRestaurantData = createAsyncThunk('restaurant/fetchRestaurantData', async (payload) => {
-  return payload
+  const data = restaurantServices.getRestaurantByName(payload)
+  return data
 });
-
 
 const initialState = {
   data: {},
@@ -23,21 +23,20 @@ export const restaurantSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchLogin.pending, (state) => {
+      .addCase(fetchRestaurantData.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchLogin.fulfilled, (state, action) => {
+      .addCase(fetchRestaurantData.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload.data;
-        localStorage.setItem('user', JSON.stringify(action.payload.data));
+        state.data = action.payload.data[0];
       })
-      .addCase(fetchLogin.rejected, (state, action) => {
+      .addCase(fetchRestaurantData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
   },
 })
 
-export const { clearData } = loginSlice.actions
-export default loginSlice.reducer
+export const { clearData } = restaurantSlice.actions
+export default restaurantSlice.reducer

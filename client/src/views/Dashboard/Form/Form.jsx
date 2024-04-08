@@ -46,6 +46,7 @@ const Form = ({ title }) => {
 		},
 	})
 	const navigate = useNavigate()
+	console.log(values);
 
 	const submitHandler = () => {
 		// si hay id en params edita un dish y si no hay, crea un dish
@@ -58,7 +59,7 @@ const Form = ({ title }) => {
 					position: 'bottom-center'
 				})
 				setTimeout(() => {
-					navigate('/dashboard/dishes')
+					navigate('/admin/dashboard/dishes')
 				}, 2000);
 			})
 			: dispatch(createDish({ values, token })).then((res) => {
@@ -148,7 +149,7 @@ const Form = ({ title }) => {
 					value={values.price}
 					isDisabled={loadingFields || loading}
 				/>
-				{/* <label htmlFor='image'>Image URL</label>
+				<label htmlFor='image'>Image URL</label>
 				<Input
 					id='image'
 					name='image'
@@ -156,7 +157,7 @@ const Form = ({ title }) => {
 					onChange={handleChange}
 					value={values.image}
 					isDisabled={loadingFields || loading}
-				/> */}
+				/>
 				{/* <label htmlFor='celiac'>Gluten</label> */}
 				<div className="flex gap-5">
 					<Checkbox
