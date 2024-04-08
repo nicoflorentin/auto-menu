@@ -8,6 +8,7 @@ loginRouter.post("/", async (request, _response, next) => {
   const { username, password } = request.body;
 
   try {
+    const tokenDuration = 6 * 60 * 60;
     const user = await User.findOne({ username });
     console.log("Datos de usuario", user);
 
@@ -20,7 +21,7 @@ loginRouter.post("/", async (request, _response, next) => {
       id: user._id,
     };
 
-    const token = jwt.sign(userForToken, config.SECRET, {});
+    const token = jwt.sign(userForToken, config.SECRET, { expiresIn: tokenDuration });
     request.data = { token, username: user.username, name: user.name, restaurantId: user.restaurant._id };
     request.statusCode = 200;
     next();

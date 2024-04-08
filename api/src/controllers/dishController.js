@@ -13,15 +13,12 @@ dishRouter.get("/", async (request, response, next) => {
 
     const user = await User.findById(userId).populate("restaurant");
     if (!user.restaurant) {
-      return response
-        .status(400)
-        .json({ error: "El usuario no tiene un restaurante asociado" });
+      return next(new Error("Restaurant not found"));
     }
 
     const restaurantId = user.restaurant.id;
 
-    const { name, category, archived, celiac, vegetarian, price } =
-      request.query;
+    const { name, category, archived, celiac, vegetarian, price } = request.query;
 
     const filter = { restaurant: restaurantId };
 

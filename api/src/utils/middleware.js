@@ -30,7 +30,7 @@ const unknownEndpoint = (request, response, next) => {
 const errorHandler = (error, request, response, next) => {
   logger.error(error);
 
-  let statusCode = 500
+  let statusCode = 500;
 
   if (
     error.name === "ValidatorError" ||
@@ -41,20 +41,27 @@ const errorHandler = (error, request, response, next) => {
     error.message === "Missing data, error creating" ||
     error.message === "Dish not found" ||
     error.message === "Restaurant not found" ||
-    error.message === "User does not have permission to edit this dish" ||
     error.message === "The user does not have an associated restaurant"
   ) {
     statusCode = 400;
+
   } else if (
     error.message === "jwt must be provided" ||
     error.message === "Incorrect user or password" ||
-    error.message === "Dish not found or user does not have permission to edit it"||
-    error.message === "User does not have permission to access this dish"
+    error.message === "Dish not found or user does not have permission to edit it"
   ) {
     statusCode = 401;
+
+  } else if (
+    error.message === "User does not have permission to access this dish" ||
+    error.message === "User does not have permission to edit this dish" ||
+    error.message === "User does not have permission to edit this restaurant" ||
+    error.message === "User does not have permission to access this restaurant"
+  ) {
+    statusCode = 403;
   }
 
-    response.status(statusCode).json({ error: true, message: error.message });
+  response.status(statusCode).json({ error: true, message: error.message });
 };
 
 // Middleware para manejar respuestas exitosas
