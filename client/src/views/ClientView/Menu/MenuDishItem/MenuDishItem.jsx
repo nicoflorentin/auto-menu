@@ -4,7 +4,6 @@ import { GlutenFreeIcon, VegetarianIcon } from 'assets/icons'
 const currency = 'USD'
 
 const MenuDishItem = ({ dish }) => {
-	console.log(dish);
 	const { title, description, price, image, vegetarian, celiac } = dish
 	return (
 		<div className='shadow-md rounded-xl'>

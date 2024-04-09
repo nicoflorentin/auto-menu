@@ -4,29 +4,35 @@ import Subtitle from "components/Subtitle/Subtitle";
 import Title from "components/Title/Title";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { fetchRestaurantData } from "redux/slices/restaurantSlice";
-
-const initialValues = {
-	name: '',
-	description: '',
-	image: ''
-}
+import { useDispatch, useSelector } from "react-redux";
+import { editRestaurantById, fetchRestaurantById } from "redux/slices/restaurantSlice";
 
 const Restaurant = () => {
 
 	const [loading, setLoading] = useState(false)
+	const { restaurantId, token, loading: restaurantLoading } = useSelector(state => state.login.data)
+	const { name, description, image } = useSelector(state => state.restaurant.data)
 	const { values, handleChange, handleSubmit, setValues } = useFormik({
-		initialValues,
+		initialValues: {
+			name,
+			description,
+			image
+		},
 		onSubmit: (values) => {
 			console.log("Submitted form with values:", values)
 		},
 	})
 
+	console.log(name, description, image);
+
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		// dispatch(fetchRestaurantData({name: restaurantName}))
+		!name && dispatch(fetchRestaurantById({ restaurantId, token }))
+			.then((res) => {
+				const { name, image, description } = res.payload.data
+				setValues({ name, image, description })
+			})
 	}, [])
 
 	const widgetHandler = () => {
@@ -40,13 +46,17 @@ const Restaurant = () => {
 			(error, result) => {
 				console.log(result);
 				if (!error && result && result.event === "success") {
-					console.log('Done! Here is the image info: ', result.info);
+					console.log('Done! Here is the image info: ', result.info)
 					setValues({ ...values, image: result.info.secure_url })
 					setLoading(false)
 				}
 			}
 		)
 		myWidget.open()
+	}
+
+	const submitHandler = () => {
+		dispatch(editRestaurantById({ restaurantId, body: { ...values }, token }))
 	}
 
 	return (
@@ -88,8 +98,12 @@ const Restaurant = () => {
 								: <img className="w-full h-auto block" src={values.image} alt="selected portrait image" />
 						}
 					</div>
-					<Button className="my-2" color='primary' onPress={() => widgetHandler()}>
-						Upload and change
+					<Button className="my-2" color='secondary' onPress={() => widgetHandler()}>
+						Change image
+					</Button>
+					<br />
+					<Button className="my-2" color='primary' onPress={() => submitHandler()}>
+						Submit
 					</Button>
 				</div>
 

@@ -6,8 +6,8 @@ import CategorizedDishes from "views/ClientView/Menu/CategorizedDishes.jsx/Categ
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRestaurantData } from "redux/slices/restaurantSlice";
 
-const Menu = () => {
-	const { dishes, name, description, categories: unformattedCategories } = useSelector(state => state.restaurant.data)
+const Menu = ({ restaurantData }) => {
+	const { categories: unformattedCategories, description, dishes } = restaurantData
 
 	const categories = unformattedCategories?.map(category => category.label)
 

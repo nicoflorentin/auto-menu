@@ -9,7 +9,6 @@ const CategorizedDishes = ({ dishes, categories }) => {
 			label: category,
 			dishes: dishes?.filter(dish => dish.category === toCamelCase(category)).sort((a, b) => a.price - b.price),
 		}));
-		console.log(dishes);
 		return orderedDishes;
 	}
 	const orderedDishes = orderDishes(dishes);
