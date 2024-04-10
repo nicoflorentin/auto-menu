@@ -32,7 +32,7 @@ const AsideBar = ({ linksConfig, logoutHandler }) => {
 				}
 			})}
 			<UserDetails logoutHandler={logoutHandler} />
-			<button className="w-1" onClick={darkMode.toggle}>{!darkMode.value ? <span>🌙</span> : <span>🌞</span>}</button>
+			{/* <button className="w-1" onClick={darkMode.toggle}>{!darkMode.value ? <span>🌙</span> : <span>🌞</span>}</button> */}
 		</>
 	)
 }

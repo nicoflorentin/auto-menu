@@ -7,7 +7,7 @@ const ClientView = () => {
 	console.log(restaurantData.image)
 
 	return (
-		<div className="max-w-[425px] m-auto min-h-svh bg-[#FAFAFA]">
+		<div className="max-w-[425px] m-auto min-h-lvh bg-[#FAFAFA]">
 			<div className={`h-32 shadow-md shadow-zinc-200`}> <img className="h-full w-full object-cover" src={restaurantData.image}></img> </div>
 			<div className="relative bottom-20">
 				<Menu restaurantData={restaurantData} />

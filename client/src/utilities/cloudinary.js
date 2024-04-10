@@ -3,7 +3,7 @@ export const openWidget = (callback) => {
 		cloudName: 'dp9xjtgsf',
 		uploadPreset: 'portrait',
 		apiKey: '511867113661765',
-		sources: ['local', 'camera']
+		sources: ['local', 'camera', 'url']
 	}, callback)
 
 	myWidget.open()

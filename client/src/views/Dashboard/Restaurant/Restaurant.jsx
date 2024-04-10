@@ -59,8 +59,6 @@ const Restaurant = () => {
 		dispatch(editRestaurantById({ restaurantId, body: { ...values }, token }))
 	}
 
-	console.log(restaurantLoading);
-
 	return (
 		<div className="flex flex-col gap-5">
 			<Title>Restaurant Configuration</Title>
@@ -105,8 +103,15 @@ const Restaurant = () => {
 							Select image
 						</Button>
 						{loadingWidget && <span className="ml-5"><Loading content='Opening window' /></span>}
-
 					</div>
+					{name &&
+						<div>
+							<Subtitle>Restaurant menu</Subtitle>
+							<div className="flex flex-col pr-10 ml-auto text-sm gap-1">
+								<span>Go to menu: <a className="ml-2 underline underline-offset-4" href={`http://localhost:5173/menu/${name?.replace(' ', '%20')}`}>{name}</a></span>
+								<span>Share this link: <span className="ml-2">{`http://localhost:5173/menu/${name?.replace(' ', '%20')}`}</span></span>
+							</div>
+						</div>}
 					<br />
 					{
 						fieldsWasChanged &&
