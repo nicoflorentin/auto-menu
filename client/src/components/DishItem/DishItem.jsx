@@ -26,11 +26,11 @@ const DishItem = ({ dish, config }) => {
 				<Chip color="default" size="sm" variant='solid' className="h-4 px-0 uppercase text-tiny text-secondary rounded">{formatCategory(category)}</Chip>
 				{dish.archived && <p className="text-tiny">(Archived)</p>}
 				<div className="flex gap-1">
-					<span onClick={config && (() => config.archive(dish, token))} className="ml-auto cursor-pointer transition-all hover:scale-125"
+					<span onClick={config && (() => config.archive(dish, token))} className="ml-auto cursor-pointer duration-[.15s] hover:scale-125"
 					>
 						{config && config.archiveIcon}
 					</span>
-					<span onClick={config && (() => config.action(id, token))} className="cursor-pointer hover:scale-125">
+					<span onClick={config && (() => config.action(id, token))} className="cursor-pointer duration-[.15s] hover:scale-125">
 						{config && config.icon}
 					</span>
 				</div>

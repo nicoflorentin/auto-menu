@@ -6,7 +6,7 @@ const currency = 'USD'
 const MenuDishItem = ({ dish }) => {
 	const { title, description, price, image, vegetarian, celiac } = dish
 	return (
-		<div className='shadow-md rounded-xl'>
+		<div className='bg-slate-50 shadow-md rounded-xl mb-3'>
 			<img className="h-28 drop-shadow-lg m-auto" src={defaultImage} alt={image} />
 			<div className='px-3 py-3'>
 				<div className='flex items-center gap-2'>

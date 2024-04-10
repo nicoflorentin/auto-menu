@@ -1,17 +1,21 @@
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
+import Loading from "components/Loading/Loading";
 import Subtitle from "components/Subtitle/Subtitle";
 import Title from "components/Title/Title";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editRestaurantById, fetchRestaurantById } from "redux/slices/restaurantSlice";
+import { openWidget } from "utilities/cloudinary";
 
 const Restaurant = () => {
 
-	const [loading, setLoading] = useState(false)
-	const { restaurantId, token, loading: restaurantLoading } = useSelector(state => state.login.data)
+	const [restaurantLoading, setRestaurantLoading] = useState(false)
+	const [loadingWidget, setLoadingWidget] = useState(false)
+	const { restaurantId, token } = useSelector(state => state.login.data)
 	const { name, description, image } = useSelector(state => state.restaurant.data)
+	const dispatch = useDispatch()
 	const { values, handleChange, handleSubmit, setValues } = useFormik({
 		initialValues: {
 			name,
@@ -23,41 +27,39 @@ const Restaurant = () => {
 		},
 	})
 
-	console.log(name, description, image);
-
-	const dispatch = useDispatch()
+	const fieldsWasChanged = name !== values.name || description !== values.description || image !== values.image
 
 	useEffect(() => {
-		!name && dispatch(fetchRestaurantById({ restaurantId, token }))
-			.then((res) => {
-				const { name, image, description } = res.payload.data
-				setValues({ name, image, description })
-			})
+		if (!name) {
+			setRestaurantLoading(true)
+			dispatch(fetchRestaurantById({ restaurantId, token }))
+				.then((res) => {
+					const { name, image, description } = res.payload.data
+					setValues({ name, image, description })
+					setRestaurantLoading(false)
+				})
+		}
 	}, [])
 
 	const widgetHandler = () => {
-		setLoading(true)
-		const myWidget = cloudinary.createUploadWidget({
-			cloudName: 'dp9xjtgsf',
-			uploadPreset: 'portrait',
-			apiKey: '511867113661765',
-			sources: ['local', 'camera']
-		},
-			(error, result) => {
-				console.log(result);
-				if (!error && result && result.event === "success") {
-					console.log('Done! Here is the image info: ', result.info)
-					setValues({ ...values, image: result.info.secure_url })
-					setLoading(false)
-				}
+		setLoadingWidget(true)
+		openWidget((error, result) => {
+			if (!error && result && result.event === "success") {
+				console.log('Done. Image info: ', result.info)
+				setValues({ ...values, image: result.info.secure_url })
+				setLoadingWidget(false)
 			}
+			setLoadingWidget(false)
+		}
+
 		)
-		myWidget.open()
 	}
 
 	const submitHandler = () => {
 		dispatch(editRestaurantById({ restaurantId, body: { ...values }, token }))
 	}
+
+	console.log(restaurantLoading);
 
 	return (
 		<div className="flex flex-col gap-5">
@@ -72,7 +74,7 @@ const Restaurant = () => {
 						type='text'
 						onChange={handleChange}
 						value={values.name}
-						isDisabled={loading}
+						isDisabled={restaurantLoading || loadingWidget}
 					/>
 				</div>
 				<div className="grow">
@@ -84,7 +86,7 @@ const Restaurant = () => {
 						type='text'
 						onChange={handleChange}
 						value={values.description}
-						isDisabled={loading}
+						isDisabled={restaurantLoading || loadingWidget}
 					/>
 				</div>
 			</div>
@@ -98,13 +100,23 @@ const Restaurant = () => {
 								: <img className="w-full h-auto block" src={values.image} alt="selected portrait image" />
 						}
 					</div>
-					<Button className="my-2" color='secondary' onPress={() => widgetHandler()}>
-						Change image
-					</Button>
+					<div className="flex gap-5 items-center">
+						<Button className="my-2" color='secondary' onPress={() => widgetHandler()} isDisabled={restaurantLoading || loadingWidget}>
+							Select image
+						</Button>
+						{loadingWidget && <span className="ml-5"><Loading content='Opening window' /></span>}
+
+					</div>
 					<br />
-					<Button className="my-2" color='primary' onPress={() => submitHandler()}>
-						Submit
-					</Button>
+					{
+						fieldsWasChanged &&
+						<div>
+							<Button className="my-2" color='primary' onPress={() => submitHandler()} isDisabled={restaurantLoading || loadingWidget}>
+								Save
+							</Button>
+							<span className="text-sm ml-2">There are unsaved changes!</span>
+						</div>
+					}
 				</div>
 
 			</div>

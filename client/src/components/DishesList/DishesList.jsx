@@ -11,11 +11,11 @@ import Title from "components/Title/Title"
 
 const categoriesOrder = ["platosPrincipales", "entrantes", "bebidas", "postres"]
 
-const RenderDishes = ({dishes, currentConfig, routeName }) =>
+const RenderDishes = ({ dishes, currentConfig, routeName }) =>
 (
 	<div className="flex flex-wrap gap-5">
 		{dishes?.filter(dish => (routeName === "archived" ? dish.archived : !dish.archived))
-			.sort((a, b) => categoriesOrder.indexOf(a.category) - categoriesOrder.indexOf(b.category) ).map(dish => (
+			.sort((a, b) => categoriesOrder.indexOf(a.category) - categoriesOrder.indexOf(b.category)).map(dish => (
 				<DishItem config={currentConfig} dish={dish} key={dish.id} iconSize="20" archived={dish.archived} />
 			))}
 	</div>
@@ -71,7 +71,10 @@ const DishesList = ({ routeName, title }) => {
 	return (
 		<div className="">
 			<Title>{title}</Title>
-			<div className="">{loading ? <Loading /> : <RenderDishes dishes={dishes} currentConfig={currentConfig} routeName={routeName} />}</div>
+			<div className="">{
+				loading
+					? <div className="w-10 m-auto mt-44"><Loading labelPosition='top' content='Loading' /></div>
+					: <RenderDishes dishes={dishes} currentConfig={currentConfig} routeName={routeName} />}</div>
 		</div>
 	)
 }
