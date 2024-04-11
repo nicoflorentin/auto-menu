@@ -9,7 +9,6 @@ const CategorizedDishes = ({ dishes, categories }) => {
 			label: category,
 			dishes: dishes?.filter(dish => dish.category === toCamelCase(category)).sort((a, b) => a.price - b.price),
 		}));
-		console.log(dishes);
 		return orderedDishes;
 	}
 	const orderedDishes = orderDishes(dishes);
@@ -17,7 +16,7 @@ const CategorizedDishes = ({ dishes, categories }) => {
 	return (
 		<div className="px-2">
 			{orderedDishes?.map((category, index) => (
-				<CategorySection key={index} dishes={category.dishes} name={category.label} />
+				!!category.dishes.length && <CategorySection key={index} dishes={category.dishes} name={category.label} />
 			))}
 		</div>
 	)

@@ -11,7 +11,7 @@ function AdminView({ logOut }) {
 	const darkMode = useDarkMode()
 
 	return (
-		<div className={`${darkMode.value ? 'dark bg-gradient-to-r from-[#1f1f1f] from-40% to-[#34343b] to-100%' : 'light bg-white'} flex transition
+		<div className={`${darkMode.value ? 'dark bg-gradient-to-r from-[#1f1f1f] from-40% to-[#34343b] to-100%' : 'light bg-zinc-200'} flex
 		 text-foreground font-inter
 		 vanillaClass
 		 `}>

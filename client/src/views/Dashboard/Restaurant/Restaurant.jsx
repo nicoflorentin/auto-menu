@@ -1,52 +1,62 @@
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
+import Loading from "components/Loading/Loading";
 import Subtitle from "components/Subtitle/Subtitle";
 import Title from "components/Title/Title";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { fetchRestaurantData } from "redux/slices/restaurantSlice";
-
-const initialValues = {
-	name: '',
-	description: '',
-	image: ''
-}
+import { useDispatch, useSelector } from "react-redux";
+import { editRestaurantById, fetchRestaurantById } from "redux/slices/restaurantSlice";
+import { openWidget } from "utilities/cloudinary";
 
 const Restaurant = () => {
 
-	const [loading, setLoading] = useState(false)
+	const [restaurantLoading, setRestaurantLoading] = useState(false)
+	const [loadingWidget, setLoadingWidget] = useState(false)
+	const { restaurantId, token } = useSelector(state => state.login.data)
+	const { name, description, image } = useSelector(state => state.restaurant.data)
+	const dispatch = useDispatch()
 	const { values, handleChange, handleSubmit, setValues } = useFormik({
-		initialValues,
+		initialValues: {
+			name,
+			description,
+			image
+		},
 		onSubmit: (values) => {
 			console.log("Submitted form with values:", values)
 		},
 	})
 
-	const dispatch = useDispatch()
+	const fieldsWasChanged = name !== values.name || description !== values.description || image !== values.image
 
 	useEffect(() => {
-		// dispatch(fetchRestaurantData({name: restaurantName}))
+		if (!name) {
+			setRestaurantLoading(true)
+			dispatch(fetchRestaurantById({ restaurantId, token }))
+				.then((res) => {
+					const { name, image, description } = res.payload.data
+					setValues({ name, image, description })
+					setRestaurantLoading(false)
+				})
+		}
 	}, [])
 
 	const widgetHandler = () => {
-		setLoading(true)
-		const myWidget = cloudinary.createUploadWidget({
-			cloudName: 'dp9xjtgsf',
-			uploadPreset: 'portrait',
-			apiKey: '511867113661765',
-			sources: ['local', 'camera']
-		},
-			(error, result) => {
-				console.log(result);
-				if (!error && result && result.event === "success") {
-					console.log('Done! Here is the image info: ', result.info);
-					setValues({ ...values, image: result.info.secure_url })
-					setLoading(false)
-				}
+		setLoadingWidget(true)
+		openWidget((error, result) => {
+			if (!error && result && result.event === "success") {
+				console.log('Done. Image info: ', result.info)
+				setValues({ ...values, image: result.info.secure_url })
+				setLoadingWidget(false)
 			}
+			setLoadingWidget(false)
+		}
+
 		)
-		myWidget.open()
+	}
+
+	const submitHandler = () => {
+		dispatch(editRestaurantById({ restaurantId, body: { ...values }, token }))
 	}
 
 	return (
@@ -62,7 +72,7 @@ const Restaurant = () => {
 						type='text'
 						onChange={handleChange}
 						value={values.name}
-						isDisabled={loading}
+						isDisabled={restaurantLoading || loadingWidget}
 					/>
 				</div>
 				<div className="grow">
@@ -74,7 +84,7 @@ const Restaurant = () => {
 						type='text'
 						onChange={handleChange}
 						value={values.description}
-						isDisabled={loading}
+						isDisabled={restaurantLoading || loadingWidget}
 					/>
 				</div>
 			</div>
@@ -88,9 +98,30 @@ const Restaurant = () => {
 								: <img className="w-full h-auto block" src={values.image} alt="selected portrait image" />
 						}
 					</div>
-					<Button className="my-2" color='primary' onPress={() => widgetHandler()}>
-						Upload and change
-					</Button>
+					<div className="flex gap-5 items-center">
+						<Button className="my-2" color='secondary' onPress={() => widgetHandler()} isDisabled={restaurantLoading || loadingWidget}>
+							Select image
+						</Button>
+						{loadingWidget && <span className="ml-5"><Loading content='Opening window' /></span>}
+					</div>
+					{name &&
+						<div>
+							<Subtitle>Restaurant menu</Subtitle>
+							<div className="flex flex-col pr-10 ml-auto text-sm gap-1">
+								<span>Go to menu: <a className="ml-2 underline underline-offset-4" href={`http://localhost:5173/menu/${name?.replace(' ', '%20')}`}>{name}</a></span>
+								<span>Share this link: <span className="ml-2">{`http://localhost:5173/menu/${name?.replace(' ', '%20')}`}</span></span>
+							</div>
+						</div>}
+					<br />
+					{
+						fieldsWasChanged &&
+						<div>
+							<Button className="my-2" color='primary' onPress={() => submitHandler()} isDisabled={restaurantLoading || loadingWidget}>
+								Save
+							</Button>
+							<span className="text-sm ml-2">There are unsaved changes!</span>
+						</div>
+					}
 				</div>
 
 			</div>

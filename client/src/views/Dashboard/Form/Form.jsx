@@ -13,6 +13,8 @@ import AskConfirmationModal from "../../../components/modals/AskConfirmationModa
 import ErrorModal from "../../../components/modals/ErrorModal/ErrorModal"
 import toast, { Toaster } from "react-hot-toast"
 import Title from "components/Title/Title"
+import { openWidget } from "utilities/cloudinary"
+import Loading from "components/Loading/Loading"
 
 const initialValues = {
 	title: "",
@@ -33,12 +35,13 @@ const initialCategories = [
 
 const Form = ({ title }) => {
 	const dispatch = useDispatch()
-	const { id } = useParams()
-	const [categories, setCategories] = useState(initialCategories)
-	const token = useToken()
-	const { loading, error } = useSelector((state) => state.dishes)
 	const [loadingFields, setLoadingFields] = useState(false)
+	const [loadingWidget, setLoadingWidget] = useState(false)
+	const [categories, setCategories] = useState(initialCategories)
+	const { loading, error } = useSelector((state) => state.dishes)
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
+	const { id } = useParams()
+	const token = useToken()
 	const { values, handleChange, handleSubmit, setValues } = useFormik({
 		initialValues,
 		onSubmit: (values) => {
@@ -101,6 +104,25 @@ const Form = ({ title }) => {
 		})
 	}, [])
 
+	const resetImageHandler = () => {
+		setValues({ ...values, image: '' })
+	}
+
+	const widgetHandler = () => {
+		setLoadingWidget(true)
+		openWidget((error, result) => {
+			if (!error && result && result.event === "success") {
+				console.log('Done. Image info: ', result.info)
+				setValues({ ...values, image: result.info.secure_url })
+				setLoadingWidget(false)
+			}
+			setLoadingWidget(false)
+		}
+		)
+	}
+
+
+
 	return (
 		<>
 			<Title>{title}</Title>
@@ -149,15 +171,16 @@ const Form = ({ title }) => {
 					value={values.price}
 					isDisabled={loadingFields || loading}
 				/>
-				<label htmlFor='image'>Image URL</label>
-				<Input
-					id='image'
-					name='image'
-					type='text'
-					onChange={handleChange}
-					value={values.image}
-					isDisabled={loadingFields || loading}
-				/>
+				<label htmlFor='image'>Image</label>
+				<div className="flex gap-3">
+					<Button className="" color='secondary' onPress={() => widgetHandler()} isDisabled={loadingFields || loadingWidget}>
+						Select image
+					</Button>
+					<Button className="" color='warning' onPress={() => resetImageHandler()} isDisabled={loadingFields || loadingWidget}>
+						Delete Image
+					</Button>
+					{loadingWidget && <span className="ml-5"><Loading content='Opening window' /></span>}
+				</div>
 				{/* <label htmlFor='celiac'>Gluten</label> */}
 				<div className="flex gap-5">
 					<Checkbox

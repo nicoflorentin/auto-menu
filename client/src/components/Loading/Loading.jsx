@@ -1,10 +1,17 @@
 import { Spinner } from "@nextui-org/react"
 import React from "react"
 
-const Loading = () => {
+const Loading = ({ content, labelPosition }) => {
+	const labelPositionClass = {
+		side: '',
+		top: 'flex-col',
+		bottom: 'flex-col-reverse'
+	}[labelPosition] || ''
+
 	return (
-		<div className="mt-20 flex justify-center items-center">
-			<Spinner size="lg"/>
+		<div className={`flex ${labelPositionClass} items-center gap-3`}>
+			<Spinner size="lg" />
+			<span className="text-xs">{content}</span>
 		</div>
 	)
 }
