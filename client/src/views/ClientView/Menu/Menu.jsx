@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchRestaurantData } from "redux/slices/restaurantSlice";
 
 const Menu = ({ restaurantData }) => {
-	const { categories: unformattedCategories, description, dishes } = restaurantData
+	const { categories: unformattedCategories, description, dishes, profileImage } = restaurantData
 
 	const categories = unformattedCategories?.map(category => category.label)
 
@@ -20,7 +20,7 @@ const Menu = ({ restaurantData }) => {
 
 	return (
 		<div className="font-inter m-auto">
-			<RestaurantProfile name={restaurantName} description={description} />
+			<RestaurantProfile name={restaurantName} description={description} profileImage={profileImage} />
 			<NavBar />
 			<CategorizedDishes dishes={dishes} categories={categories} />
 		</div>

@@ -7,7 +7,7 @@ function App() {
 	return (
 		<div className=''>
 			<Routes>
-				<Route path='/' element={<Navigate to='/menu' />} />
+				<Route path='/' element={<Navigate to='/admin' />} />
 				<Route path='/admin/*' element={<AdminView />} />
 				<Route path='/menu/:restaurantName' element={<ClientView />} />
 				<Route path='/*' element={<RequestError404 />} />
