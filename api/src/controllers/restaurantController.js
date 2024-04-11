@@ -1,5 +1,6 @@
 const restaurantRouter = require("express").Router();
 const Restaurant = require("../models/Restaurant");
+const User = require("../models/User")
 const jwt = require("jsonwebtoken");
 const config = require("../utils/config");
 
@@ -40,7 +41,7 @@ restaurantRouter.get("/:id", async (request, _response, next) => {
 //Ruta para editar restaurantes
 restaurantRouter.put("/:id", async (request, _response, next) => {
   const restaurantId = request.params.id;
-  const { name, description, image } = request.body;
+  const { name, description, image, profileImage} = request.body;
 
   try {
     const codeToken = jwt.verify(request.token, config.SECRET);
@@ -58,6 +59,7 @@ restaurantRouter.put("/:id", async (request, _response, next) => {
     if (name) restaurant.name = name;
     if (description) restaurant.description = description;
     if (image) restaurant.image = image;
+    if (profileImage) restaurant.profileImage = profileImage
 
     const updatedRestaurant = await restaurant.save();
 
@@ -68,5 +70,6 @@ restaurantRouter.put("/:id", async (request, _response, next) => {
     next(error);
   }
 });
+
 
 module.exports = restaurantRouter;

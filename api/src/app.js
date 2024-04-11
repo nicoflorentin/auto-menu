@@ -35,6 +35,7 @@ app.use("/api/user", userRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/restaurant", restaurantRouter)
 app.use("/restaurant/edit", restaurantRouter)
+app.use("/restaurant/create", restaurantRouter)
 app.use("/menu", publicRestaurantRouter)
 
 

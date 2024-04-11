@@ -9,11 +9,15 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     minlength: 5,
   },
-
+  
   image: {
     type: String,
   },
 
+  profileImage: {
+    type: String, 
+  },
+   
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
