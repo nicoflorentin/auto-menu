@@ -15,6 +15,7 @@ import toast, { Toaster } from "react-hot-toast"
 import Title from "components/Title/Title"
 import { openWidget } from "utilities/cloudinary"
 import Loading from "components/Loading/Loading"
+import MenuDishItem from "views/ClientView/Menu/MenuDishItem/MenuDishItem"
 
 const initialValues = {
 	title: "",
@@ -49,7 +50,6 @@ const Form = ({ title }) => {
 		},
 	})
 	const navigate = useNavigate()
-	console.log(values);
 
 	const submitHandler = () => {
 		// si hay id en params edita un dish y si no hay, crea un dish
@@ -198,9 +198,11 @@ const Form = ({ title }) => {
 						isDisabled={loadingFields || loading}
 					/>
 				</div>
+				<label htmlFor='preview'>Preview</label>
+				<MenuDishItem dish={values} className='w-96 text-zinc-900' />
 				{!loading ? (
 					<Button color='primary' variant='solid' onPress={onOpen} isDisabled={loadingFields}>
-						{id ? "Edit" : "Create"}
+						{id ? "Save" : "Create"}
 					</Button>
 				) : (
 					<Button variant='solid' color='primary' spinner={<Spinner />} isLoading>

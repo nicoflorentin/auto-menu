@@ -84,14 +84,14 @@ const Login = ({ login, signUp, loading }) => {
 							</Tab>
 							<Tab key="sign-up" title="Sign up">
 								<form className="flex flex-col gap-4 h-[300px]" onSubmit={handleSubmit}>
-									<Input
+									{/* <Input
 										isRequired
 										name="name"
 										label="Name"
 										placeholder="Enter your name"
 										type="text"
 										onChange={e => handleInput(e)}
-									/>
+									/> */}
 									<Input
 										isRequired
 										name="username"
