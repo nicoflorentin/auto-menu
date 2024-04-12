@@ -3,14 +3,12 @@ import RestaurantProfile from "views/ClientView/Menu/RestaurantProfile/Restauran
 import { useParams } from "react-router-dom";
 import NavBar from "views/ClientView/Menu/NavBar/NavBar";
 import CategorizedDishes from "views/ClientView/Menu/CategorizedDishes.jsx/CategorizedDishes";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchRestaurantData } from "redux/slices/restaurantSlice";
 
 const Menu = ({ restaurantData }) => {
 	const { categories: unformattedCategories, description, dishes, profileImage } = restaurantData
-
 	const categories = unformattedCategories?.map(category => category.label)
-
 	const { restaurantName } = useParams();
 	const dispatch = useDispatch()
 
