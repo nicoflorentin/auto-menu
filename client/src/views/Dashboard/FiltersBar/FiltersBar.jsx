@@ -6,23 +6,25 @@ import { useDispatch } from "react-redux"
 import { fetchDishes } from "../../../redux/slices/dishesSlice"
 import Checkbox from "../../../components/Checkbox/Checkbox"
 import useToken from "../../../hooks/useToken"
-import { Button } from "@nextui-org/button"
 import logo from 'assets/page-logo.png'
+import SearchBar from "components/SearchBar/SearchBar"
+import { PencilIcon } from "assets/icons"
 
 const FiltersBar = ({ routeName }) => {
 	const dispatch = useDispatch()
 	const [categories, setCategories] = useState([])
 	const token = useToken()
-	const [orderFilters] = useState([
-		{ label: "High first", value: "descendant" },
-		{ label: "Low first", value: "ascendant" },
-	])
+	// const [orderFilters] = useState([
+	// 	{ label: "High first", value: "descendant" },
+	// 	{ label: "Low first", value: "ascendant" },
+	// ])
 
 	const initialValues = {
 		celiac: false,
 		vegetarian: false,
 		order: '',
 		category: '',
+		query: ''
 	}
 
 	const { values, handleChange, setValues } = useFormik({
@@ -38,33 +40,44 @@ const FiltersBar = ({ routeName }) => {
 			dispatch(
 				fetchDishes({
 					token,
-					filters: { ...values, archived: routeName === "archived" },
+					// filters: { ...values, archived: routeName === "archived" },
+					filters: {
+						celiac: values.celiac,
+						vegetarian: values.vegetarian,
+						order: values.order,
+						category: values.category,
+						name: values.query,
+						archived: routeName === "archived"
+					}
 				})
 			)
 	}, [values, routeName, token])
 
-	const resetFilters = () => {
-		console.log("reset filters")
-		setValues(initialValues)
-	}
+	// const resetFilters = () => {
+	// 	console.log("reset filters")
+	// 	setValues(initialValues)
+	// }
+
+	console.log(values);
 
 	return (
-		<div className="flex items-center">
-			<img src={logo} alt="" className="w-44"/>
-			<form className="ml-auto">
-				<div className="flex flex-wrap justify-end items-center gap-2 mb-1 px-1">
+		<div className="flex items-center h-15">
+			<img src={logo} alt="" className="w-44" />
+			{routeName !== 'restaurant' && <form className="ml-auto mr-10 self-end">
+				<div className="flex items-center gap-2 px-1">
 					<Checkbox
 						onChange={e => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
 						name="vegetarian"
 						label="Vegetarian"
 						isSelected={values.vegetarian}
+						size='sm'
 					/>
 					<Checkbox
 						onChange={e => handleChange({ target: { name: "celiac", value: e.target.checked } })}
 						name="celiac"
 						label="Gluten Free"
 						isSelected={values.celiac}
-						className='mr-auto'
+						size='sm'
 					/>
 					<FilterElement
 						label="Category"
@@ -76,7 +89,7 @@ const FiltersBar = ({ routeName }) => {
 						options={categories}
 						radius="md"
 					/>
-					<FilterElement
+					{/* <FilterElement
 						label="Order by price"
 						name="order"
 						selectionMode="single"
@@ -84,11 +97,21 @@ const FiltersBar = ({ routeName }) => {
 						onChange={handleChange}
 						options={orderFilters}
 						radius="md"
+					/> */}
+					<SearchBar
+						name='query'
+						value={values.query}
+						onChange={handleChange}
+						size
+						type="email"
+						placeholder="Search"
+						endContent={
+							<PencilIcon size='25' className='text-zinc-500' />
+						}
+						className='w-40	'
 					/>
-					{/* aca iria la searchbar */}
-					<Button onClick={() => resetFilters()}>Reset</Button>
 				</div>
-			</form>
+			</form>}
 		</div>
 
 	)

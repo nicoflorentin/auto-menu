@@ -11,7 +11,6 @@ const getRestaurantByName = async (name) => {
 		const categories = await dishServices.getCategories()
 		const { data } = response
 		data.data[0].categories = categories.data
-		console.log(data);
 		return data
 	} catch (error) {
 		throw new Error(error.message)

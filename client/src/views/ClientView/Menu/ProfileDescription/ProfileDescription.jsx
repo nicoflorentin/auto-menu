@@ -1,6 +1,6 @@
 const ProfileDescription = ({ content }) => {
 	return (
-		<p className="text-center text-lg">
+		<p className="text-center text-lg font-medium">
 			{content}
 		</p>
 	)
