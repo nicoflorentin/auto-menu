@@ -15,21 +15,20 @@ const Restaurant = () => {
 	const [loadingPortraitWidget, setLoadingPortraitWidget] = useState(false)
 	const [loadingProfileWidget, setLoadingProfileWidget] = useState(false)
 	const { restaurantId, token } = useSelector(state => state.login.data)
-	const { name, description, image, profileImage, loading: restaurantLoading } = useSelector(state => state.restaurant.data)
+	const { name, description, image, profileImage } = useSelector(state => state.restaurant.data)
+	const { loading: restaurantLoading } = useSelector(state => state.restaurant)
 	const dispatch = useDispatch()
 	const { values, handleChange, handleSubmit, setValues } = useFormik({
 		initialValues: {
-			name,
-			description,
-			image,
-			profileImage
+			name: 'Loading...',
+			description: 'Loading...',
+			image: 'Loading...',
+			profileImage: 'Loading...',
 		},
 		onSubmit: (values) => {
 			console.log("Submitted form with values:", values)
 		},
 	})
-
-	console.log(values)
 
 	const fieldsWasChanged = name !== values.name || description !== values.description || image !== values.image || profileImage !== values.profileImage
 
@@ -67,6 +66,8 @@ const Restaurant = () => {
 		dispatch(editRestaurantById({ restaurantId, body: { ...values }, token }))
 	}
 
+	console.log(restaurantLoading)
+
 	return (
 		<div>
 			<Title>Restaurant Configuration</Title>
@@ -101,10 +102,10 @@ const Restaurant = () => {
 					<div className="flex gap-10">
 						<div className="">
 							<Subtitle>Restaurant logo</Subtitle>
-							<div className="flex items-center h-40 bg-slate-50 text-center rounded-xl text-black aspect-square">
+							<div className="flex items-center h-40 bg-slate-300 text-center rounded-xl text-black aspect-square">
 								{
 									!values.profileImage
-										? <p className="m-auto">No image yet</p>
+										? <p className="m-auto">{restaurantLoading && 'Loading...'}</p>
 										: <img className="w-full object-cover rounded-xl" src={values.profileImage} alt="selected profile image" />
 								}
 							</div>
@@ -112,15 +113,14 @@ const Restaurant = () => {
 								<Button className="my-2" color='secondary' onPress={() => widgetHandler('profile')} isDisabled={restaurantLoading || loadingProfileWidget || loadingProfileWidget}>
 									Change image
 								</Button>
-								{/* {loadingProfileWidget && <span className="ml-5"><Loading content='Opening window' /></span>} */}
 							</div>
 						</div>
 						<div className="grow">
 							<Subtitle>Portrait image</Subtitle>
-							<div className="flex items-center h-40 bg-slate-50 text-center rounded-xl  text-black overflow-hidden">
+							<div className="flex items-center h-40 bg-slate-300 text-center rounded-xl  text-black overflow-hidden">
 								{
 									!values.image
-										? <p className="m-auto">No image yet</p>
+										? <p className="m-auto">{restaurantLoading && 'Loading...'}</p>
 										: <img className="w-full h-auto block" src={values.image} alt="selected portrait image" />
 								}
 							</div>

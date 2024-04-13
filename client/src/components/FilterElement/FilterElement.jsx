@@ -4,7 +4,7 @@ import React from "react"
 const FilterElement = ({ options, ...props }) => {
 	return (
 		<div className="font-bold w-36">
-			<Select {...props} size="sm">
+			<Select {...props} size="xs">
 				{options?.map(option => (
 					<SelectItem key={option.value} value={option.value}>
 						{option.label}

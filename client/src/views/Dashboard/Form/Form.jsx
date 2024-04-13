@@ -166,7 +166,7 @@ const Form = ({ title }) => {
 				<Input
 					id='price'
 					name='price'
-					type='number'
+					type={loadingFields ? 'text' : 'number'}
 					onChange={handleChange}
 					value={values.price}
 					isDisabled={loadingFields || loading}
