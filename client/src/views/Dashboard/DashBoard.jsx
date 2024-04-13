@@ -83,7 +83,7 @@ const DashBoard = ({ logoutHandler }) => {
 		<section id="section-container" className="py-1 m-auto w-[1250px] min-h-lvh">
 			<FiltersBar routeName={searchWord} />
 			<div id="dashboard-container" className="flex flex-row flex-grow">
-				<aside className="flex flex-col mt-10
+				<aside className="flex flex-col mt-1
 				w-72 h-[570px] py-5 pr-5
 				">
 					<AsideBar linksConfig={linksConfig} logoutHandler={logoutHandler} />

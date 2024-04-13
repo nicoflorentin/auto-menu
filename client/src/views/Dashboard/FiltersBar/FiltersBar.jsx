@@ -62,7 +62,7 @@ const FiltersBar = ({ routeName }) => {
 
 	return (
 		<div className="flex items-center h-15">
-			<img src={logo} alt="" className="w-44" />
+			<img src={logo} alt="" className="w-44 mt-2" />
 			{routeName !== 'restaurant' && <form className="ml-auto mr-10 self-end">
 				<div className="flex items-center gap-2 px-1">
 					<Checkbox
