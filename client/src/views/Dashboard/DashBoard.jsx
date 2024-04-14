@@ -4,6 +4,7 @@ import { Outlet, useLocation } from "react-router-dom"
 import Section from "./Section/Section.jsx"
 import { DishIcon, AddIcon, PencilIcon, DeleteIcon, ArchiveIcon, MenuIcon } from 'assets/icons'
 import FiltersBar from "./FiltersBar/FiltersBar"
+import logo from 'assets/page-logo.png'
 
 const DashBoard = ({ logoutHandler }) => {
 	const linksConfig = [
@@ -80,7 +81,8 @@ const DashBoard = ({ logoutHandler }) => {
 	}
 
 	return (
-		<section id="section-container" className="py-1 m-auto w-[1250px] min-h-lvh">
+		<section id="section-container" className="py-1 m-auto w-[1250px] flex flex-col min-h-screen
+		">
 			<FiltersBar routeName={searchWord} />
 			<div id="dashboard-container" className="flex flex-row flex-grow">
 				<aside className="flex flex-col mt-1
@@ -92,6 +94,16 @@ const DashBoard = ({ logoutHandler }) => {
 					<Outlet />
 
 				</section>
+			</div>
+			<div id='FOOTER' className="flex items-center gap-10 mt-10 text-xs tracking-wider">
+				<img src={logo} alt="" className="w-36 mt-2 grayscale" />
+				<div className="">
+					<p>Front End development : Nicolás Florentín</p>
+					<p>Back End development : Gonzalo Masa</p>
+
+				</div>
+				<a href='https://github.com/nicoflorentin/auto-menu' className="ml-auto underline underline-offset-2">SOURCE CODE</a>
+				<p>2024 AutoMenu</p>
 			</div>
 		</section>
 	)

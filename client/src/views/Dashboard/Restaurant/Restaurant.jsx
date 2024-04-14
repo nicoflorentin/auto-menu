@@ -1,5 +1,6 @@
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
+import { DeleteIcon } from "assets/icons";
 import Loading from "components/Loading/Loading";
 import Subtitle from "components/Subtitle/Subtitle";
 import Title from "components/Title/Title";
@@ -16,7 +17,7 @@ const Restaurant = () => {
 	const [loadingProfileWidget, setLoadingProfileWidget] = useState(false)
 	const { restaurantId, token } = useSelector(state => state.login.data)
 	const { name, description, image, profileImage } = useSelector(state => state.restaurant.data)
-	const { loading: restaurantLoading } = useSelector(state => state.restaurant)
+	const { loading: restaurantLoading, error } = useSelector(state => state.restaurant)
 	const dispatch = useDispatch()
 	const { values, handleChange, handleSubmit, setValues } = useFormik({
 		initialValues: {
@@ -67,7 +68,7 @@ const Restaurant = () => {
 	}
 
 	const deleteImageHandler = (property) => {
-		setValues({...values, [property]: ''})
+		setValues({ ...values, [property]: '' })
 	}
 
 	console.log(values)
@@ -86,7 +87,7 @@ const Restaurant = () => {
 							type='text'
 							onChange={handleChange}
 							value={values.name}
-							isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget}
+							isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget || error}
 						/>
 					</div>
 					<div className="grow">
@@ -98,7 +99,7 @@ const Restaurant = () => {
 							type='text'
 							onChange={handleChange}
 							value={values.description}
-							isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget}
+							isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget || error}
 						/>
 					</div>
 				</div>
@@ -113,11 +114,13 @@ const Restaurant = () => {
 										: <img className="w-full object-cover rounded-xl" src={values.profileImage} alt="selected profile image" />
 								}
 							</div>
-							<div className="flex flex-col w-32">
-								<Button className="my-2" color='secondary' onPress={() => widgetHandler('profile')} isDisabled={restaurantLoading || loadingProfileWidget || loadingProfileWidget}>
+							<div className="flex w-48 items-center gap-1">
+								<Button className="my-2" color='secondary' onPress={() => widgetHandler('profile')} isDisabled={restaurantLoading || loadingProfileWidget || loadingProfileWidget || error}>
 									Change image
 								</Button>
-								<Button onClick={() => deleteImageHandler('profileImage')} color='warning'>Delete</Button>
+								<button onClick={() => deleteImageHandler('profileImage')} isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget || error}>
+									<DeleteIcon size='23' className='text-red-500 hover:scale-110 duration-[.15s]' />
+								</button>
 							</div>
 						</div>
 						<div className="grow">
@@ -129,11 +132,13 @@ const Restaurant = () => {
 										: <img className="w-full h-auto block" src={values.image} alt="selected portrait image" />
 								}
 							</div>
-							<div className="flex flex-col w-32">
-								<Button className="my-2" color='secondary' onPress={() => widgetHandler('portrait')} isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget}>
+							<div className="flex w-48 items-center gap-1">
+								<Button className="my-2" color='secondary' onPress={() => widgetHandler('portrait')} isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget || error}>
 									Change image
 								</Button>
-								<Button onClick={() => deleteImageHandler('image')} color='warning'>Delete</Button>
+								<button onClick={() => deleteImageHandler('image')} isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget || error}>
+									<DeleteIcon size='23' className='text-red-500 hover:scale-110 duration-[.15s]' />
+								</button>
 								{(loadingPortraitWidget || loadingProfileWidget) && <span className="ml-auto mr-5"><Loading content='Opening window' /></span>}
 							</div>
 						</div>
@@ -154,7 +159,7 @@ const Restaurant = () => {
 					{
 						fieldsWasChanged &&
 						<div>
-							<Button className="my-2" color='primary' onPress={() => submitHandler()} isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget}>
+							<Button className="my-2" color='primary' onPress={() => submitHandler()} isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget || error}>
 								Save
 							</Button>
 							<span className="text-sm ml-2">There are unsaved changes!</span>
