@@ -66,7 +66,11 @@ const Restaurant = () => {
 		dispatch(editRestaurantById({ restaurantId, body: { ...values }, token }))
 	}
 
-	console.log(restaurantLoading)
+	const deleteImageHandler = (property) => {
+		setValues({...values, [property]: ''})
+	}
+
+	console.log(values)
 
 	return (
 		<div>
@@ -109,10 +113,11 @@ const Restaurant = () => {
 										: <img className="w-full object-cover rounded-xl" src={values.profileImage} alt="selected profile image" />
 								}
 							</div>
-							<div className="flex gap-5 items-center">
+							<div className="flex flex-col w-32">
 								<Button className="my-2" color='secondary' onPress={() => widgetHandler('profile')} isDisabled={restaurantLoading || loadingProfileWidget || loadingProfileWidget}>
 									Change image
 								</Button>
+								<Button onClick={() => deleteImageHandler('profileImage')} color='warning'>Delete</Button>
 							</div>
 						</div>
 						<div className="grow">
@@ -124,10 +129,11 @@ const Restaurant = () => {
 										: <img className="w-full h-auto block" src={values.image} alt="selected portrait image" />
 								}
 							</div>
-							<div className="flex gap-5 items-center">
+							<div className="flex flex-col w-32">
 								<Button className="my-2" color='secondary' onPress={() => widgetHandler('portrait')} isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget}>
 									Change image
 								</Button>
+								<Button onClick={() => deleteImageHandler('image')} color='warning'>Delete</Button>
 								{(loadingPortraitWidget || loadingProfileWidget) && <span className="ml-auto mr-5"><Loading content='Opening window' /></span>}
 							</div>
 						</div>
