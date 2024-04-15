@@ -1,9 +1,8 @@
 
 ## Menú Automático y Dashboard de Usuario
-Este proyecto es una aplicación web que permite a los usuarios crear platos con su descripción, imagen y precio, y luego ver la información ordenada por categorías en una URL específica para que los clientes del restaurante puedan acceder desde sus dispositivos móviles.
+Este proyecto es una aplicación web que genera menús al instante y controla cada detalle desde un dashboard diseñado para simplificar la gestión. Crea una URL específica para que los clientes del restaurante puedan acceder desde sus dispositivos móviles.
 
 ### Tecnologías Utilizadas
-JavaScript
 Tailwind CSS
 Next UI
 React.js
