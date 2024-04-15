@@ -2,6 +2,9 @@
 ## Menú Automático y Dashboard de Usuario
 Este proyecto es una aplicación web que genera menús al instante y controla cada detalle desde un dashboard diseñado para simplificar la gestión. Crea una URL específica para que los clientes del restaurante puedan acceder desde sus dispositivos móviles.
 
+### Demo
+![automenu-demo](https://github.com/nicoflorentin/auto-menu/assets/81888574/56c68267-7bad-4d86-b98e-cacf9bd3a7cb)
+
 ### Tecnologías Utilizadas
 Tailwind CSS
 Next UI
