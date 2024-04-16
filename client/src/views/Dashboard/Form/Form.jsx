@@ -92,7 +92,10 @@ const Form = ({ title }) => {
 				setLoadingFields(false)
 			})
 		}
-		return () => setValues(initialValues)
+		return () => {
+			originalDishValues.current = initialValues
+			setValues(initialValues)
+		}
 	}, [id, token])
 
 	useEffect(() => {
