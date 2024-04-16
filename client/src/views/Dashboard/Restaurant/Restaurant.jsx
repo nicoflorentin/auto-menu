@@ -162,7 +162,7 @@ const Restaurant = () => {
 							<Button className="my-2" color='primary' onPress={() => submitHandler()} isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget || error}>
 								Save
 							</Button>
-							<span className="text-sm ml-2">There are unsaved changes!</span>
+							<span className="text-sm ml-2">There are unsaved changes</span>
 						</div>
 					}
 				</div>

@@ -17,6 +17,7 @@ import { openWidget } from "utilities/cloudinary"
 import Loading from "components/Loading/Loading"
 import MenuDishItem from "views/ClientView/Menu/MenuDishItem/MenuDishItem"
 import { useRef } from "react"
+import Subtitle from "components/Subtitle/Subtitle"
 
 const initialValues = {
 	title: "",
@@ -53,6 +54,10 @@ const Form = ({ title }) => {
 	})
 	const navigate = useNavigate()
 
+	const loadingPlaceholderHandler = () => {
+		return loading ? 'Loading...' : ''
+	}
+
 	const submitHandler = () => {
 		// si hay id en params edita un dish y si no hay, crea un dish
 		id
@@ -81,16 +86,6 @@ const Form = ({ title }) => {
 		//si hay un id en params, trae los datos del dish y rellena el formulario con los campos del dish
 		if (id) {
 			setLoadingFields(true)
-			setValues({
-				title: "Loading...",
-				category: "Loading...",
-				description: "Loading...",
-				image: "Loading...",
-				price: "Loading...",
-				celiac: false,
-				vegetarian: false,
-			})
-
 			dishServices.getOneDish(id, token).then((res) => {
 				setValues(res.data)
 				originalDishValues.current = res.data
@@ -123,7 +118,14 @@ const Form = ({ title }) => {
 		)
 	}
 
-	const fieldsWasChanged = originalDishValues.current.title !== values.title
+	const fieldsWasChanged =
+		originalDishValues.current.title !== values.title ||
+		originalDishValues.current.description !== values.description ||
+		originalDishValues.current.category !== values.category ||
+		originalDishValues.current.image !== values.image ||
+		originalDishValues.current.price !== values.price ||
+		originalDishValues.current.celiac !== values.celiac ||
+		originalDishValues.current.vegetarian !== values.vegetarian;
 
 	console.log('original values', originalDishValues);
 	console.log('values', values);
@@ -133,28 +135,45 @@ const Form = ({ title }) => {
 		<>
 			<div className="flex">
 				<Title>{title}</Title>
-				{fieldsWasChanged && <p className="ml-auto">SAVE CHANGES</p>}
+
+				{fieldsWasChanged &&
+					<div className="ml-auto flex items-center">
+						{!loading ? (<div>
+							{id && <span className="text-sm mr-2">There are unsaved changes</span>}
+							<Button color='primary' variant='solid' onPress={onOpen} isDisabled={loadingFields}>
+								{id ? "Save" : "Create"}
+							</Button>
+						</div>
+						) : (
+							<Button variant='solid' color='primary' spinner={<Spinner />} isLoading>
+								Loading
+							</Button>
+						)}
+					</div>}
 			</div>
-			<form className='flex flex-col gap-5' onSubmit={handleSubmit}>
-				<label htmlFor='title'>Name</label>
+			<form className='flex flex-col' onSubmit={handleSubmit}>
+				<Subtitle htmlFor='title'>Name</Subtitle>
 				<Input
 					id='title'
 					name='title'
 					type='text'
+					placeholder={loadingPlaceholderHandler()}
 					onChange={handleChange}
 					value={values.title}
 					isDisabled={loadingFields || loading}
 				/>
-				<label htmlFor='description'>Description</label>
+				<Subtitle htmlFor='description'>Description</Subtitle>
 				<Input
 					id='description'
 					name='description'
 					type='text'
+					placeholder={loadingPlaceholderHandler()}
 					onChange={handleChange}
 					value={values.description}
 					isDisabled={loadingFields || loading}
+					className=""
 				/>
-				<label htmlFor='category'>Category</label>
+				<Subtitle htmlFor='category'>Category</Subtitle>
 				<Select
 					name='category'
 					label='Category'
@@ -171,16 +190,17 @@ const Form = ({ title }) => {
 						</SelectItem>
 					))}
 				</Select>
-				<label htmlFor='price'>Price</label>
+				<Subtitle htmlFor='price'>Price</Subtitle>
 				<Input
 					id='price'
 					name='price'
 					type={loadingFields ? 'text' : 'number'}
+					placeholder={loadingPlaceholderHandler()}
 					onChange={handleChange}
 					value={values.price}
 					isDisabled={loadingFields || loading}
 				/>
-				<label htmlFor='image'>Image</label>
+				<Subtitle htmlFor='image'>Image</Subtitle>
 				<div className="flex gap-3">
 					<Button className="" color='secondary' onPress={() => widgetHandler()} isDisabled={loadingFields || loadingWidget}>
 						Select image
@@ -209,15 +229,6 @@ const Form = ({ title }) => {
 				</div>
 				<label htmlFor='preview'>Preview</label>
 				<MenuDishItem dish={values} className='w-96 text-zinc-900' />
-				{!loading ? (
-					<Button color='primary' variant='solid' onPress={onOpen} isDisabled={loadingFields}>
-						{id ? "Save" : "Create"}
-					</Button>
-				) : (
-					<Button variant='solid' color='primary' spinner={<Spinner />} isLoading>
-						Loading
-					</Button>
-				)}
 				<AskConfirmationModal isOpen={isOpen} onOpenChange={onOpenChange} acceptFunction={submitHandler} />
 				<ErrorModal error={error} isOpen={error} acceptFunction={() => dispatch(clearError())} />
 			</form>
