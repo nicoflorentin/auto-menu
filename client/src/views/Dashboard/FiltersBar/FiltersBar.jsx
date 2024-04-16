@@ -9,11 +9,14 @@ import useToken from "../../../hooks/useToken"
 import logo from 'assets/page-logo.png'
 import SearchBar from "components/SearchBar/SearchBar"
 import { PencilIcon } from "assets/icons"
+import { useParams } from "react-router-dom"
 
 const FiltersBar = ({ routeName }) => {
 	const dispatch = useDispatch()
 	const [categories, setCategories] = useState([])
 	const token = useToken()
+	const { id } = useParams()
+	const mustRenderForm = routeName !== 'restaurant' && routeName !== 'add' && !id
 	// const [orderFilters] = useState([
 	// 	{ label: "High first", value: "descendant" },
 	// 	{ label: "Low first", value: "ascendant" },
@@ -58,13 +61,11 @@ const FiltersBar = ({ routeName }) => {
 	// 	setValues(initialValues)
 	// }
 
-	console.log(values);
-
 	return (
-		<div className="flex items-center h-15">
+		<div className="flex items-center">
 			<img src={logo} alt="" className="w-44 mt-2" />
-			{routeName !== 'restaurant' && <form className="ml-auto mr-10 self-end">
-				<div className="flex items-center gap-2 px-1">
+			{mustRenderForm && <form className="ml-auto mr-10 self-end">
+				<div className="flex gap-2">
 					<Checkbox
 						onChange={e => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
 						name="vegetarian"
@@ -80,14 +81,18 @@ const FiltersBar = ({ routeName }) => {
 						size='sm'
 					/>
 					<FilterElement
-						label="Category"
+						label={!values.category ? 'Category' : ''}
 						name="category"
 						selectionMode="single"
 						value={values.category}
+						// labelPlacement='outside'
 						// selectedKeys=''
 						onChange={handleChange}
 						options={categories}
 						radius="md"
+						size='xs'
+						className='h-2'
+
 					/>
 					{/* <FilterElement
 						label="Order by price"

@@ -10,7 +10,7 @@ const DishItem = ({ dish, config }) => {
 	const { category, celiac, description, id, image, price, title, vegetarian } = dish
 	const { TITLE_MAX_LENGTH, DESCRIPTION_MAX_LENGTH } = dishItemConfig
 
-	const customContent = (text) => (
+	const styledTextContent = (text) => (
 		<p className="w-44">
 			{text}
 		</p>
@@ -36,11 +36,11 @@ const DishItem = ({ dish, config }) => {
 				</div>
 			</div>
 			{title.length > TITLE_MAX_LENGTH
-				? <Tooltip showArrow={false} placement='center' closeDelay={0} content={customContent(title)}><p className="font-bold text-medium">{longStringTrunc(title, TITLE_MAX_LENGTH)}</p></Tooltip>
+				? <Tooltip showArrow={false} placement='center' closeDelay={0} content={styledTextContent(title)}><p className="font-bold text-medium">{longStringTrunc(title, TITLE_MAX_LENGTH)}</p></Tooltip>
 				: <p className="font-bold text-medium">{title}</p>
 			}
 			{description.length > DESCRIPTION_MAX_LENGTH
-				? <Tooltip showArrow={false} placement='center' closeDelay={0} content={customContent(description)}><p className="text-small">{longStringTrunc(description, DESCRIPTION_MAX_LENGTH)}</p></Tooltip>
+				? <Tooltip showArrow={false} placement='center' closeDelay={0} content={styledTextContent(description)}><p className="text-small">{longStringTrunc(description, DESCRIPTION_MAX_LENGTH)}</p></Tooltip>
 				: <p className="text-small">{description}</p>
 			}
 

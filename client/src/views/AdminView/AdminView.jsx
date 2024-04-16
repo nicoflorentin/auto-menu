@@ -8,10 +8,10 @@ import useDarkMode from "use-dark-mode"
 import Restaurant from "views/Dashboard/Restaurant/Restaurant"
 
 function AdminView({ logOut }) {
-	const darkMode = useDarkMode()
+	const darkMode = useDarkMode(true)
 
 	return (
-		<div className={`${darkMode.value ? 'dark bg-gradient-to-r from-[#1f1f1f] from-40% to-[#34343b] to-100%' : 'light bg-zinc-200'} flex
+		<div className={`${darkMode.value ? 'dark bg-gradient-to-r from-[#1f1f1f] from-40% to-[#34343b] to-100%' : 'light bg-zinc-200'}
 		 text-foreground font-inter
 		 vanillaClass
 		 `}>
@@ -29,6 +29,7 @@ function AdminView({ logOut }) {
 					<Route path='restaurant' element={<Restaurant title='Configure Restaurant'/>} />
 				</Route>
 			</Routes>
+			
 		</div>
 	)
 }

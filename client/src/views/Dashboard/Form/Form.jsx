@@ -16,6 +16,7 @@ import Title from "components/Title/Title"
 import { openWidget } from "utilities/cloudinary"
 import Loading from "components/Loading/Loading"
 import MenuDishItem from "views/ClientView/Menu/MenuDishItem/MenuDishItem"
+import { useRef } from "react"
 
 const initialValues = {
 	title: "",
@@ -41,6 +42,7 @@ const Form = ({ title }) => {
 	const [categories, setCategories] = useState(initialCategories)
 	const { loading, error } = useSelector((state) => state.dishes)
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
+	const originalDishValues = useRef(initialValues)
 	const { id } = useParams()
 	const token = useToken()
 	const { values, handleChange, handleSubmit, setValues } = useFormik({
@@ -91,6 +93,7 @@ const Form = ({ title }) => {
 
 			dishServices.getOneDish(id, token).then((res) => {
 				setValues(res.data)
+				originalDishValues.current = res.data
 				setLoadingFields(false)
 			})
 		}
@@ -99,7 +102,6 @@ const Form = ({ title }) => {
 
 	useEffect(() => {
 		dishServices.getCategories(token).then((res) => {
-			console.log(res)
 			setCategories(res.data)
 		})
 	}, [])
@@ -121,11 +123,18 @@ const Form = ({ title }) => {
 		)
 	}
 
+	const fieldsWasChanged = originalDishValues.current.title !== values.title
 
+	console.log('original values', originalDishValues);
+	console.log('values', values);
+	console.log('fields changed', fieldsWasChanged)
 
 	return (
 		<>
-			<Title>{title}</Title>
+			<div className="flex">
+				<Title>{title}</Title>
+				{fieldsWasChanged && <p className="ml-auto">SAVE CHANGES</p>}
+			</div>
 			<form className='flex flex-col gap-5' onSubmit={handleSubmit}>
 				<label htmlFor='title'>Name</label>
 				<Input

@@ -4,6 +4,7 @@ import { Outlet, useLocation } from "react-router-dom"
 import Section from "./Section/Section.jsx"
 import { DishIcon, AddIcon, PencilIcon, DeleteIcon, ArchiveIcon, MenuIcon } from 'assets/icons'
 import FiltersBar from "./FiltersBar/FiltersBar"
+import Footer from "views/Dashboard/Footer/Footer"
 
 const DashBoard = ({ logoutHandler }) => {
 	const linksConfig = [
@@ -80,7 +81,8 @@ const DashBoard = ({ logoutHandler }) => {
 	}
 
 	return (
-		<section id="section-container" className="py-1 m-auto w-[1250px] min-h-lvh">
+		<section id="section-container" className="py-1 m-auto w-[1250px] flex flex-col min-h-screen
+		">
 			<FiltersBar routeName={searchWord} />
 			<div id="dashboard-container" className="flex flex-row flex-grow">
 				<aside className="flex flex-col mt-1
@@ -93,6 +95,7 @@ const DashBoard = ({ logoutHandler }) => {
 
 				</section>
 			</div>
+			<Footer />
 		</section>
 	)
 }
