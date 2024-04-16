@@ -62,18 +62,15 @@ const Form = ({ title }) => {
 		// si hay id en params edita un dish y si no hay, crea un dish
 		id
 			? dispatch(editDish({ id, values, token })).then((res) => {
-				console.log(res);
-				// navigate("/dashboard/dishes")
 				!res.error && toast(
 					`${values.title} edited successfully!`, {
 					position: 'bottom-center'
 				})
 				setTimeout(() => {
 					navigate('/admin/dashboard/dishes')
-				}, 2000);
+				}, 1000);
 			})
 			: dispatch(createDish({ values, token })).then((res) => {
-				console.log("res", res)
 				!res.error && toast(
 					`${values.title} created successfully!`, {
 					position: 'bottom-center'
