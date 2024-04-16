@@ -61,8 +61,6 @@ const FiltersBar = ({ routeName }) => {
 	// 	setValues(initialValues)
 	// }
 
-	console.log(id);
-
 	return (
 		<div className="flex items-center">
 			<img src={logo} alt="" className="w-44 mt-2" />
