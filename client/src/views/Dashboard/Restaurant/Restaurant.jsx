@@ -154,7 +154,7 @@ const Restaurant = () => {
 							<Subtitle>Restaurant menu</Subtitle>
 							<div className="flex flex-col pr-10 ml-auto text-sm gap-1">
 								<span>Go to menu: <p className="ml-2 underline underline-offset-4" onClick={() => navigate(`/menu/${name}`)}>{name}</p></span>
-								<span>Share this link: <span className="ml-2">{`auto-menu-app.vercel.app/menu/${name?.replaceAll(' ', '%20')}`}</span></span>
+								<span>Share this link: <span className="ml-2">{`https://auto-menu-alpha.vercel.app/menu/${name?.replaceAll(' ', '%20')}`}</span></span>
 							</div>
 						</div>}
 					<br />
