@@ -35,7 +35,7 @@ $ man git-config
 Hay que tener varias cosas en cuenta:
 - No diferencia entre mayúsculas y minúsculas
 - Al escribir un nombre de archivo o carpeta con espacios conviene escribirlo entrecomillado
-- Los nombres pueden ser de hasta 255 caracteres y con extensiones de hasta 3 caracteres* Si eliminas un archivo desde CMD no va a la Papelera.
+- Los nombres pueden ser de hasta 255 caracteres y con extensiones de hasta 3 caracteres * Si eliminas un archivo desde CMD no va a la Papelera.
 
 /? Si quieres saber más de un comando, añade /? para ver la ayuda relacionada. Te será muy útil para ver las muchas opciones de cada comando.
 HELP Te mostrará una lista de comandos disponibles.

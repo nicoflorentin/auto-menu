@@ -1,0 +1,34 @@
+{
+  "name": "auto-menu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicoflorentin/auto-menu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicoflorentin/auto-menu/issues"
+  },
+  "homepage": "https://github.com/nicoflorentin/auto-menu#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.1.1"
+  },
+  "devDependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.1",
+    "mongoose-unique-validator": "^5.0.0",
+    "nodemon": "^3.0.3"
+  }
+}

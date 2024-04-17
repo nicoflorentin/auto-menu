@@ -1,0 +1,513 @@
+[33mcommit a0bc4181e20b96f29ed32c617cef1500a29b9d67[m[33m ([m[1;36mHEAD -> [m[1;32mrestaurant-form[m[33m, [m[1;31morigin/restaurant-form[m[33m)[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Thu Apr 11 18:51:23 2024 -0300
+
+    feat : change profile picture and associated styles
+
+[33mcommit e0dac04b8c307407d1a99ee0461fa106a7e609dc[m[33m ([m[1;31morigin/menu-view[m[33m, [m[1;32mmenu-view[m[33m)[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Wed Apr 10 17:59:36 2024 -0300
+
+    feat : cloudinary widget in dashboard form
+
+[33mcommit 4b197207f313cc692f89c89142f004ca801fe288[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Wed Apr 10 02:27:52 2024 -0300
+
+    feat : form fields disabling while loading
+
+[33mcommit 2d66ed0324f2601a8c88bb29700fc33bacf82aa0[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Tue Apr 9 14:36:14 2024 -0300
+
+    feat : restaurant form autofill
+
+[33mcommit b4d2304730aa2d55629b331f8cb3bcff6969e9df[m
+Merge: 4f5531c 4d6207b
+Author: Gonzalo Ezequiel Masa <gonzalo-masa@outlook.com>
+Date:   Mon Apr 8 16:16:49 2024 -0300
+
+    Merge pull request #42 from nicoflorentin/menu-view
+    
+    Menu view
+
+[33mcommit 4f5531c91e163f6b582be3564b674b752143b219[m
+Merge: 4d806bb f286c7d
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Mon Apr 8 16:11:32 2024 -0300
+
+    Merge pull request #43 from nicoflorentin/back
+    
+    Ruta GET restaurant por id y ruta PUT restaurant con jwt
+
+[33mcommit f286c7d62bda4481a22c938c33d584d814918634[m
+Author: gonzalo00913 <gonzalo-masa@outlook.com>
+Date:   Mon Apr 8 16:07:50 2024 -0300
+
+    Ruta GET restaurant por id y ruta PUT restaurant con jwt
+
+[33mcommit 4d6207bf86a71d8097a91c09a08b4593b41632ba[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Mon Apr 8 15:02:48 2024 -0300
+
+    styles : mayor styles in menu view
+
+[33mcommit 4d806bbe4cdaf4da2190094fdbbf8f51770cef2f[m
+Merge: a7364b7 0aa3056
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Fri Apr 5 14:35:45 2024 -0300
+
+    Merge pull request #41 from nicoflorentin/nicoflorentin-patch-1
+    
+    Update README.md
+
+[33mcommit 0aa30563de39f4ceb994627ae57c611607c9580b[m
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Fri Apr 5 14:35:28 2024 -0300
+
+    Update README.md
+
+[33mcommit a7364b78f195115fbc78793bfbc8a89f30f8ec29[m
+Merge: 7a47d97 ba5b1a5
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Fri Apr 5 14:29:21 2024 -0300
+
+    Merge pull request #40 from nicoflorentin/nicoflorentin-patch-1
+    
+    Update README.md
+
+[33mcommit ba5b1a59fc45b7fbeff0cef3c704deff57196ce7[m
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Fri Apr 5 14:29:07 2024 -0300
+
+    Update README.md
+
+[33mcommit 7a47d97eab33828913b67201ef0700ec840272e1[m
+Merge: d401120 0d94f8d
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Thu Apr 4 18:45:06 2024 -0300
+
+    Merge pull request #39 from nicoflorentin/search
+    
+    Login con ID restaurant y respuesta con array eliminado
+
+[33mcommit 0d94f8df5c21d313c335b3af33ebfc6867a2f694[m
+Author: gonzalo00913 <gonzalo-masa@outlook.com>
+Date:   Thu Apr 4 16:30:35 2024 -0300
+
+    Login con ID restaurant y respuesta con array eliminado
+
+[33mcommit cb47ade5dcb017c6e2f9c51e0c422a7bd90aef8e[m
+Merge: fdab006 d401120
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Thu Apr 4 14:29:25 2024 -0300
+
+    Merge branch 'dev' of https://github.com/nicoflorentin/auto-menu into menu-view
+
+[33mcommit fdab0063b7cfbb8237815ec6e5621737f44bdb0e[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Thu Apr 4 14:28:18 2024 -0300
+
+    style : background and profile info
+
+[33mcommit d40112083c6463be62cb7a35738aedb5e2af2129[m
+Merge: cbba32c 1eb6597
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Wed Apr 3 12:53:30 2024 -0300
+
+    Merge pull request #38 from nicoflorentin/menu-view
+    
+    Client view : mayor styles - profile data and render categories
+
+[33mcommit cbba32c7bf4698c86360b27f3168db917f5618e4[m
+Merge: 5cb816d f0a1ad2
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Wed Apr 3 12:51:54 2024 -0300
+
+    Merge pull request #37 from nicoflorentin/search
+    
+    Creacion de restaurante y  menu
+
+[33mcommit f0a1ad2b2ed7cffac69a147f8eb6580c18f7fd8b[m
+Author: gonzalo00913 <gonzalo-masa@outlook.com>
+Date:   Wed Apr 3 10:47:13 2024 -0300
+
+    Creacion de restaurante y  menu
+
+[33mcommit 1eb65971201b46effa31b3fb19b9279e408c3528[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Wed Apr 3 02:22:22 2024 -0300
+
+    Client view : mayor styles - profile data and render categories
+
+[33mcommit 5cb816db5ac49019d056bc09d6e8a1c4c6af7511[m
+Merge: 4d25948 0d1ede6
+Author: Gonzalo Ezequiel Masa <gonzalo-masa@outlook.com>
+Date:   Sun Mar 31 12:03:13 2024 -0300
+
+    Merge pull request #36 from nicoflorentin/new-routes
+    
+    New routes
+
+[33mcommit 0d1ede6e3dda706bd7fa8e3fda041924db62c8a5[m[33m ([m[1;31morigin/new-routes[m[33m, [m[1;32mnew-routes[m[33m)[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Sat Mar 30 16:11:35 2024 -0300
+
+    new routes, client and admin views
+
+[33mcommit fb0bee63c283c7ca763adc57f933b37e9a0fabb3[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Thu Mar 28 15:47:29 2024 -0300
+
+    new route paths, client and admin views
+
+[33mcommit 4d259484a75c183f02608d3345ab1983c8cf9d20[m
+Merge: 95e55d4 42d9138
+Author: Gonzalo Ezequiel Masa <gonzalo-masa@outlook.com>
+Date:   Tue Mar 26 14:28:20 2024 -0300
+
+    Merge pull request #35 from nicoflorentin/cloudinary
+    
+    Cloudinary
+
+[33mcommit 42d91388d57e893ac4a01b6d68e48f913dd95dd0[m[33m ([m[1;31morigin/cloudinary[m[33m)[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Tue Mar 26 00:20:57 2024 -0300
+
+    sort dishes in dishes view
+
+[33mcommit d04a70fe11350dce7e1868386ec7948a9dbdf448[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Mon Mar 25 02:22:41 2024 -0300
+
+    add cloudinary widget to restaurant configuration view
+
+[33mcommit 8adc16aef503555b10d4a0d2584471f2dcd2dc79[m[33m ([m[1;31morigin/login-bugs[m[33m, [m[1;32mlogin-bugs[m[33m)[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Sat Mar 23 03:09:32 2024 -0300
+
+    fix login bugs and styles
+
+[33mcommit 0fa9be2818b4cbe7b34c7bff94e2b3e8083db416[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Thu Mar 21 23:13:14 2024 -0300
+
+    fix login bugs
+
+[33mcommit 95e55d42cd13d512137cdfffb1dcc07522c7a2d7[m
+Merge: ad120ae 5e0ef8f
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Thu Mar 21 11:13:15 2024 -0300
+
+    Merge pull request #34 from nicoflorentin/new-layout
+    
+    move filters bar to dashboard view
+
+[33mcommit 5e0ef8fd3418defef84ffbc5faefced0e06d7dbe[m[33m ([m[1;31morigin/new-layout[m[33m, [m[1;32mnew-layout[m[33m)[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Wed Mar 20 20:12:59 2024 -0300
+
+    move filters bar to dashboard view
+
+[33mcommit ad120aed1df27c58ecb273eff35fc5c750a181c1[m
+Merge: 98075b6 2aa72d9
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Wed Mar 20 11:09:10 2024 -0300
+
+    Merge pull request #33 from nicoflorentin/themes
+    
+    mayor styles and themes
+
+[33mcommit 2aa72d92ccea4104bd8297340cc393c0272586df[m[33m ([m[1;32mdev[m[33m)[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Wed Mar 20 11:07:24 2024 -0300
+
+    mayor styles and themes
+
+[33mcommit 98075b69f5da5b412cbb6a2bb23bd22e2729b31c[m
+Merge: e024db8 3668ab2
+Author: Gonzalo Ezequiel Masa <gonzalo-masa@outlook.com>
+Date:   Sat Mar 16 12:55:57 2024 -0300
+
+    Merge pull request #32 from nicoflorentin/archived
+    
+    dark theme and layout
+
+[33mcommit 3668ab21011a13491ea67b477dfcb484898aeff9[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Sat Mar 16 02:14:55 2024 -0300
+
+    dark theme and layout
+
+[33mcommit e024db8951d357ba0a49e39c2a44c61b8ecbbc0a[m
+Merge: 4d1ff45 4eac392
+Author: Gonzalo Ezequiel Masa <gonzalo-masa@outlook.com>
+Date:   Sun Mar 10 10:46:14 2024 -0300
+
+    Merge pull request #31 from nicoflorentin/archived
+    
+    Archived items feature - Confirmation and error modals
+
+[33mcommit 4eac392edb0386d4bce4cdd636fd2381d11b0f6b[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Sat Mar 9 17:15:11 2024 -0300
+
+    Archived items feature - Confirmation and error modals
+
+[33mcommit 4d1ff452e12de690952a263f3f15f8191ad36d08[m
+Merge: dac5eef 1f9c65f
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Thu Feb 29 17:25:20 2024 -0300
+
+    Merge pull request #30 from nicoflorentin/filters
+    
+    ✅filters
+
+[33mcommit dac5eef89f141256ddb8920e4d7987d6257f56ed[m
+Merge: aebd439 6071f01
+Author: Gonzalo Ezequiel Masa <gonzalo-masa@outlook.com>
+Date:   Thu Feb 29 17:09:54 2024 -0300
+
+    Merge pull request #29 from nicoflorentin/nicoflorentin-patch-1
+    
+    Create README.md
+
+[33mcommit 1f9c65ff2304cc6c85e2f407be93a35302235d22[m
+Author: gonzalo00913 <gonzalo-masa@outlook.com>
+Date:   Thu Feb 29 17:03:41 2024 -0300
+
+    ✅filters
+
+[33mcommit 6071f011fedb35c7c4e8796693f7dd3729945b8d[m
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Thu Feb 29 13:56:07 2024 -0300
+
+    Create README.md
+
+[33mcommit aebd43922356640665c51cfdcc61584da3c12b79[m
+Merge: b945347 6d45601
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Thu Feb 29 13:55:33 2024 -0300
+
+    Merge pull request #28 from nicoflorentin/filters
+    
+    ✅filtros
+
+[33mcommit 6d4560143ad9c573d367399ca782cd7611d47f55[m
+Merge: fb79f8d b945347
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Thu Feb 29 13:54:13 2024 -0300
+
+    Merge branch 'dev' into filters
+
+[33mcommit fb79f8de40b0dbcca7f8a4d62d35248f64dbd652[m
+Author: gonzalo00913 <gonzalo-masa@outlook.com>
+Date:   Thu Feb 29 03:16:14 2024 -0300
+
+    ✅filtros
+
+[33mcommit b9453471a9ed5ef67a427d4798b5d535b5ffe455[m
+Merge: e9df784 f46eeea
+Author: Gonzalo Ezequiel Masa <gonzalo-masa@outlook.com>
+Date:   Wed Feb 28 20:13:51 2024 -0300
+
+    Merge pull request #27 from nicoflorentin/new-code
+    
+    New code
+
+[33mcommit f46eeea0f386874886ff849e7ee04047799e4f98[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Wed Feb 28 19:33:08 2024 -0300
+
+    archived - filters bar
+
+[33mcommit 18055332e4c0e4a4c7948ba80ca18dd7f963622a[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Wed Feb 28 19:25:15 2024 -0300
+
+    archived - filters bar
+
+[33mcommit e9df7841a28160b719b2df5a58d4ee88506268da[m
+Merge: 97499ce 2bfc44f
+Author: Gonzalo Ezequiel Masa <gonzalo-masa@outlook.com>
+Date:   Sat Feb 24 01:57:47 2024 -0300
+
+    Merge pull request #26 from nicoflorentin/edit-form
+    
+    add categories module
+
+[33mcommit 2bfc44feddf613af6b1975fc3fef97987d8cd378[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Sat Feb 24 01:56:47 2024 -0300
+
+    add categories module
+
+[33mcommit 97499ceec08110951a97e158080c5cc4ec809c93[m
+Merge: 89d8bdf 33f966a
+Author: Gonzalo Ezequiel Masa <gonzalo-masa@outlook.com>
+Date:   Sat Feb 24 01:48:19 2024 -0300
+
+    Merge pull request #25 from nicoflorentin/get-categories
+    
+    get categories controller
+
+[33mcommit 33f966a8a77da0fc4b2fa1df7c03d2007f050c5d[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Sat Feb 24 01:20:35 2024 -0300
+
+    get categories controller
+
+[33mcommit 89d8bdfce99f6658b520c6c5ad322a5ada72ecb3[m
+Merge: f403297 b1ded20
+Author: Gonzalo Ezequiel Masa <gonzalo-masa@outlook.com>
+Date:   Fri Feb 23 23:42:24 2024 -0300
+
+    Merge pull request #24 from nicoflorentin/edit-form
+    
+    edit form autofill
+
+[33mcommit b1ded205c5d1381eef00a292af444f55618ed618[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Wed Feb 21 18:04:22 2024 -0300
+
+    edit form autofill
+
+[33mcommit f403297145d8b05eb79570cfd9f5745c6872ed4d[m
+Merge: 543c355 3b18391
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Wed Feb 21 17:33:45 2024 -0300
+
+    Merge pull request #23 from nicoflorentin/getCategories
+    
+    ✅get de categorias
+
+[33mcommit 3b183911a684d159d45657fd354c0cda09b38a1e[m
+Author: gonzalo00913 <gonzalo-masa@outlook.com>
+Date:   Wed Feb 21 17:28:50 2024 -0300
+
+    ✅get de categorias
+
+[33mcommit 543c35503699f7816dda1492349c2baef84c2d96[m
+Merge: 2ca7054 a2d8e68
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Wed Feb 21 15:02:23 2024 -0300
+
+    Merge pull request #22 from nicoflorentin/getID
+    
+    ✅Ruta get para traer platos por ID
+
+[33mcommit a2d8e68d3efa461b754db7f78be9638d4d3606cb[m
+Author: gonzalo00913 <gonzalo-masa@outlook.com>
+Date:   Wed Feb 21 09:39:56 2024 -0300
+
+    ✅Ruta get para traer platos por ID
+
+[33mcommit 2ca7054e40e4e0338c78a6e178edd17360a59617[m
+Merge: f54196b 00c9d77
+Author: Gonzalo Ezequiel Masa <gonzalo-masa@outlook.com>
+Date:   Tue Feb 20 06:27:12 2024 -0300
+
+    Merge pull request #21 from nicoflorentin/front-dashboard
+    
+    Front dashboard | add | delete | edit | icons | router
+
+[33mcommit 00c9d77b6078c3a8671d1ef6c5039242a9717e60[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Tue Feb 20 01:31:23 2024 -0300
+
+    almost donee
+
+[33mcommit 0d186a9e86c5fa02fc91c27b936fcbbb1a8e7199[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Tue Feb 20 01:26:24 2024 -0300
+
+    almost donee
+
+[33mcommit 2e59746c7c6cbe282666a6acca64516a3eb7f0a4[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Mon Feb 19 23:58:55 2024 -0300
+
+    add form
+
+[33mcommit 19f0087f4afbd92082f918c9000bf73a84269ffe[m
+Merge: d034eea f54196b
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Mon Feb 19 20:13:20 2024 -0300
+
+    Merge branch 'dev' of https://github.com/nicoflorentin/auto-menu into front-dashboard
+
+[33mcommit d034eea547035dfa7ffd32375fa0eb57d870da92[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Mon Feb 19 20:12:39 2024 -0300
+
+    form
+
+[33mcommit f54196b617e15a8c59465461268d0843c32ded39[m
+Merge: ccc0587 7e2fdfa
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Mon Feb 19 19:17:37 2024 -0300
+
+    Merge pull request #20 from nicoflorentin/api
+    
+    ✅Ruta GET:categorias y ruta DELETE listas para usar. Bug de agregar i…
+
+[33mcommit 7e2fdfaa4636ef702cd479a64bbe0bc9eeda6cfc[m
+Author: gonzalo00913 <gonzalo-masa@outlook.com>
+Date:   Sat Feb 17 08:32:27 2024 -0300
+
+    ✅Ruta GET:categorias y ruta DELETE listas para usar. Bug de agregar imagen solucionado
+
+[33mcommit 4bc60c6a355d82a203a5d17f65ec9aee27bc938b[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Fri Feb 16 12:21:20 2024 -0300
+
+    dashboard routing
+
+[33mcommit 3b27abadaf6d04f15582fa27acc9f55c9a0fad00[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Fri Feb 16 03:32:51 2024 -0300
+
+    menu desplegable en vista dashboard
+
+[33mcommit 54a218da817d71eca475f719b7eaaee85524c02b[m
+Merge: 67055dd ccc0587
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Fri Feb 16 03:16:31 2024 -0300
+
+    Merge branch 'dev' of https://github.com/nicoflorentin/auto-menu into front-dashboard
+
+[33mcommit ccc0587990d99a49ae091c6062e371a3ce2fc8f0[m
+Merge: 6be70ff 5f336b0
+Author: Nicolás Florentín <81888574+nicoflorentin@users.noreply.github.com>
+Date:   Fri Feb 16 02:33:47 2024 -0300
+
+    Merge pull request #19 from nicoflorentin/PUT
+    
+    ✅ Ruta PUT 'terminada' y try catch modificado en login y crear usuario
+
+[33mcommit 67055dd7c0ccd8313da5d947c104e08ad6787cda[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Thu Feb 15 19:43:25 2024 -0300
+
+    dashboard routing
+
+[33mcommit 5f336b018a99d53c00e117c0683a3367790cc231[m
+Author: gonzalo00913 <gonzalo-masa@outlook.com>
+Date:   Thu Feb 15 06:32:26 2024 -0300
+
+    ✅ Ruta PUT 'terminada' y try catch modificado en login y crear usuario
+
+[33mcommit 6be70ffd744a81511af0ce89df24e45397fe29d0[m
+Merge: 8c1d4c5 61416d5
+Author: Gonzalo Ezequiel Masa <gonzalo-masa@outlook.com>
+Date:   Wed Feb 14 21:40:28 2024 -0300
+
+    Merge pull request #18 from nicoflorentin/dashboard
+    
+    Dashboard
+
+[33mcommit 61416d5bf63ad953cdd5be9750368482650c1b98[m
+Author: nicoflorentin <nicogrunger@hotmail.com>
+Date:   Wed Feb 14 14:35:03 2024 -0300
+
+    login and signup form
