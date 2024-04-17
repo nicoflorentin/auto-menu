@@ -7,6 +7,7 @@ import Title from "components/Title/Title";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { editRestaurantById, fetchRestaurantById } from "redux/slices/restaurantSlice";
 import { openWidget } from "utilities/cloudinary";
 
@@ -19,6 +20,7 @@ const Restaurant = () => {
 	const { name, description, image, profileImage } = useSelector(state => state.restaurant.data)
 	const { loading: restaurantLoading, error } = useSelector(state => state.restaurant)
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 	const { values, handleChange, handleSubmit, setValues } = useFormik({
 		initialValues: {
 			name: 'Loading...',
@@ -151,8 +153,8 @@ const Restaurant = () => {
 						<div>
 							<Subtitle>Restaurant menu</Subtitle>
 							<div className="flex flex-col pr-10 ml-auto text-sm gap-1">
-								<span>Go to menu: <a className="ml-2 underline underline-offset-4" href={`http://localhost:5173/menu/${name}`}>{name}</a></span>
-								<span>Share this link: <span className="ml-2">{`http://localhost:5173/menu/${name?.replaceAll(' ', '%20')}`}</span></span>
+								<span>Go to menu: <p className="ml-2 underline underline-offset-4" onClick={() => navigate(`/menu/${name}`)}>{name}</p></span>
+								<span>Share this link: <span className="ml-2">{`auto-menu-app.vercel.app/menu/${name?.replaceAll(' ', '%20')}`}</span></span>
 							</div>
 						</div>}
 					<br />
