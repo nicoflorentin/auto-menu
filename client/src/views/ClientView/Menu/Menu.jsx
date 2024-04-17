@@ -5,6 +5,7 @@ import NavBar from "views/ClientView/Menu/NavBar/NavBar";
 import CategorizedDishes from "views/ClientView/Menu/CategorizedDishes.jsx/CategorizedDishes";
 import { useDispatch } from "react-redux";
 import { fetchRestaurantData } from "redux/slices/restaurantSlice";
+import Footer from "views/ClientView/Menu/Footer/Footer";
 
 const Menu = ({ restaurantData }) => {
 	const { categories: unformattedCategories, description, dishes, profileImage } = restaurantData
@@ -21,6 +22,7 @@ const Menu = ({ restaurantData }) => {
 			<RestaurantProfile name={restaurantName} description={description} profileImage={profileImage} />
 			<NavBar />
 			<CategorizedDishes dishes={dishes} categories={categories} />
+			
 		</div>
 	);
 };
