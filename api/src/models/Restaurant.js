@@ -7,7 +7,7 @@ const restaurantSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    minlength: 5,
+    required: false
   },
   
   image: {
