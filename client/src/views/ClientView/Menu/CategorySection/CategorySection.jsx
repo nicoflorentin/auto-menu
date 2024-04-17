@@ -1,7 +1,10 @@
 import MenuDishItem from "views/ClientView/Menu/MenuDishItem/MenuDishItem"
 import { Element } from 'react-scroll';
 
-const CategorySection = ({ dishes, label, name }) => {
+const CategorySection = ({ dishes, label, name, categoryObj }) => {
+
+
+console.log(categoryObj);	
 	return (
 		<div className="mb-10">
 			<Element name={name}>

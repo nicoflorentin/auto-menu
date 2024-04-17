@@ -132,14 +132,14 @@ const Restaurant = () => {
 										: <img className="w-full h-auto block" src={values.image} alt="selected portrait image" />
 								}
 							</div>
-							<div className="flex w-48 items-center gap-1">
+							<div className="flex items-center gap-1">
 								<Button className="my-2" color='secondary' onPress={() => widgetHandler('portrait')} isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget || error}>
 									Change image
 								</Button>
 								<button onClick={() => deleteImageHandler('image')} isDisabled={restaurantLoading || loadingPortraitWidget || loadingProfileWidget || error}>
 									<DeleteIcon size='23' className='text-red-500 hover:scale-110 duration-[.15s]' />
 								</button>
-								{(loadingPortraitWidget || loadingProfileWidget) && <span className="ml-auto mr-5"><Loading content='Opening window' /></span>}
+								{(loadingPortraitWidget || loadingProfileWidget) && <span className="mr-5"><Loading content='Opening window' /></span>}
 							</div>
 						</div>
 					</div>

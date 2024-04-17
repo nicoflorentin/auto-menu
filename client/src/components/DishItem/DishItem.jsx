@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { formatCategory } from "../../utilities/formatCategory"
-import { VegetarianIcon, GlutenFreeIcon } from 'assets/icons'
+import { VegetarianIcon, GlutenFreeIcon, NoCameraIcon } from 'assets/icons'
 import { Chip, Tooltip } from "@nextui-org/react";
 import { longStringTrunc } from "utilities/longStringTrunc";
 import dishItemConfig from 'components/DishItem/dishItemConfig'
@@ -37,7 +37,10 @@ const DishItem = ({ dish, config }) => {
 			</div>
 			{title.length > TITLE_MAX_LENGTH
 				? <Tooltip showArrow={false} placement='center' closeDelay={0} content={styledTextContent(title)}><p className="font-bold text-medium">{longStringTrunc(title, TITLE_MAX_LENGTH)}</p></Tooltip>
-				: <p className="font-bold text-medium">{title}</p>
+				: <div className="flex gap-2 items-center">
+					<span className="font-bold text-medium">{title}</span>
+					{!dish.image && <NoCameraIcon size='17' className='text-zinc-700' />}
+				</div>
 			}
 			{description.length > DESCRIPTION_MAX_LENGTH
 				? <Tooltip showArrow={false} placement='center' closeDelay={0} content={styledTextContent(description)}><p className="text-small">{longStringTrunc(description, DESCRIPTION_MAX_LENGTH)}</p></Tooltip>

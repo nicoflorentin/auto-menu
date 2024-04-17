@@ -211,7 +211,7 @@ const Form = ({ title }) => {
 					{loadingWidget && <span className="ml-5"><Loading content='Opening window' /></span>}
 				</div>
 				{/* <label htmlFor='celiac'>Gluten</label> */}
-				<div className="flex gap-5">
+				<div className="flex gap-5 my-5">
 					<Checkbox
 						onChange={(e) => handleChange({ target: { name: "celiac", value: e.target.checked } })}
 						name='celiac'
@@ -227,8 +227,10 @@ const Form = ({ title }) => {
 						isDisabled={loadingFields || loading}
 					/>
 				</div>
-				<label htmlFor='preview'>Preview</label>
-				<MenuDishItem dish={values} className='w-96 text-zinc-900' />
+				<div>
+					<Subtitle htmlFor='preview'>Preview</Subtitle>
+					<MenuDishItem dish={values} className='w-96 text-zinc-900' />
+				</div>
 				<AskConfirmationModal isOpen={isOpen} onOpenChange={onOpenChange} acceptFunction={submitHandler} />
 				<ErrorModal error={error} isOpen={error} acceptFunction={() => dispatch(clearError())} />
 			</form>
