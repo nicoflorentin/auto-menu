@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { editRestaurantById, fetchRestaurantById } from "redux/slices/restaurantSlice";
 import { openWidget } from "utilities/cloudinary";
+import { DEPLOY_URL } from "services/const";
 
 const Restaurant = () => {
 
@@ -153,8 +154,8 @@ const Restaurant = () => {
 						<div>
 							<Subtitle>Restaurant menu</Subtitle>
 							<div className="flex flex-col pr-10 ml-auto text-sm gap-1">
-								<span>Go to menu: <p className="ml-2 underline underline-offset-4" onClick={() => navigate(`/menu/${name}`)}>{name}</p></span>
-								<span>Share this link: <span className="ml-2">{`https://auto-menu-alpha.vercel.app/menu/${name?.replaceAll(' ', '%20')}`}</span></span>
+								<span>Go to menu: <span className="ml-2 underline underline-offset-4" onClick={() => navigate(`/menu/${name}`)}>{name}</span></span>
+								<span>Share this link: <span className="ml-2">{`${DEPLOY_URL}/menu/${name?.replaceAll(' ', '%20')}`}</span></span>
 							</div>
 						</div>}
 					<br />
