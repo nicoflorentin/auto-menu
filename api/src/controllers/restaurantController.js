@@ -1,6 +1,6 @@
 const restaurantRouter = require("express").Router();
 const Restaurant = require("../models/Restaurant");
-const User = require("../models/User")
+const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const config = require("../utils/config");
 
@@ -16,19 +16,21 @@ restaurantRouter.get("/", async (_request, response, next) => {
 
 //Ruta para traer restaurantes por Id
 restaurantRouter.get("/:id", async (request, _response, next) => {
-    const id = request.params.id; 
+  const id = request.params.id;
   try {
     const codeToken = jwt.verify(request.token, config.SECRET);
     const userId = codeToken.id;
-    
+
     const restaurants = await Restaurant.findById(id);
 
-    if(!restaurants){
-      return next(new Error("Restaurant not found"))
+    if (!restaurants) {
+      return next(new Error("Restaurant not found"));
     }
 
-    if(restaurants.owner.toString()!== userId){
-      return next(new Error("User does not have permission to access this restaurant"));
+    if (restaurants.owner.toString() !== userId) {
+      return next(
+        new Error("User does not have permission to access this restaurant")
+      );
     }
     request.data = restaurants;
     request.statusCode = 200;
@@ -41,7 +43,7 @@ restaurantRouter.get("/:id", async (request, _response, next) => {
 //Ruta para editar restaurantes
 restaurantRouter.put("/:id", async (request, _response, next) => {
   const restaurantId = request.params.id;
-  const { name, description, image, profileImage} = request.body;
+  const { name, description, image, profileImage } = request.body;
 
   try {
     const codeToken = jwt.verify(request.token, config.SECRET);
@@ -50,16 +52,18 @@ restaurantRouter.put("/:id", async (request, _response, next) => {
     const restaurant = await Restaurant.findById(restaurantId);
 
     if (!restaurant) {
-      next(new Error("Restaurant not found"));}
-
-    if(restaurant.owner.toString()!== userId){
-      return next(new Error("User does not have permission to edit this restaurant"));
+      next(new Error("Restaurant not found"));
     }
 
-    if (name) restaurant.name = name;
-    if (description) restaurant.description = description;
-    if (image) restaurant.image = image;
-    if (profileImage) restaurant.profileImage = profileImage
+    if (restaurant.owner.toString() !== userId) {
+      return next(
+        new Error("User does not have permission to edit this restaurant")
+      );
+    }
+    restaurant.name = name;
+    restaurant.description = description;
+    restaurant.image = image;
+    restaurant.profileImage = profileImage;
 
     const updatedRestaurant = await restaurant.save();
 
@@ -70,7 +74,5 @@ restaurantRouter.put("/:id", async (request, _response, next) => {
     next(error);
   }
 });
-
-
 
 module.exports = restaurantRouter;
