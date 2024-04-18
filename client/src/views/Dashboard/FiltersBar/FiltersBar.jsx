@@ -8,8 +8,8 @@ import Checkbox from "../../../components/Checkbox/Checkbox"
 import useToken from "../../../hooks/useToken"
 import logo from 'assets/page-logo.png'
 import SearchBar from "components/SearchBar/SearchBar"
-import { PencilIcon } from "assets/icons"
 import { useParams } from "react-router-dom"
+import { PencilIcon, SearchIcon } from "assets/icons"
 
 const FiltersBar = ({ routeName }) => {
 	const dispatch = useDispatch()
@@ -110,10 +110,8 @@ const FiltersBar = ({ routeName }) => {
 						size
 						type="email"
 						placeholder="Search"
-						endContent={
-							<PencilIcon size='25' className='text-zinc-500' />
-						}
-						className='w-40	'
+						endContent={<SearchIcon size='25' className='text-zinc-500' />}
+						className='w-40'
 					/>
 				</div>
 			</form>}
