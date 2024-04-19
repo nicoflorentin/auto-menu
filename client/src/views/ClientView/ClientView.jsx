@@ -8,9 +8,9 @@ const ClientView = () => {
 	console.log(restaurantData.image)
 
 	return (
-		<div className="max-w-[425px] m-auto min-h-screen bg-[#FAFAFA] border border-red-600 flex flex-col">
-			<div className={`h-32 shadow-md shadow-zinc-200`}> <img className="h-full w-full object-cover" src={restaurantData.image}></img></div>
-			<div className="flex flex-col grow border border-blue-700">
+		<div className="max-w-[425px] m-auto min-h-screen bg-[#FAFAFA] flex flex-col">
+			<div className={`h-32 shadow-md shadow-zinc-300`}> <img className="h-full w-full object-cover" src={restaurantData.image}></img></div>
+			<div className="flex flex-col grow">
 				<div className="relative bottom-20">
 					<Menu restaurantData={restaurantData} />
 				</div>
