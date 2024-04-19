@@ -154,7 +154,7 @@ const Restaurant = () => {
 						<div>
 							<Subtitle>Restaurant menu</Subtitle>
 							<div className="flex flex-col pr-10 ml-auto text-sm gap-1">
-								<span>Go to menu: <span className="ml-2 underline underline-offset-4" onClick={() => navigate(`/menu/${name}`)}>{name}</span></span>
+								<span>Go to menu: <span className="ml-2 underline underline-offset-4 cursor-pointer" onClick={() => navigate(`/menu/${name}`)}>{name}</span></span>
 								<span>Share this link: <span className="ml-2">{`${DEPLOY_URL}/menu/${name?.replaceAll(' ', '%20')}`}</span></span>
 							</div>
 						</div>}
