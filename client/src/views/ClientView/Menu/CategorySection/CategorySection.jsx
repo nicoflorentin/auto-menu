@@ -6,9 +6,9 @@ const CategorySection = ({ dishes, label, name, categoryObj }) => {
 
 console.log(categoryObj);	
 	return (
-		<div className="mb-10">
+		<div className="mb-16">
 			<Element name={name}>
-				<div className="font-bold text-zinc-700 text-2xl uppercase mb-2 pl-2">{label}</div>
+				<div className="font-bold text-zinc-700 text-xl uppercase mb-3 pl-1 mx-4 border-b-2 border-zinc-600 ">{label}</div>
 			</Element>
 			{dishes?.map(dish => <MenuDishItem key={dish.id} dish={dish} />)}
 		</div>
