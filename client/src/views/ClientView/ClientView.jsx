@@ -7,7 +7,7 @@ const ClientView = () => {
 
 	return (
 		<div className="max-w-[425px] m-auto min-h-screen bg-[#FAFAFA] flex flex-col">
-			<div className={`h-32 shadow-md shadow-zinc-300 absolute w-full`}> <img className="h-full w-full object-cover" src={restaurantData.image}></img></div>
+			<div className={`h-32 shadow-md shadow-zinc-300 absolute w-full max-w-[425px]`}> <img className="h-full w-full object-cover" src={restaurantData.image}></img></div>
 			<div className="flex flex-col grow">
 				<div className="relative top-12">
 					<Menu restaurantData={restaurantData} />
