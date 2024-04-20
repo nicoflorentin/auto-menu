@@ -33,7 +33,7 @@ const NavBar = () => {
 
 	return (
 		<ul className="flex gap-4 overflow-scroll no-scrollbar w-[95%] px-2 m-auto py-8">
-			{links.map(link =><NavBarButton link={link} scrollHandler={scrollHandler}/>)}
+			{links.map(link =><NavBarButton key={link.name} link={link} scrollHandler={scrollHandler}/>)}
 		</ul>
 		// <ul className="flex gap-4 overflow-scroll no-scrollbar w-[95%] px-2 m-auto py-8">
 		// 	{links.map(link => <li onClick={() => scrollHandler(link.name)} key={link.label}

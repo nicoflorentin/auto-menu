@@ -5,8 +5,6 @@ import { useSelector } from 'react-redux'
 const ClientView = () => {
 	const { data: restaurantData } = useSelector(state => state.restaurant)
 
-	console.log(restaurantData.image)
-
 	return (
 		<div className="max-w-[425px] m-auto min-h-screen bg-[#FAFAFA] flex flex-col">
 			<div className={`h-32 shadow-md shadow-zinc-300 absolute w-full`}> <img className="h-full w-full object-cover" src={restaurantData.image}></img></div>

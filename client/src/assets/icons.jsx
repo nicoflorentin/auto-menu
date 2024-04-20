@@ -160,7 +160,7 @@ const SearchIcon = ({ className, color, size }) => {
 
 const GitHubIcon = ({ className, color, size }) => {
 	return (
-		<svg fill="#f6ffff" width={size} height={size} viewBox={`0 0 20 20`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-github" stroke="#71717a" strokeWidth="0.00024000000000000003">
+		<svg fill="#f6ffff" width={size} height={size} viewBox={`0 0 20 20`} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" className="jam jam-github" stroke="#71717a" strokeWidth="0.00024000000000000003">
 			<g id="SVGRepo_bgCarrier" strokeWidth="0" />
 			<g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
 			<g id="SVGRepo_iconCarrier">

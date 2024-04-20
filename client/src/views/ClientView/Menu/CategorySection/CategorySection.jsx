@@ -2,9 +2,6 @@ import MenuDishItem from "views/ClientView/Menu/MenuDishItem/MenuDishItem"
 import { Element } from 'react-scroll';
 
 const CategorySection = ({ dishes, label, name, categoryObj }) => {
-
-
-console.log(categoryObj);	
 	return (
 		<div className="mb-16">
 			<Element name={name}>

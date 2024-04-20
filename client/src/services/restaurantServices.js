@@ -4,8 +4,6 @@ import dishServices from './dishServices';
 
 const getRestaurantByName = async (name) => {
 
-	console.log('get restaurant by name service');
-
 	try {
 		const response = await axios.get(`${LOCAL_URL}/menu/${name}`,);
 		const categories = await dishServices.getCategories()
