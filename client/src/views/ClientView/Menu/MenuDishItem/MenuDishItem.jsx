@@ -1,4 +1,3 @@
-import defaultImage from 'assets/page-logo.png'
 import { GlutenFreeIcon, VegetarianIcon } from 'assets/icons'
 
 const currency = 'USD'
