@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux"
 import { fetchDishes } from "../../../redux/slices/dishesSlice"
 import Checkbox from "../../../components/Checkbox/Checkbox"
 import useToken from "../../../hooks/useToken"
-import logo from 'assets/page-logo.png'
+import logo from 'assets/img/page-logo.png'
 import SearchBar from "components/SearchBar/SearchBar"
 import { useParams } from "react-router-dom"
 import { PencilIcon, SearchIcon } from "assets/icons"
