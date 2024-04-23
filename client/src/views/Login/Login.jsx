@@ -4,7 +4,7 @@ import { Input, Button, Card, CardBody, Tabs, Tab } from "@nextui-org/react"
 import Spinner from "../../components/Spinner"
 import { Link, useNavigate } from "react-router-dom"
 import logo from 'assets/page-logo.png'
-import VideoExample from "./VideoExample/VideoExample"
+import YoutubeFrame from "components/YoutubeFrame/YoutubeFrame"
 
 const Login = ({ login, signUp, loading }) => {
 	const [selected, setSelected] = useState("login")
@@ -39,7 +39,7 @@ const Login = ({ login, signUp, loading }) => {
 
 	return (
 		<div className="flex w-screen h-dvh">
-			<div className="flex flex-col gap-5 justify-center items-center px-20">
+			<div className="flex flex-col gap-5 justify-center items-center px-10">
 				<img className="h-20" src={logo} alt="page-logo" />
 				<Card className="max-w-full w-[340px] h-[400px]">
 					<CardBody className="overflow-hidden">
@@ -125,7 +125,9 @@ const Login = ({ login, signUp, loading }) => {
 					</CardBody>
 				</Card>
 			</div>
-			<div className="flex justify-center items-center grow border borer-red-700"><VideoExample /></div>
+			<div className="grow">
+				<YoutubeFrame />
+			</div>
 		</div>
 	)
 }
