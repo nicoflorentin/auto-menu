@@ -5,6 +5,7 @@ import Spinner from "../../components/Spinner"
 import { Link, useNavigate } from "react-router-dom"
 import logo from 'assets/page-logo.png'
 import YoutubeFrame from "components/YoutubeFrame/YoutubeFrame"
+import WaitingGuy from "components/WaitingGuy/WaitingGuy"
 
 const Login = ({ login, signUp, loading }) => {
 	const [selected, setSelected] = useState("login")
@@ -42,6 +43,13 @@ const Login = ({ login, signUp, loading }) => {
 			<img className="sm:hidden object-contain h-16 my-5 order-3" src={logo} alt="page-logo" />
 			<div className="flex flex-col gap-5 justify-center items-center px-1 pb-1 sm:px-10 xl:px-32 2xl:px-48">
 				<img className="hidden sm:h-20 sm:inline" src={logo} alt="page-logo" />
+				{/* {!loading
+				? <img className="sm:hidden object-contain h-16 my-5 order-3" src={logo} alt="page-logo" />
+				: <WaitingGuy />
+			}
+			<div className="flex flex-col gap-5 justify-center items-center px-1 pb-1 sm:px-10 xl:px-32 2xl:px-48">
+				{loading ? <img className="hidden sm:h-20 sm:inline" src={logo} alt="page-logo" />
+					: <WaitingGuy />} */}
 				<Card className="max-w-full w-[340px] h-[400px]">
 					<CardBody className="overflow-hidden">
 						<Tabs fullWidth size="md" aria-label="Tabs form" selectedKey={selected} onSelectionChange={setSelected}>
@@ -70,7 +78,7 @@ const Login = ({ login, signUp, loading }) => {
 											Sign up
 										</Link>
 									</p>
-									{loading && <p className="text-sm text-center">Server may take longer due to server limitations, please be patient</p>}
+									{loading && <p className="text-xs text-center">Server may take longer due to server limitations</p>}
 									<div className="flex gap-2 justify-end mt-auto">
 										{!loading ? (
 											<Button className="w-full" color="primary" type="submit" variant="solid">
