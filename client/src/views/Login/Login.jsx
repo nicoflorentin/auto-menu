@@ -5,7 +5,7 @@ import Spinner from "../../components/Spinner"
 import { Link, useNavigate } from "react-router-dom"
 import logo from 'assets/img/page-logo.png'
 import YoutubeFrame from "components/YoutubeFrame/YoutubeFrame"
-import WaitingGuy from "components/WaitingGuy/WaitingGuy"
+// import WaitingGuy from "components/WaitingGuy/WaitingGuy"
 
 const Login = ({ login, signUp, loading }) => {
 	const [selected, setSelected] = useState("login")
