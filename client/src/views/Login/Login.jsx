@@ -3,7 +3,7 @@ import withAuth from "./withAuth"
 import { Input, Button, Card, CardBody, Tabs, Tab } from "@nextui-org/react"
 import Spinner from "../../components/Spinner"
 import { Link, useNavigate } from "react-router-dom"
-import logo from 'assets/page-logo.png'
+import logo from 'assets/img/page-logo.png'
 import YoutubeFrame from "components/YoutubeFrame/YoutubeFrame"
 import WaitingGuy from "components/WaitingGuy/WaitingGuy"
 
