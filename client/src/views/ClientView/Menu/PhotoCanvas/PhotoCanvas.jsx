@@ -1,4 +1,4 @@
-import defaultImage from 'assets/page-logo.png'
+import defaultImage from 'assets/img/page-logo.png'
 
 const PhotoCanvas = ({image}) => {
 
