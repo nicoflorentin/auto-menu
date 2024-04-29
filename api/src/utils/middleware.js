@@ -41,7 +41,11 @@ const errorHandler = (error, request, response, next) => {
     error.message === "Missing data, error creating" ||
     error.message === "Dish not found" ||
     error.message === "Restaurant not found" ||
-    error.message === "The user does not have an associated restaurant"
+    error.message === "The user does not have an associated restaurant" ||
+    error.message === "Restaurant Password does not meet minimum requirements found" ||
+    error.message === "the email address is not valid" ||
+    error.message === "Title must contain only letters" ||
+    error.message === "Price must contain only numbers" 
   ) {
     statusCode = 400;
 
