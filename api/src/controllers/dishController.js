@@ -3,6 +3,7 @@ const User = require("../models/User");
 const Dish = require("../models/Dish");
 const jwt = require("jsonwebtoken");
 const config = require("../utils/config");
+const validator = require("validator");
 
 //Ruta GET para traer todos los platos con token
 dishRouter.get("/", async (request, response, next) => {
@@ -18,7 +19,8 @@ dishRouter.get("/", async (request, response, next) => {
 
     const restaurantId = user.restaurant.id;
 
-    const { name, category, archived, celiac, vegetarian, price } = request.query;
+    const { name, category, archived, celiac, vegetarian, price } =
+      request.query;
 
     const filter = { restaurant: restaurantId };
 
@@ -89,6 +91,14 @@ dishRouter.post("/", async (request, response, next) => {
       archived,
     } = request.body;
 
+    if (!validator.isAlpha(title.replace(/\s/g, ""))) {
+      return next(new Error("Title must contain only letters"));
+    }
+
+    if (!validator.isNumeric(price)) {
+      return next(new Error("Price must contain only numbers"));
+    }
+
     const user = await User.findById(userId).populate("restaurant");
 
     if (!user.restaurant) {
@@ -141,6 +151,14 @@ dishRouter.put("/:id", async (request, _response, next) => {
       vegetarian,
       archived,
     } = request.body;
+
+    if (!validator.isAlpha(title.replace(/\s/g, ""))) {
+      return next(new Error("Title must contain only letters"));
+    }
+
+    if (!validator.isNumeric(price)) {
+      return next(new Error("Price must contain only numbers"));
+    }
 
     const dishDb = await Dish.findById(dishId).populate("restaurant");
 
