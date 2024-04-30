@@ -27,12 +27,12 @@ const NavBar = () => {
 			duration: 1000,
 			delay: 300,
 			smooth: 'easeInOut',
-			offset: -20, // Scrolls to element + 50 pixels down the page
+			offset: -70, 
 		});
 	}
 
 	return (
-		<ul className="flex gap-4 overflow-scroll no-scrollbar w-[95%] px-2 m-auto py-8">
+		<ul className="flex gap-4 overflow-scroll no-scrollbar w-full px-2 m-auto my-6 py-2 sticky top-0 bg-white z-50">
 			{links.map(link =><NavBarButton key={link.name} link={link} scrollHandler={scrollHandler}/>)}
 		</ul>
 		// <ul className="flex gap-4 overflow-scroll no-scrollbar w-[95%] px-2 m-auto py-8">

@@ -63,8 +63,8 @@ const FiltersBar = ({ routeName }) => {
 
 	return (
 		<div className="flex items-center">
-			<img src={logo} alt="" className="w-44 mt-2" />
-			{mustRenderForm && <form className="ml-auto mr-10 self-end">
+			<img src={logo} alt="" className="sm:w-44 w-32 sm:mx-0 m-auto mt-2" />
+			{mustRenderForm || false && <form className="ml-auto sm:mr-10 self-end">
 				<div className="flex gap-2">
 					<Checkbox
 						onChange={e => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
