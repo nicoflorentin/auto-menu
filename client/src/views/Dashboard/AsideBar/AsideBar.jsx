@@ -5,11 +5,19 @@ import UserDetails from "../../../components/UserDetails/UserDetails"
 import useDarkMode from "use-dark-mode"
 import { Button } from "@nextui-org/button"
 
-const AsideBar = ({ linksConfig, logoutHandler }) => {
+const AsideBar = ({ linksConfig, logoutHandler, showAside }) => {
 	const darkMode = useDarkMode(false)
 
+	const toggleAsideStylesHandler = () => {
+		if (!showAside) { return `left-[-20%]` } else { return `left-1` }
+	}
+
 	return (
-		<>
+		<aside
+			className={`flex flex-col mt-1 py-2 p-2 bg-zinc-800 rounded-2xl z-50
+		fixed top-32 ${toggleAsideStylesHandler()} duration-[.3s]
+		sm:w-72 sm:h-[570px] sm:pr-5 sm:py-5 sm:relative sm:left-0 sm:top-0 sm:bg-transparent
+		`}>
 			{linksConfig.map(element => {
 				if (element.isGroup) {
 					return (
@@ -31,9 +39,9 @@ const AsideBar = ({ linksConfig, logoutHandler }) => {
 					)
 				}
 			})}
-			{/* <UserDetails logoutHandler={logoutHandler} /> */}
+			<UserDetails logoutHandler={logoutHandler} />
 			{/* <button className="w-1" onClick={darkMode.toggle}>{!darkMode.value ? <span>🌙</span> : <span>🌞</span>}</button> */}
-		</>
+		</aside>
 	)
 }
 

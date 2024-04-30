@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import AsideBar from "./AsideBar/AsideBar"
 import { Outlet, useLocation } from "react-router-dom"
 import Section from "./Section/Section.jsx"
@@ -82,32 +82,23 @@ const DashBoard = ({ logoutHandler }) => {
 		return null
 	}
 
-	const toggleAsideStylesHandler = () => {
-		if (!showAside) { return `left-[-20%]` } else { return `left-1` }
-	}
-
 	return (
-		<section id="section-container" className="py-1 m-auto flex flex-col min-h-screen px-1
+		<section id="section-container"
+			className="py-1 m-auto flex flex-col min-h-screen px-1
 		sm:px-0 sm:w-[1250px]
 		">
 			<FiltersBar routeName={searchWord} />
 			<div id="dashboard-container" className="flex flex-row flex-grow">
-				<aside className={`flex flex-col mt-1 py-2 p-2 bg-zinc-800 rounded-2xl z-50
-				absolute top-32 ${toggleAsideStylesHandler()} duration-[.3s]
-				sm:w-72 sm:h-[570px] sm:pr-5 sm:py-5 sm:relative sm:left-0 sm:top-0 sm:bg-transparent
-				`}>
-					<AsideBar linksConfig={linksConfig} logoutHandler={logoutHandler} />
-				</aside>
+				<AsideBar linksConfig={linksConfig} logoutHandler={logoutHandler} showAside={showAside} />
 				<MenuButton
-					className="fixed bottom-2 left-2 sm:hidden"
+					className="fixed top-2 left-2 sm:hidden"
 					onClick={() => setShowAside(prev => !prev)}
 				/>
-				<section className="sm:w-full">
+				<section className="sm:w-full min-h-svh">
 					<Outlet />
-
 				</section>
 			</div>
-			{/* <Footer /> */}
+			<Footer />
 		</section>
 	)
 }
