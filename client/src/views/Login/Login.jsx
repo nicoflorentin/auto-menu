@@ -135,7 +135,8 @@ const Login = ({ login, signUp, loading }) => {
 					</CardBody>
 				</Card>
 			</div>
-			<div className="h-96 sm:h-dvh mb-10 sm:grow">
+			<div className="h-96 mb-10
+			sm:grow sm:h-dvh sm:flex sm:flex-col sm:justify-center">
 				<YoutubeFrame />
 			</div>
 		</div>

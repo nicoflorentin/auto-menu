@@ -73,7 +73,7 @@ const DishesList = ({ routeName, title }) => {
 			<Title>{title}</Title>
 			<div className="">{
 				loading
-					? <div className="w-10 m-auto mt-44"><Loading labelPosition='top' content='Loading' /></div>
+					? <div className="w-screen m-auto mt-44 sm:w-10"><Loading labelPosition='top' content='Loading' /></div>
 					: <RenderDishes dishes={dishes} currentConfig={currentConfig} routeName={routeName} />}</div>
 		</div>
 	)

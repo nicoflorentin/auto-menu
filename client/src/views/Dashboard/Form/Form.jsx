@@ -133,7 +133,8 @@ const Form = ({ title }) => {
 
 	return (
 		<>
-			<div className="flex">
+			<div className="flex max-w-screen
+			sm:w-auto">
 				<Title>{title}</Title>
 
 				{fieldsWasChanged &&

@@ -25,7 +25,7 @@ const YoutubeFrame = () => {
 	return (<YouTube
 		videoId={VIDEO_DEMO_ID}
 		id={VIDEO_DEMO_ID}
-		className={'h-full'}
+		className={'h-full sm:h-auto sm:aspect-[1.78/1]'}
 		iframeClassName={'w-full h-full'}
 		// style={{}}
 		title={'video-demo'}
