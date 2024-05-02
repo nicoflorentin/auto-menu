@@ -95,10 +95,6 @@ dishRouter.post("/", async (request, response, next) => {
       return next(new Error("Title must contain only letters"));
     }
 
-    if (!validator.isNumeric(price)) {
-      return next(new Error("Price must contain only numbers"));
-    }
-
     const user = await User.findById(userId).populate("restaurant");
 
     if (!user.restaurant) {
@@ -109,7 +105,7 @@ dishRouter.post("/", async (request, response, next) => {
       title,
       description,
       category,
-      price,
+      price: parseFloat(price),
       image,
       celiac,
       vegetarian,
@@ -154,10 +150,6 @@ dishRouter.put("/:id", async (request, _response, next) => {
 
     if (!validator.isAlpha(title.replace(/\s/g, ""))) {
       return next(new Error("Title must contain only letters"));
-    }
-
-    if (!validator.isNumeric(price)) {
-      return next(new Error("Price must contain only numbers"));
     }
 
     const dishDb = await Dish.findById(dishId).populate("restaurant");
