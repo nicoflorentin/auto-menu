@@ -15,7 +15,7 @@ const AsideBar = ({ linksConfig, logoutHandler, showAside }) => {
 	return (
 		<aside
 			className={`flex flex-col mt-1 py-3 p-2 bg-zinc-800 rounded-2xl z-50
-		fixed top-16 sm:top-32 ${toggleAsideStylesHandler()} duration-[.3s]
+		fixed top-16 sm  ${toggleAsideStylesHandler()} duration-[.3s]
 		sm:w-72 sm:h-[570px] sm:pr-5 sm:py-5 sm:relative sm:left-0 sm:top-0 sm:bg-transparent
 		`}>
 			{linksConfig.map(element => {
