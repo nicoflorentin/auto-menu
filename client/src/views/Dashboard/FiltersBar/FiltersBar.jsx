@@ -9,7 +9,7 @@ import useToken from "../../../hooks/useToken"
 import logo from 'assets/img/page-logo.png'
 import SearchBar from "components/SearchBar/SearchBar"
 import { useParams } from "react-router-dom"
-import { PencilIcon, SearchIcon } from "assets/icons"
+import { GlutenFreeIcon, SearchIcon, VegetarianIcon } from "assets/icons"
 
 const FiltersBar = ({ routeName }) => {
 	const dispatch = useDispatch()
@@ -29,6 +29,8 @@ const FiltersBar = ({ routeName }) => {
 		category: '',
 		query: ''
 	}
+
+	const iconSize = 25
 
 	const { values, handleChange, setValues } = useFormik({
 		initialValues,
@@ -62,38 +64,41 @@ const FiltersBar = ({ routeName }) => {
 	// }
 
 	return (
-		<div className="flex items-center">
+		<div className="flex flex-col items-center sm:flex-row">
 			<img src={logo} alt="" className="sm:w-44 w-32 sm:mx-0 m-auto mt-2" />
-			{mustRenderForm || false && <form className="ml-auto sm:mr-10 self-end">
-				<div className="flex gap-2">
-					<Checkbox
-						onChange={e => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
-						name="vegetarian"
-						label="Vegetarian"
-						isSelected={values.vegetarian}
-						size='sm'
-					/>
-					<Checkbox
-						onChange={e => handleChange({ target: { name: "celiac", value: e.target.checked } })}
-						name="celiac"
-						label="Gluten Free"
-						isSelected={values.celiac}
-						size='sm'
-					/>
-					<FilterElement
-						label={!values.category ? 'Category' : ''}
-						name="category"
-						selectionMode="single"
-						value={values.category}
-						// labelPlacement='outside'
-						// selectedKeys=''
-						onChange={handleChange}
-						options={categories}
-						radius="md"
-						size='xs'
-						className='h-2'
-
-					/>
+			{/* {mustRenderForm || false && <form className="ml-auto sm:mr-10 self-end"> */}
+			{mustRenderForm && <form className="pt-5 sm:w-auto sm:ml-auto sm:mr-10 sm:self-end">
+				<div className="flex flex-row flex-wrap gap-1 sm:gap-2">
+					<div className="flex gap-2 order-2 items-center w-full px-10 sm:px-0 sm:w-auto sm:order-first">
+						<Checkbox
+							onChange={(e) => handleChange({ target: { name: "vegetarian", value: e.target.checked } })}
+							name="vegetarian"
+							label="Vegetarian"
+							image={<VegetarianIcon className={'text-green-600'} size={iconSize} />}
+							isSelected={values.vegetarian}
+							size="sm"
+						/>
+						<Checkbox
+							onChange={(e) => handleChange({ target: { name: "celiac", value: e.target.checked } })}
+							name="celiac"
+							label="Gluten Free"
+							image={<GlutenFreeIcon className={'text-white'} size={iconSize} />}
+							isSelected={values.celiac}
+							size="sm"
+						/>
+						<div className="flex-grow" /> {/* Este div ocupa el espacio restante */}
+						<FilterElement
+							label={!values.category ? 'Category' : ''}
+							name="category"
+							selectionMode="single"
+							value={values.category}
+							onChange={handleChange}
+							options={categories}
+							radius="md"
+							size="xs"
+							className="ml-auto"
+						/>
+					</div>
 					{/* <FilterElement
 						label="Order by price"
 						name="order"
@@ -111,7 +116,7 @@ const FiltersBar = ({ routeName }) => {
 						type="email"
 						placeholder="Search"
 						endContent={<SearchIcon size='25' className='text-zinc-500' />}
-						className='w-40'
+						className='w-screen px-3 sm:p-0 sm:w-80'
 					/>
 				</div>
 			</form>}

@@ -13,7 +13,8 @@ const categoriesOrder = ["platosPrincipales", "entrantes", "bebidas", "postres"]
 
 const RenderDishes = ({ dishes, currentConfig, routeName }) =>
 (
-	<div className="flex flex-wrap gap-5">
+	<div className="flex flex-wrap gap-5 justify-center
+	sm:justify-start">
 		{dishes?.filter(dish => (routeName === "archived" ? dish.archived : !dish.archived))
 			.sort((a, b) => categoriesOrder.indexOf(a.category) - categoriesOrder.indexOf(b.category)).map(dish => (
 				<DishItem config={currentConfig} dish={dish} key={dish.id} iconSize="20" archived={dish.archived} />
