@@ -1,6 +1,6 @@
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
-import { DeleteIcon } from "assets/icons";
+import { CopyIcon, DeleteIcon } from "assets/icons";
 import Loading from "components/Loading/Loading";
 import Subtitle from "components/Subtitle/Subtitle";
 import Title from "components/Title/Title";
@@ -11,10 +11,11 @@ import { useNavigate } from "react-router-dom";
 import { editRestaurantById, fetchRestaurantById } from "redux/slices/restaurantSlice";
 import { openWidget } from "utilities/cloudinary";
 import { DEPLOY_URL } from "services/const";
+import { copyToClipboard } from "utilities/copyToClipBoard";
+import toast, { Toaster } from "react-hot-toast";
 
 const Restaurant = () => {
 
-	// const [restaurantLoading, setRestaurantLoading] = useState(false)
 	const [loadingPortraitWidget, setLoadingPortraitWidget] = useState(false)
 	const [loadingProfileWidget, setLoadingProfileWidget] = useState(false)
 	const { restaurantId, token } = useSelector(state => state.login.data)
@@ -74,17 +75,23 @@ const Restaurant = () => {
 		setValues({ ...values, [property]: '' })
 	}
 
+	const copyToClipboardHandler = (text) => {
+		copyToClipboard(text).then(toast(
+			`Copied to clipboard`, {
+			position: 'bottom-center'
+		}))
+	}
+
 	console.log(values)
 
 	return (
-		<div>
+		<>
 			<Title>Restaurant Configuration</Title>
-			<div className="flex flex-col pr-5 gap-5">
-				<div className="flex gap-4">
+			<div className="flex flex-col gap-5 sm:pr-5">
+				<div className="flex gap-4 flex-col sm:flex-row">
 					<div className="grow">
 						<Subtitle>Restaurant name</Subtitle>
 						<Input
-							// className="w-96"
 							id='name'
 							name='name'
 							type='text'
@@ -107,7 +114,7 @@ const Restaurant = () => {
 					</div>
 				</div>
 				<div>
-					<div className="flex gap-10">
+					<div className="flex flex-col sm:flex-row sm:gap-10">
 						<div className="">
 							<Subtitle>Restaurant logo</Subtitle>
 							<div className="flex items-center h-40 bg-slate-300 text-center rounded-xl text-black aspect-square">
@@ -153,9 +160,20 @@ const Restaurant = () => {
 					{name &&
 						<div>
 							<Subtitle>Restaurant menu</Subtitle>
-							<div className="flex flex-col pr-10 ml-auto text-sm gap-1">
-								<span>Go to menu: <span className="ml-2 underline underline-offset-4 cursor-pointer" onClick={() => navigate(`/menu/${name}`)}>{name}</span></span>
-								<span>Share this link: <span className="ml-2">{`${DEPLOY_URL}/menu/${name?.replaceAll(' ', '%20')}`}</span></span>
+							<div className=" flex sm:justify-start gap-5 justify-between ml-auto text-sm sm:pr-10">
+								<div className="">
+									<p className="">Go to menu: </p><p className="underline underline-offset-4 cursor-pointer" onClick={() => navigate(`/menu/${name}`)}>{name}</p>
+								</div>
+								<div className="flex gap-3">
+									{/* <span className="">Share this link: </span><span className="ml-2">{`${DEPLOY_URL}/menu/${name?.replaceAll(' ', '%20')}`}</span> */}
+									<button className="flex gap-1 items-center bg-zinc-800 rounded-xl self-start shadow-lg p-1
+									hover:bg-slate-800 transition-background
+									sm:flex-col"
+										onClick={() => copyToClipboardHandler(`${DEPLOY_URL}/menu/${name?.replaceAll(' ', '%20')}`)}>
+										<p className="text-[12px]">Copy link to clipboard</p>
+										<CopyIcon className={'text-slate-400'} secondaryClassName={'text-slate-500'} size={30} />
+									</button>
+								</div>
 							</div>
 						</div>}
 					<br />
@@ -170,7 +188,8 @@ const Restaurant = () => {
 					}
 				</div>
 			</div>
-		</div>
+			<Toaster></Toaster>
+		</>
 
 	)
 }

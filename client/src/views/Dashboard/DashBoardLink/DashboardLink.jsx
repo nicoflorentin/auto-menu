@@ -1,7 +1,10 @@
-import React from "react"
+import React, { useContext } from "react"
 import { NavLink } from "react-router-dom"
+import { AsideContext } from "views/AdminView/showAsideBarContext/showAsideBarContext"
 
 const DashboardLink = ({ sectionPath, sectionName, Icon }) => {
+
+	const {toggleAside} = useContext(AsideContext)
 
 	const stylesHandler = ({ isActive }) => {
 		return `flex items-center gap-4 rounded-small px-2 py-2 my-[2px]
@@ -17,6 +20,7 @@ const DashboardLink = ({ sectionPath, sectionName, Icon }) => {
 		<NavLink
 			to={`/admin/dashboard/${sectionPath}`}
 			className={stylesHandler}
+			onClick={() => toggleAside()}
 		>
 			<span>{Icon && <Icon size={30} className='text-foreground'></Icon>}</span>
 			<span className="hidden text-large sm:inline">{sectionName}</span>

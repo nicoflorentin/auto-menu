@@ -127,10 +127,6 @@ const Form = ({ title }) => {
 		originalDishValues.current.celiac !== values.celiac ||
 		originalDishValues.current.vegetarian !== values.vegetarian;
 
-	console.log('original values', originalDishValues);
-	console.log('values', values);
-	console.log('fields changed', fieldsWasChanged)
-
 	return (
 		<>
 			<div className="flex max-w-screen
@@ -230,7 +226,7 @@ const Form = ({ title }) => {
 				</div>
 				<div>
 					<Subtitle htmlFor='preview'>Preview</Subtitle>
-					<MenuDishItem dish={values} className='w-96 text-zinc-900' />
+					<MenuDishItem dish={values} className='sm:w-96 text-zinc-900' />
 				</div>
 				<AskConfirmationModal isOpen={isOpen} onOpenChange={onOpenChange} acceptFunction={submitHandler} />
 				<ErrorModal error={error} isOpen={error} acceptFunction={() => dispatch(clearError())} />

@@ -11,8 +11,10 @@ const Footer = () => {
 				<p>Back End development<br />Gonzalo Masa</p>
 
 			</div>
-			<a href='https://github.com/nicoflorentin/auto-menu' className="underline underline-offset-2 font-semibold">SOURCE CODE</a>
-			<p className='ml-auto'>2024 AutoMenu</p>
+			<div className='flex gap-5 sm:ml-auto'>
+				<a href='https://github.com/nicoflorentin/auto-menu' className="underline underline-offset-2 font-semibold">SOURCE CODE</a>
+				<p className=''>2024 AutoMenu</p>
+			</div>
 		</div>
 	)
 }

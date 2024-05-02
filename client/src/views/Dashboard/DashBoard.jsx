@@ -6,6 +6,7 @@ import { DishIcon, AddIcon, PencilIcon, DeleteIcon, ArchiveIcon, MenuIcon } from
 import FiltersBar from "./FiltersBar/FiltersBar"
 import Footer from "views/Dashboard/Footer/Footer"
 import MenuButton from "components/MenuButton/MenuButton"
+import { AsideContext } from "views/AdminView/showAsideBarContext/showAsideBarContext"
 
 const DashBoard = ({ logoutHandler }) => {
 	const linksConfig = [
@@ -61,7 +62,7 @@ const DashBoard = ({ logoutHandler }) => {
 		// },
 	]
 
-	const [showAside, setShowAside] = useState(false)
+	const {showAside, toggleAside} = useContext(AsideContext)
 	const { pathname } = useLocation()
 	const pathSplitParts = pathname.split("/")
 	const searchWord = pathSplitParts[3]
@@ -92,9 +93,9 @@ const DashBoard = ({ logoutHandler }) => {
 				<AsideBar linksConfig={linksConfig} logoutHandler={logoutHandler} showAside={showAside} />
 				<MenuButton
 					className="fixed top-2 left-2 sm:hidden"
-					onClick={() => setShowAside(prev => !prev)}
+					onClick={() => toggleAside()}
 				/>
-				<section className="sm:w-full min-h-svh">
+				<section className="w-full min-h-svh px-3 sm:px-0">
 					<Outlet />
 				</section>
 			</div>

@@ -78,7 +78,7 @@ const Login = ({ login, signUp, loading }) => {
 											Sign up
 										</Link>
 									</p>
-									{loading && <p className="text-xs text-center">Server may take longer due to server limitations</p>}
+									{loading && <p className="text-xs text-center text-primary">Server may take longer due to server limitations</p>}
 									<div className="flex gap-2 justify-end mt-auto">
 										{!loading ? (
 											<Button className="w-full" color="primary" type="submit" variant="solid">
